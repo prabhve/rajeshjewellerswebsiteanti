@@ -1,0 +1,148 @@
+{
+  "business_name": "Rajesh Jewellers",
+  "business_name_hindi": "राजेश ज्वेलर्स (सराफ़)",
+  "tagline": "फैंसी आभूषणों के विक्रेता व निर्माता (Manufacturers & Retailers of Fancy Jewellery)",
+  "official_merchant_bio": "Introducing our exquisite collection of pure and elegant gold and silver jewelry, designed to captivate hearts and elevate your style ✨️ 100% BIS, HALLMARK Gold items. We make all types of gold jewelry designs. हमारे यहां शुद्धता की गारंटी के साथ जेवर बनाए और बेचे जाते हैं।",
+  "brand_identity": {
+    "monogram": "RJ",
+    "emblem": "Diamond-crested RJ with BIS Triangular Hallmark Emblem",
+    "certifications": [
+      "100% BIS 916 Hallmarked Gold",
+      "GST Registered Enterprise",
+      "Government Registered Jeweller"
+    ]
+  },
+  "legal": {
+    "gstin": "09ADMPS4528E1Z8",
+    "state": "Uttar Pradesh",
+    "state_code": "09"
+  },
+  "contact": {
+    "whatsapp_primary": "+919161123840",
+    "whatsapp_display": "+91 91611 23840",
+    "whatsapp_catalog_url": "https://wa.me/c/919161123840",
+    "phone_primary": "+917007025545",
+    "phone_primary_display": "+91 70070 25545",
+    "phone_secondary": "+917007467510",
+    "phone_secondary_display": "+91 70074 67510"
+  },
+  "location": {
+    "address_line1": "Sangmohal, Station Road",
+    "landmark": "Nearby Jila Karagar (District Jail)",
+    "city": "Mirzapur",
+    "state": "Uttar Pradesh",
+    "pincode": "231001",
+    "full_address": "Rajesh Jewellers, Sangmohal, Station Rd, nearby jila karagar, Mirzapur, Uttar Pradesh 231001",
+    "coordinates": {
+      "latitude": 25.136699,
+      "longitude": 82.5664251
+    },
+    "google_maps_url": "https://www.google.com/maps/place/Rajesh+Jewellers/@25.1367946,82.5638832,17z/data=!4m6!3m5!1s0x398fc1b0c7937c61:0x23f9b79dffe1abf!8m2!3d25.136699!4d82.5664251!16s%2Fg%2F11gmxyb8gt",
+    "google_place_id": "ChIJYXyTx7DBjzkRvxr-33mbPwI",
+    "google_cid": "0x398fc1b0c7937c61:0x23f9b79dffe1abf",
+    "google_cid_decimal": "162019059359947455",
+    "google_reviews_url": "https://search.google.com/local/reviews?placeid=ChIJYXyTx7DBjzkRvxr-33mbPwI&q=Rajesh+Jewellers&authuser=0&hl=en&gl=IN"
+  },
+  "operating_hours": {
+    "current_status": "Open",
+    "schedule": [
+      { "day": "Monday", "hours": "10:00 AM – 8:00 PM", "isOpen": true },
+      { "day": "Tuesday", "hours": "10:00 AM – 8:00 PM", "isOpen": true },
+      { "day": "Wednesday", "hours": "10:00 AM – 8:00 PM", "isOpen": true },
+      { "day": "Thursday", "hours": "10:00 AM – 8:00 PM", "isOpen": true },
+      { "day": "Friday", "hours": "10:00 AM – 8:00 PM", "isOpen": true },
+      { "day": "Saturday", "hours": "10:00 AM – 8:00 PM", "isOpen": true },
+      { "day": "Sunday", "hours": "10:30 AM – 4:30 PM", "isOpen": true }
+    ]
+  },
+  "ratings_and_reviews": {
+    "average_rating": 4.5,
+    "total_reviews": 10,
+    "rating_stars": "★★★★★",
+    "reviews": [
+      {
+        "id": "Ci9DQUlRQUNvZENodHljRjlvT214cVQyaFpNWE4yVVhCTVdFNDVaSEYxZEdGUVFrRRAB",
+        "author": "Kiran Rani",
+        "avatar": "https://lh3.googleusercontent.com/a/ACg8ocLYhw8AGXwQgZkEV8d2Yn6K1eHRL4L6V2D8AJbTSf73yGLwzQ=s120-c-rp-mo-br100",
+        "rating": 5,
+        "timeAgo": "1 year ago",
+        "text": "Best jwellery collection in this shop",
+        "verified": true
+      },
+      {
+        "id": "ChZDSUhNMG9nS0VJQ0FnSUQ2bTVLcVRBEAE",
+        "author": "Harshit Keshari",
+        "avatar": "https://lh3.googleusercontent.com/a-/ALV-UjWlx7ZcQxLhcxOq5Z_JklE7imLxdS7MK6axdobOklBAYeu1GGLV=s120-c-rp-mo-ba12-br100",
+        "rating": 5,
+        "timeAgo": "5 years ago",
+        "text": "Top class jewellery designs and honest rate calculation. Op experience in Mirzapur!",
+        "verified": true
+      },
+      {
+        "id": "Ci9DQUlRQUNvZENodHljRjlvT2s4MWVYZFViazVKWkhnM2NHTTFkalJrYldONllYYxAB",
+        "author": "Deepika Pandey",
+        "avatar": "https://lh3.googleusercontent.com/a-/ALV-UjUAhAmnqvFH1fwSI3Ycj-KkebYo-S2KyuPuUh4GyLZxtTsktstn=s120-c-rp-mo-br100",
+        "rating": 5,
+        "timeAgo": "3 months ago",
+        "text": "Wonderful pure 22K BIS 916 hallmarked bridal designs and very trustworthy dealing in Sangmohal.",
+        "verified": true
+      },
+      {
+        "id": "Ci9DQUlRQUNvZENodHljRjlvT2pSMmJHUk1YM0l3VmpWTVRrRnZibXd3WnpkUGJrRRAB",
+        "author": "Pratima Tiwari",
+        "avatar": "https://lh3.googleusercontent.com/a/ACg8ocL4k2QRba1izJs1tiA6hJrqK73LRKSs2tbzIDRJyj4F8W4I=s120-c-rp-mo-br100",
+        "rating": 5,
+        "timeAgo": "3 months ago",
+        "text": "Trusted family jeweller for antique and gold jewellery in Mirzapur. Very polite staff and fair making charges.",
+        "verified": true
+      },
+      {
+        "id": "Ci9DQUlRQUNvZENodHljRjlvT2taWGRWRldWRk5VVGkwME0xVTNaSE5MVm01NGRVRRAB",
+        "author": "Neha Mishra",
+        "avatar": "https://lh3.googleusercontent.com/a/ACg8ocLgRWXC6llJ8Q3FyyO8mIr9wv0PI7eDn6dc5q-SI9oo4mPnhQ=s120-c-rp-mo-br100",
+        "rating": 4,
+        "timeAgo": "3 months ago",
+        "text": "Very courteous customer service, wide silver and gold ornament collection right near Jila Karagar.",
+        "verified": true
+      }
+    ]
+  },
+  "photos": [
+    {
+      "id": "storefront",
+      "title": "Rajesh Jewellers Storefront & Illuminated Fascia",
+      "description": "Showroom entrance at Sangmohal, Station Rd with 3D illuminated Hindi signage, RJ monogram, BIS Hallmark and GSTIN",
+      "local_path": "/assets/images/store/storefront_facade.jpg",
+      "cloud_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLe-WNb6DmN5ayxLwy4TkQNxnXObkM7C0Ol8prI8gQaS_NIiEr0-gfCKE6tSkZForp7ZJeYGr_QZ3dEL-sYKQGES38clc2aTEuOYrv0t5TiYnYbozuT7TAVSqsU8tZyCLt4vq3J0fAMgEJs3=s1600"
+    },
+    {
+      "id": "interior_counter",
+      "title": "Authentic Showroom Floor & Traditional Seated Gaddi",
+      "description": "Traditional Indian luxury jewellery showroom experience with silver counter, wall repositories, and glass showcases",
+      "local_path": "/assets/images/store/store_interior_counter.jpg",
+      "cloud_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLcZJQyuNLTS2JPdjGvMJo2zZ6193JvS3-EI-oORs8Nw7y5ZYn70NglJs4U5G_aShSNQom7o7jVU_Y3ZEE36Hn5NDpLZnos-H6hzeBtvKmI-e4BCQiXOsQ2OnFB16NVKNKGTW_u-kw=s1600"
+    },
+    {
+      "id": "rani_haar_jewellery",
+      "title": "Handcrafted 22K Pure Gold Bridal Rani Haar Set",
+      "description": "Exquisite bridal long necklace with matching designer jhumkas photographed inside Rajesh Jewellers",
+      "local_path": "/assets/images/store/store_display_jewellery.jpg",
+      "cloud_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLemjcZXUhfvPiv6xn0_kCYzMKZSvk9E8MqC8RAwQ_D3h42ApznJJuRhhYweIfDghRhk0n-r1UlyiBMn1rQR9YqryzCESCBwdL9_plFvBUoD0K8KYcYzcZfLjngE9HqNiHGI7iwBAg=s1600"
+    },
+    {
+      "id": "gold_drop_earrings",
+      "title": "Delicate Gold Drop & Bell Earrings",
+      "description": "Pure hallmarked gold contemporary drop earrings collection",
+      "local_path": "/assets/images/store/store_showcase_video_thumb.jpg",
+      "cloud_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLctsFY5dwhX_a-P5zsPn--wQkOzpgInzPH4T3bFpBMfXpMIhSj4gJdfvNC8wHfjjD64mtO3Pa-2eBRTvUf9Ye8CX-2syXvpz3PC4_tosy4kX3B2KADG1tNd4OJLFHERl1SH1DfAG6HG_l3N=s1600"
+    },
+    {
+      "id": "streetview_location",
+      "title": "Google Street View - Sangmohal Station Road",
+      "description": "Daylight exterior view with wall painting and landmark near District Jail",
+      "local_path": "/assets/images/store/streetview_location.jpg",
+      "cloud_url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=A2zDvfYC7-_6yWeswYwm-w&cb_client=search.gws-prod.grass&w=1200&h=800&yaw=183.19005&pitch=0&thumbfov=100"
+    }
+  ]
+}
+

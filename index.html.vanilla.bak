@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rajesh Jewellers Mirzapur | Online Jewellery Store & Live Bullion Rates</title>
+  <meta name="description" content="Shop 22K BIS 916 hallmarked bridal jewellery, gold necklaces, antique temple bangles, certified diamond solitaires, and 925 silver at Rajesh Jewellers, Wellesley Ganj, Mirzapur.">
+  <meta name="keywords" content="Rajesh Jewellers Mirzapur, Wellesley Ganj Jewellers, gold store Mirzapur, buy jewellery online Mirzapur, 916 hallmark gold, gold rate today Mirzapur, wedding jewellery Mirzapur">
+  <meta name="theme-color" content="#581420">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Rajesh Jewellers Mirzapur | Online Jewellery Showcase">
+  <meta property="og:description" content="Explore pure 22K BIS 916 Hallmarked Gold, Bridal Polki, and Certified Diamonds in Wellesley Ganj, Mirzapur.">
+  <meta property="og:image" content="assets/images/hero_bridal.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23581420' stroke='%23B88E2F' stroke-width='4'/><text x='50%' y='60%' font-family='serif' font-weight='bold' font-size='38' fill='%23FFFFFF' text-anchor='middle'>RJ</text></svg>">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       TOP ANNOUNCEMENT & LIVE BULLION BAR
+       ======================================================================== -->
+  <header class="top-bar">
+    <div class="container">
+      <div class="top-bar-flex">
+        <div class="top-rate-marquee">
+          <div class="rate-chip">
+            <span class="live-pulse-dot"></span>
+            <span style="font-weight: 600; color: #DFBE6B;">LIVE RATES:</span>
+          </div>
+          <div class="rate-chip">
+            <span>24K Gold:</span>
+            <strong id="rate-24k" style="color: #FFF;">₹78,450</strong>
+          </div>
+          <span style="opacity: 0.3;">|</span>
+          <div class="rate-chip">
+            <span>22K 916 Hallmark:</span>
+            <strong id="rate-22k" style="color: #DFBE6B;">₹71,950</strong>
+          </div>
+          <span style="opacity: 0.3;">|</span>
+          <div class="rate-chip">
+            <span>18K Diamond:</span>
+            <strong id="rate-18k" style="color: #FFF;">₹58,850</strong>
+          </div>
+          <span style="opacity: 0.3;">|</span>
+          <div class="rate-chip">
+            <span>Silver 999:</span>
+            <strong id="rate-silver" style="color: #FFF;">₹94,500/kg</strong>
+          </div>
+          <span style="opacity: 0.3;">|</span>
+          <div class="rate-chip">
+            <span style="font-size: 0.72rem; color: #DFBE6B;" id="rate-timestamp">Mirzapur Market</span>
+            <button class="rate-refresh-btn" onclick="refreshLiveRates()" title="Refresh Live Market Rates">⟳ Refresh</button>
+          </div>
+        </div>
+
+        <div class="top-store-info">
+          <a href="#showroom" class="top-info-link">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Station Rd, Wellesley Ganj, Mirzapur
+          </a>
+          <a href="tel:05442220000" class="top-info-link">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            05442-220000
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN SITE HEADER & SEARCH (TANISHQ / BLUESTONE STYLE)
+       ======================================================================== -->
+  <header class="site-header" id="navbar">
+    <div class="container">
+      <div class="header-main-row">
+        <!-- Brand Logo -->
+        <a href="#" class="brand-wrap">
+          <div class="brand-emblem">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 11h2v4h-2zm0 5h2v2h-2z"/>
+            </svg>
+          </div>
+          <div class="brand-title-box">
+            <span class="brand-name">RAJESH JEWELLERS</span>
+            <span class="brand-sub">WELLESLEY GANJ • MIRZAPUR</span>
+          </div>
+        </a>
+
+        <!-- Live Instant Search Bar (BlueStone style) -->
+        <div class="header-search-wrap">
+          <div class="search-input-box">
+            <input type="text" id="search-input" placeholder="Search 22K Gold Chokers, Temple Kadas, Solitaire Rings, Payal..." autocomplete="off">
+            <button type="button" aria-label="Search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </button>
+          </div>
+          <!-- Dropdown Matches Container -->
+          <div class="search-dropdown" id="search-dropdown"></div>
+        </div>
+
+        <!-- Header Actions: Wishlist, Cart, VIP Visit -->
+        <div class="header-actions">
+          <!-- Wishlist Button -->
+          <button class="header-icon-btn" onclick="openWishlistDrawer()" title="Saved Designs">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            <span class="badge-count wishlist-count">0</span>
+          </button>
+
+          <!-- Shopping Bag Button -->
+          <button class="header-icon-btn" onclick="openCartDrawer()" title="Shopping Bag">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            <span class="badge-count bag-count">0</span>
+          </button>
+
+          <!-- Book Appointment Button -->
+          <button class="btn btn-primary" onclick="bookShowroomVisit()">
+            Book VIP Visit
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary Category Navigation Bar -->
+    <div class="header-nav-bar">
+      <div class="container">
+        <ul class="nav-links-row">
+          <li class="nav-link-item active"><a href="#catalog-section" onclick="filterCategory('all')">All Jewellery</a></li>
+          <li class="nav-link-item"><a href="#catalog-section" onclick="filterCategory('bridal')">Royal Bridal</a></li>
+          <li class="nav-link-item"><a href="#catalog-section" onclick="filterCategory('gold')">Gold Necklaces</a></li>
+          <li class="nav-link-item"><a href="#catalog-section" onclick="filterCategory('bangles')">Temple Kadas & Bangles</a></li>
+          <li class="nav-link-item"><a href="#catalog-section" onclick="filterCategory('diamond')">Solitaire Diamonds</a></li>
+          <li class="nav-link-item"><a href="#catalog-section" onclick="filterCategory('everyday')">Jhumkas & Mangalsutra</a></li>
+          <li class="nav-link-item"><a href="#catalog-section" onclick="filterCategory('mens')">Men's Jewels</a></li>
+          <li class="nav-link-item"><a href="#catalog-section" onclick="filterCategory('coins')">24K Coins</a></li>
+          <li class="nav-link-item"><a href="#catalog-section" onclick="filterCategory('silver')">925 Silver</a></li>
+          <li class="nav-link-item"><a href="#calculator" style="color: var(--gold-dark);">★ Price Calculator</a></li>
+          <li class="nav-link-item"><a href="#scheme">11+1 Gold Scheme</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       BRIGHT HERO BANNER & 3D PARTICLE SHOWCASE
+       ======================================================================== -->
+  <section class="hero-banner-section">
+    <!-- Interactive 3D Gold Dust Particle Canvas -->
+    <canvas id="gold-particles-canvas"></canvas>
+
+    <div class="container">
+      <div class="hero-banner-grid">
+        <div class="hero-banner-copy">
+          <span class="kicker-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            Lagan Mahotsav Special • Wellesley Ganj, Mirzapur
+          </span>
+
+          <h1 class="hero-heading">
+            Royal Heirloom Jewellery, <br>
+            <span class="gold-gradient-text">100% BIS 916 Hallmarked.</span>
+          </h1>
+
+          <p class="hero-desc">
+            Explore Mirzapur's most prestigious online jewellery showcase. Handcrafted bridal polki, 22K temple kadas, certified solitaires, and pure silver articles with zero compromise on purity and transparent computerized pricing.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#catalog-section" class="btn btn-primary" onclick="filterCategory('bridal')">
+              Explore Bridal Catalog
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+            </a>
+            <a href="#calculator" class="btn btn-outline-gold">
+              Calculate Gold Price
+            </a>
+            <button class="btn btn-outline" onclick="bookShowroomVisit()">
+              Book VIP Visit
+            </button>
+          </div>
+
+          <div class="hero-trust-badges">
+            <div class="trust-badge-item">
+              <div class="trust-badge-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+              </div>
+              <div class="trust-badge-text">
+                <strong>100% BIS 916</strong>
+                <span>6-Digit HUID Laser</span>
+              </div>
+            </div>
+
+            <div class="trust-badge-item">
+              <div class="trust-badge-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+              </div>
+              <div class="trust-badge-text">
+                <strong>Karatmeter Tested</strong>
+                <span>Instant In-Store Check</span>
+              </div>
+            </div>
+
+            <div class="trust-badge-item">
+              <div class="trust-badge-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </div>
+              <div class="trust-badge-text">
+                <strong>5.0 ★ Google Trust</strong>
+                <span>Wellesley Ganj, Mirzapur</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual-frame">
+          <img src="assets/images/hero_bridal.jpg" alt="Rajesh Jewellers Royal Bridal Lagan Collection">
+          <div class="floating-hero-pill">
+            <span style="font-size: 1.5rem;">👑</span>
+            <div>
+              <strong style="color: var(--brand-plum); font-size: 0.88rem; display: block;">Shahi Rajwada Bridal Set</strong>
+              <span style="color: var(--text-dim); font-size: 0.75rem;">22K Hallmarked • Uncut Polki & Emeralds</span>
+            </div>
+            <button class="btn btn-primary" style="padding: 0.4rem 0.85rem; font-size: 0.75rem; margin-left: 0.5rem;" onclick="openQuickView('RJ-BR-101')">
+              View Specs
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       CIRCULAR STORY-STYLE CATEGORY CAROUSEL (TANISHQ / BLUESTONE BUBBLES)
+       ======================================================================== -->
+  <section class="category-bubbles-section" id="categories-section">
+    <div class="container">
+      <div class="category-section-header">
+        <span class="kicker-tag">Curated Collections</span>
+        <h2>Shop by Category (श्रेणी अनुसार आभूषण)</h2>
+        <p>Explore pure 22K BIS 916 hallmarked bridal sets, temple kadas, certified solitaires, and 24K gold coins.</p>
+      </div>
+
+      <div class="bubbles-scroll-track">
+        <div class="cat-bubble-item active" data-filter="all">
+          <div class="cat-bubble-avatar">
+            <img src="assets/images/necklace_collection.jpg" alt="All Collections">
+          </div>
+          <span class="cat-bubble-title">All Designs</span>
+        </div>
+
+        <div class="cat-bubble-item" data-filter="bridal">
+          <div class="cat-bubble-avatar">
+            <img src="assets/images/hero_bridal.jpg" alt="Royal Bridal">
+          </div>
+          <span class="cat-bubble-title">Bridal Sets</span>
+        </div>
+
+        <div class="cat-bubble-item" data-filter="gold">
+          <div class="cat-bubble-avatar">
+            <img src="assets/images/necklace_collection.jpg" alt="22K Gold Chokers">
+          </div>
+          <span class="cat-bubble-title">22K Necklaces</span>
+        </div>
+
+        <div class="cat-bubble-item" data-filter="bangles">
+          <div class="cat-bubble-avatar">
+            <img src="assets/images/antique_bangles.jpg" alt="Temple Bangles">
+          </div>
+          <span class="cat-bubble-title">Temple Kadas</span>
+        </div>
+
+        <div class="cat-bubble-item" data-filter="diamond">
+          <div class="cat-bubble-avatar">
+            <img src="assets/images/diamond_rings.jpg" alt="Solitaire Diamonds">
+          </div>
+          <span class="cat-bubble-title">Diamonds</span>
+        </div>
+
+        <div class="cat-bubble-item" data-filter="everyday">
+          <div class="cat-bubble-avatar">
+            <img src="assets/images/earrings_jhumka.jpg" alt="Chandbali Jhumkas">
+          </div>
+          <span class="cat-bubble-title">Jhumkas</span>
+        </div>
+
+        <div class="cat-bubble-item" data-filter="mens">
+          <div class="cat-bubble-avatar">
+            <img src="assets/images/mens_chain_kada.jpg" alt="Men's Jewels">
+          </div>
+          <span class="cat-bubble-title">Men's Kada</span>
+        </div>
+
+        <div class="cat-bubble-item" data-filter="coins">
+          <div class="cat-bubble-avatar">
+            <img src="assets/images/gold_coin.jpg" alt="24K Gold Coins">
+          </div>
+          <span class="cat-bubble-title">24K Coins</span>
+        </div>
+
+        <div class="cat-bubble-item" data-filter="silver">
+          <div class="cat-bubble-avatar">
+            <img src="assets/images/silver_collection.jpg" alt="925 Silver">
+          </div>
+          <span class="cat-bubble-title">925 Silver</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       ONLINE STORE CATALOGUE & PLP GRID (TANISHQ / BLUESTONE STYLE)
+       ======================================================================== -->
+  <section class="catalog-section" id="catalog-section">
+    <div class="container">
+      <div class="catalog-header-flex">
+        <div class="catalog-header-left">
+          <span class="kicker-tag" style="background: var(--gold-soft); color: var(--gold-dark); border-color: var(--gold-border);">
+            Online Store Catalog
+          </span>
+          <h2>राजेश ज्वेलर्स ऑनलाइन आभूषण संग्रह</h2>
+          <p id="items-count-display">Showing 8 Designs in Wellesley Ganj</p>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--bg-warm); padding: 0.45rem 1rem; border-radius: 999px; border: 1px solid var(--border-medium); font-size: 0.8rem; color: var(--brand-plum); font-weight: 600;">
+          <span class="live-pulse-dot" style="width: 6px; height: 6px;"></span>
+          100% Certified 22K 916 Hallmark Designs
+        </div>
+      </div>
+
+      <!-- Controls & Sorting Bar -->
+      <div class="catalog-controls-bar">
+        <div class="category-filter-chips">
+          <button class="filter-chip active" data-filter="all">All Jewellery</button>
+          <button class="filter-chip" data-filter="bridal">Royal Bridal</button>
+          <button class="filter-chip" data-filter="gold">22K Gold Necklaces</button>
+          <button class="filter-chip" data-filter="bangles">Temple Bangles</button>
+          <button class="filter-chip" data-filter="diamond">Solitaire Diamonds</button>
+          <button class="filter-chip" data-filter="everyday">Jhumkas</button>
+          <button class="filter-chip" data-filter="mens">Men's Kada</button>
+          <button class="filter-chip" data-filter="coins">24K Coins</button>
+          <button class="filter-chip" data-filter="silver">925 Silver</button>
+        </div>
+
+        <div class="sort-select-box">
+          <label for="catalog-sort-select">Sort By:</label>
+          <select id="catalog-sort-select" class="sort-dropdown-select">
+            <option value="featured">Featured / लोकप्रिय</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="weight">Weight: Light to Heavy</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Product Cards Grid -->
+      <div class="ecommerce-grid" id="products-grid">
+        <!-- Injected dynamically via app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       TRANSPARENT GOLD PRICE CALCULATOR (BRIGHT LUXURY CARD)
+       ======================================================================== -->
+  <section class="calc-section" id="calculator">
+    <div class="container">
+      <div style="text-align: center; max-width: 650px; margin: 0 auto 3rem;">
+        <span class="kicker-tag">100% Honest & Transparent Pricing</span>
+        <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">पारदर्शी गोल्ड मूल्य कैलकुलेटर</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Know your exact gold and making price before visiting. Real-time Wellesley Ganj bullion rates + lowest making charges with 3% GST breakdown.
+        </p>
+      </div>
+
+      <div class="calc-bright-box">
+        <div class="calc-grid-inner">
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <!-- Metal Selection -->
+            <div class="form-field">
+              <label>Select Metal Purity / शुद्धता</label>
+              <div class="metal-purity-buttons">
+                <button type="button" class="metal-choice-btn active" data-metal="gold22k">
+                  <strong>22K Gold</strong>
+                  <span>916 Hallmark</span>
+                </button>
+                <button type="button" class="metal-choice-btn" data-metal="gold24k">
+                  <strong>24K Gold</strong>
+                  <span>999 Bullion</span>
+                </button>
+                <button type="button" class="metal-choice-btn" data-metal="gold18k">
+                  <strong>18K Gold</strong>
+                  <span>Diamond Setting</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Weight Input & Chips -->
+            <div class="form-field">
+              <label for="calc-weight">Gold Weight in Grams / वजन (ग्राम)</label>
+              <input type="number" id="calc-weight" value="10" min="0.5" step="0.1" style="font-size: 1.15rem; font-weight: 700; color: var(--brand-plum);">
+              <div class="preset-chips-row">
+                <button type="button" class="chip-btn" data-weight="2">2g</button>
+                <button type="button" class="chip-btn" data-weight="5">5g</button>
+                <button type="button" class="chip-btn" data-weight="8">8g (1 Tola)</button>
+                <button type="button" class="chip-btn active" data-weight="10">10g</button>
+                <button type="button" class="chip-btn" data-weight="20">20g</button>
+                <button type="button" class="chip-btn" data-weight="50">50g</button>
+                <button type="button" class="chip-btn" data-weight="100">100g</button>
+              </div>
+            </div>
+
+            <!-- Making Charge Slider -->
+            <div class="form-field">
+              <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                <label>Making Charges (गड़ाई शुल्क)</label>
+                <strong id="calc-making-val" style="color: var(--brand-plum); font-size: 1.1rem;">10%</strong>
+              </div>
+              <input type="range" id="calc-making" min="7" max="15" value="10" step="0.5" style="accent-color: var(--brand-plum); cursor: pointer;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-dim); margin-top: 0.25rem;">
+                <span>Chains (7-8%)</span>
+                <span>Standard (10%)</span>
+                <span>Bridal Polki/Temple (12-14%)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Output Bill Card -->
+          <div class="calc-bill-card">
+            <div style="border-bottom: 1px solid var(--border-medium); padding-bottom: 1rem; margin-bottom: 1.25rem;">
+              <h4 style="font-size: 0.95rem; color: var(--brand-plum); text-transform: uppercase;">Computerized Estimated Quotation</h4>
+              <p style="font-size: 0.8rem; color: var(--text-dim);" id="res-metal-name">22K 916 Hallmark (10g @ ₹7,195/g)</p>
+            </div>
+
+            <div class="bill-line-item">
+              <span>Pure Metal Value:</span>
+              <strong id="res-gold-val" style="color: var(--text-main);">₹71,950</strong>
+            </div>
+            <div class="bill-line-item">
+              <span>Making Charges:</span>
+              <strong id="res-making-val" style="color: var(--text-main);">₹7,195 (10%)</strong>
+            </div>
+            <div class="bill-line-item">
+              <span>GST (3% Indian Tax):</span>
+              <strong id="res-gst-val" style="color: var(--text-main);">₹2,374 (3%)</strong>
+            </div>
+
+            <div class="bill-line-item grand-total-row">
+              <span>Total Estimated Price:</span>
+              <div class="grand-total-price" id="res-total-val">₹81,519</div>
+            </div>
+
+            <p style="font-size: 0.72rem; color: var(--text-dim); margin-top: 1rem; line-height: 1.4;">
+              * Note: Exact final price depends on net gold weight after stone deduction on our certified computerized Karatmeter in Wellesley Ganj.
+            </p>
+
+            <a href="#" class="btn btn-primary" id="calc-whatsapp-btn" style="width: 100%; margin-top: 1.25rem;" target="_blank">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/></svg>
+              Inquire on WhatsApp with this Estimate
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       RAJESH SWARNA NIDHI (11+1 MONTHLY GOLD SCHEME)
+       ======================================================================== -->
+  <section class="scheme-bright-section" id="scheme">
+    <div class="container">
+      <div class="scheme-card-wrap">
+        <div>
+          <span class="kicker-tag" style="background: rgba(255, 255, 255, 0.15); color: #FFF; border-color: rgba(255, 255, 255, 0.3);">
+            Rajesh Swarna Nidhi • मासिक स्वर्ण बचत योजना
+          </span>
+          <h2>
+            Save for 11 Months, <br>
+            <span style="color: #FDE047;">12th Month 100% Free Bonus!</span>
+          </h2>
+          <p style="font-size: 1.05rem; opacity: 0.9; line-height: 1.7; margin-bottom: 2rem;">
+            Plan for future weddings, anniversaries, or gold investments with zero financial pressure. Deposit a fixed monthly sum for 11 months, and Rajesh Jewellers pays the 12th installment as our festive blessing!
+          </p>
+
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem;">
+            <li>✓ <strong>100% Purity:</strong> Redeem on any 22K 916 Hallmark or Diamond ornament.</li>
+            <li>✓ <strong>Extra 25% Off:</strong> Exclusive making charge discount voucher for scheme members.</li>
+            <li>✓ <strong>Affordable:</strong> Start with as low as ₹1,000/month up to ₹50,000/month.</li>
+          </ul>
+        </div>
+
+        <div class="scheme-calc-white">
+          <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--brand-plum); font-weight: 700; letter-spacing: 0.08em;">Monthly Savings Budget</span>
+          <div style="font-size: 2.2rem; font-weight: 800; color: var(--brand-plum); margin: 0.5rem 0;" id="scheme-monthly-display">₹5,000</div>
+          <input type="range" id="scheme-slider" min="1000" max="25000" step="1000" value="5000" style="width: 100%; accent-color: var(--brand-plum); cursor: pointer;">
+          
+          <div style="background: var(--bg-warm); border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0; text-align: left; font-size: 0.88rem;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span>You Deposit (11 Months):</span>
+              <strong id="scheme-total-paid" style="color: var(--text-main);">₹55,000</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: #0E8345;">
+              <span>Rajesh Jewellers Bonus (Month 12):</span>
+              <strong id="scheme-bonus">+₹5,000 FREE</strong>
+            </div>
+            <div style="border-top: 1.5px solid var(--border-medium); padding-top: 0.75rem; display: flex; justify-content: space-between; font-weight: 800; color: var(--brand-plum); font-size: 1.15rem;">
+              <span>Total Jewellery Value:</span>
+              <span id="scheme-total-value">₹60,000</span>
+            </div>
+          </div>
+
+          <a href="#" class="btn btn-primary" id="scheme-enroll-btn" style="width: 100%;" target="_blank">
+            Enroll via WhatsApp in 2 Minutes
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       5 PILLARS OF TRUST (BIS HALLMARKING GUARANTEE)
+       ======================================================================== -->
+  <section class="trust-bright-section" id="trust">
+    <div class="container">
+      <div style="text-align: center; max-width: 650px; margin: 0 auto 3rem;">
+        <span class="kicker-tag">The Wellesley Ganj Promise</span>
+        <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">हमारी 5 स्वर्ण प्रतिज्ञाएं (5 Pillars of Trust)</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Why thousands of families across Mirzapur trust Rajesh Jewellers for their most sacred celebrations.</p>
+      </div>
+
+      <div class="pillars-5-grid">
+        <div class="pillar-bright-card">
+          <div class="pillar-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          </div>
+          <h3 style="font-size: 1.05rem; margin-bottom: 0.35rem; color: var(--brand-plum);">100% BIS 916 HUID</h3>
+          <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.5;">Every gold item carries the government BIS hallmark & unique 6-digit laser HUID code.</p>
+        </div>
+
+        <div class="pillar-bright-card">
+          <div class="pillar-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+          </div>
+          <h3 style="font-size: 1.05rem; margin-bottom: 0.35rem; color: var(--brand-plum);">Karatmeter Testing</h3>
+          <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.5;">Non-destructive computerized purity checking machine available free for all walk-ins.</p>
+        </div>
+
+        <div class="pillar-bright-card">
+          <div class="pillar-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+          </div>
+          <h3 style="font-size: 1.05rem; margin-bottom: 0.35rem; color: var(--brand-plum);">Lifetime Buyback</h3>
+          <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.5;">Guaranteed lifetime exchange and buyback at prevailing market rates with full transparency.</p>
+        </div>
+
+        <div class="pillar-bright-card">
+          <div class="pillar-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/></svg>
+          </div>
+          <h3 style="font-size: 1.05rem; margin-bottom: 0.35rem; color: var(--brand-plum);">Computerized Tax Bill</h3>
+          <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.5;">Clear separation of gold rate, net weight, making charge, and GST for complete peace of mind.</p>
+        </div>
+
+        <div class="pillar-bright-card">
+          <div class="pillar-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </div>
+          <h3 style="font-size: 1.05rem; margin-bottom: 0.35rem; color: var(--brand-plum);">Wellesley Ganj Trust</h3>
+          <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.5;">Generations of personalized family relationship, ethical trade, and warm hospitality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SHOWROOM EXPERIENCE & GOOGLE MAPS SECTION
+       ======================================================================== -->
+  <section class="showroom-tour-section" id="showroom">
+    <div class="container">
+      <div class="showroom-split-grid">
+        <div class="showroom-photo-box">
+          <img src="assets/images/showroom_interior.jpg" alt="Rajesh Jewellers Wellesley Ganj Showroom Interior">
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <span class="kicker-tag">Visit Our Showroom</span>
+          <h2 style="font-size: 2.2rem; line-height: 1.2;">Experience Royal Hospitality in Wellesley Ganj, Mirzapur</h2>
+          <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6;">
+            Located in Mirzapur’s historical jewellery market on Station Road. Step into our air-conditioned showroom with private bridal viewing suites and dedicated consultants.
+          </p>
+
+          <div style="display: flex; gap: 1rem; align-items: flex-start;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--bg-warm); border: 1px solid var(--border-medium); display: flex; align-items: center; justify-content: center; color: var(--brand-plum); flex-shrink: 0;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </div>
+            <div>
+              <strong style="color: var(--brand-plum); display: block; font-size: 0.95rem;">Address & Landmark</strong>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">Station Road, Wellesley Ganj (Near Railway Station / Basanahi Bazar corridor), Mirzapur, Uttar Pradesh - 231001</p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; align-items: flex-start;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--bg-warm); border: 1px solid var(--border-medium); display: flex; align-items: center; justify-content: center; color: var(--brand-plum); flex-shrink: 0;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+            </div>
+            <div>
+              <strong style="color: var(--brand-plum); display: block; font-size: 0.95rem;">Opening Hours (खुलने का समय)</strong>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">Monday to Saturday: <strong>11:00 AM – 8:00 PM</strong><br><span style="color: var(--danger-ruby); font-weight: 600;">Sunday: Closed (साप्ताहिक अवकाश)</span></p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; margin-top: 0.5rem; flex-wrap: wrap;">
+            <!-- Real Google Maps Link from User's Place ID -->
+            <a href="https://www.google.com/maps/place/Rajesh+Jewellers/@25.136699,82.5638502,17z/data=!3m1!4b1!4m6!3m5!1s0x398fc1b0c7937c61:0x23f9b79dffe1abf!8m2!3d25.136699!4d82.5664251!16s%2Fg%2F11gmxyb8gt" target="_blank" class="btn btn-primary" id="open-gmaps-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Open in Google Maps
+            </a>
+            <button class="btn btn-outline" onclick="bookShowroomVisit()">
+              Book Private Consultation
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Google Maps Embed for Wellesley Ganj Mirzapur -->
+      <div class="showroom-map-embed" style="margin-top: 2.5rem; border-radius: 12px; overflow: hidden; border: 1.5px solid var(--border-medium); box-shadow: var(--shadow-md);">
+        <iframe 
+          src="https://maps.google.com/maps?q=25.136699,82.5664251&hl=en&z=17&output=embed" 
+          width="100%" 
+          height="320" 
+          style="border:0; display: block;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          title="Rajesh Jewellers Wellesley Ganj Mirzapur Location Map">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       FOOTER (BRIGHT CLASSIC E-COMMERCE)
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand-wrap" style="margin-bottom: 1rem;">
+            <div class="brand-emblem">
+              <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 11h2v4h-2zm0 5h2v2h-2z"/></svg>
+            </div>
+            <div class="brand-title-box">
+              <span class="brand-name">RAJESH JEWELLERS</span>
+              <span class="brand-sub">WELLESLEY GANJ • MIRZAPUR</span>
+            </div>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            Mirzapur’s hallmark of timeless elegance. Handcrafted 22K pure bridal gold, certified diamond engagement sets, antique temple kadas, and 925 sterling silver with complete purity assurance.
+          </p>
+          <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg-warm); border: 1px solid var(--border-subtle); padding: 0.4rem 0.85rem; border-radius: 6px; font-size: 0.78rem; color: var(--gold-dark); font-weight: 700;">
+            <span>★</span> BIS 916 Hallmark Certified Jeweller
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Jewellery Categories</h4>
+          <ul class="footer-links">
+            <li><a href="#catalog-section" onclick="filterCategory('bridal')">Royal Bridal Sets</a></li>
+            <li><a href="#catalog-section" onclick="filterCategory('gold')">22K Gold Necklaces</a></li>
+            <li><a href="#catalog-section" onclick="filterCategory('bangles')">Temple Kadas & Bangles</a></li>
+            <li><a href="#catalog-section" onclick="filterCategory('diamond')">Solitaire Diamond Rings</a></li>
+            <li><a href="#catalog-section" onclick="filterCategory('mens')">Men's Gold Kada & Chains</a></li>
+            <li><a href="#catalog-section" onclick="filterCategory('coins')">24K Lakshmi Gold Coins</a></li>
+            <li><a href="#catalog-section" onclick="filterCategory('silver')">925 Pure Silver Payal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Customer Services</h4>
+          <ul class="footer-links">
+            <li><a href="#calculator">Live Gold Price Calculator</a></li>
+            <li><a href="#scheme">Rajesh Swarna Nidhi (11+1)</a></li>
+            <li><a href="#trust">100% BIS Hallmark Verification</a></li>
+            <li><a href="#showroom">Showroom Hours & Direction</a></li>
+            <li><a href="javascript:void(0)" onclick="bookShowroomVisit()">Book Video Call Viewing</a></li>
+            <li><a href="javascript:void(0)" onclick="openCartDrawer()">View Shopping Bag</a></li>
+            <li><a href="javascript:void(0)" onclick="openDealerModal()" style="color: var(--gold-dark); font-weight: 600;">🔐 Dealer Portal (दुकानदार लॉगिन)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Showroom Contact</h4>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.6rem;">
+            <strong>Station Road, Wellesley Ganj</strong><br>
+            Mirzapur, Uttar Pradesh - 231001
+          </p>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+            Mon - Sat: 11:00 AM - 8:00 PM<br>
+            <span style="color: var(--danger-ruby); font-weight: 600;">Sunday: Closed</span>
+          </p>
+          <a href="https://wa.me/919450000000" target="_blank" class="btn btn-primary" style="width: 100%;">
+            WhatsApp Showroom Manager
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 Rajesh Jewellers Mirzapur. All Rights Reserved. Crafted with royal luxury aesthetics.
+        </div>
+        <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+          <a href="#" style="color: var(--text-dim); text-decoration: none;">Privacy Policy</a>
+          <a href="#" style="color: var(--text-dim); text-decoration: none;">Hallmark Standards</a>
+          <a href="https://www.google.com/maps/place/Rajesh+Jewellers/@25.136699,82.5638502,17z/data=!3m1!4b1!4m6!3m5!1s0x398fc1b0c7937c61:0x23f9b79dffe1abf!8m2!3d25.136699!4d82.5664251!16s%2Fg%2F11gmxyb8gt" target="_blank" style="color: var(--brand-plum); text-decoration: none; font-weight: 600;">Google Maps</a>
+          <!-- Merchant / Dealer Access Button exclusively in Footer -->
+          <button class="footer-dealer-btn" onclick="openDealerModal()" title="Merchant / Shop Owner Access">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Dealer Mode (दुकानदार पोर्टल)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       DEALER / SHOP ADMIN MANAGEMENT SUITE (दुकानदार / डीलर पोर्टल MODAL)
+       ======================================================================== -->
+  <div class="dealer-modal-overlay" id="dealer-modal">
+    <div class="dealer-modal-card">
+      <div class="dealer-modal-header">
+        <div class="dealer-header-title">
+          <h3>दुकानदार प्रबंधन पोर्टल (Dealer Showcase Suite)</h3>
+          <span class="dealer-badge">Store Admin</span>
+        </div>
+        <button onclick="closeDealerModal()" style="background: none; border: none; color: #FFF; font-size: 1.6rem; cursor: pointer;">&times;</button>
+      </div>
+
+      <div class="dealer-tabs-nav">
+        <button class="dealer-tab-btn active" data-pane="dealer-add-tab">
+          + Add New Item to Online Store
+        </button>
+        <button class="dealer-tab-btn" data-pane="dealer-rates-tab">
+          ⚙️ Update Live Bullion Rates
+        </button>
+        <button class="dealer-tab-btn" data-pane="dealer-inventory-tab">
+          📋 Current Online Inventory
+        </button>
+      </div>
+
+      <!-- Tab 1: Add New Product -->
+      <div class="dealer-tab-pane active" id="dealer-add-tab">
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          Add any new jewellery piece to your live website showcase. Customers in Mirzapur will immediately see it in your online store with real-time rate calculations!
+        </p>
+
+        <form id="add-product-form" onsubmit="handleDealerAddProduct(event)">
+          <div class="dealer-form-grid">
+            <div class="form-field">
+              <label>Ornament English Name</label>
+              <input type="text" id="new-item-name" placeholder="e.g. Royal 22K Kundan Choker Necklace" required>
+            </div>
+            <div class="form-field">
+              <label>Hindi Name / हिंदी नाम</label>
+              <input type="text" id="new-item-hindi" placeholder="e.g. शाही 22K कुंदन चोकर हार" required>
+            </div>
+
+            <div class="form-field">
+              <label>Jewellery Category</label>
+              <select id="new-item-category" required>
+                <option value="bridal">Royal Bridal Sets</option>
+                <option value="gold">22K Gold Necklaces</option>
+                <option value="bangles">Temple Bangles & Kadas</option>
+                <option value="diamond">Solitaire Diamonds</option>
+                <option value="everyday">Everyday & Mangalsutra</option>
+                <option value="mens">Men's Jewels</option>
+                <option value="coins">24K Gold Coins</option>
+                <option value="silver">Silver & Pooja Articles</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label>Metal Purity / शुद्धता</label>
+              <select id="new-item-purity" required>
+                <option value="gold22k">22K BIS 916 Hallmark</option>
+                <option value="gold24k">24K Pure 999 Bullion</option>
+                <option value="gold18k">18K Diamond Certified Gold</option>
+                <option value="silver999">92.5% Pure Sterling Silver</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label>Gross Weight (Grams)</label>
+              <input type="number" id="new-item-gross" step="0.01" placeholder="e.g. 48.50" required>
+            </div>
+
+            <div class="form-field">
+              <label>Net Pure Gold/Silver Weight (Grams)</label>
+              <input type="number" id="new-item-net" step="0.01" placeholder="e.g. 45.20" required>
+            </div>
+
+            <div class="form-field">
+              <label>Making Charges (%)</label>
+              <input type="number" id="new-item-making" step="0.5" value="10" placeholder="e.g. 10" required>
+            </div>
+
+            <div class="form-field">
+              <label>Special Tag / Badge</label>
+              <select id="new-item-badge">
+                <option value="New Arrival">New Arrival (नया संग्रह)</option>
+                <option value="Lagan Special">Lagan Special (विवाह स्पेशल)</option>
+                <option value="Bestseller">Bestseller (लोकप्रिय)</option>
+                <option value="Exclusive">Exclusive Masterpiece</option>
+                <option value="Ready to Ship">Ready to Ship</option>
+              </select>
+            </div>
+
+            <div class="form-field" style="grid-column: 1 / -1;">
+              <label>Select Showcase Photo</label>
+              <select id="new-item-image">
+                <option value="assets/images/hero_bridal.jpg">Royal Bridal Polki Choker (Hero)</option>
+                <option value="assets/images/necklace_collection.jpg">22K Filigree Gold Choker</option>
+                <option value="assets/images/antique_bangles.jpg">Lakshmi Temple Kada Pair</option>
+                <option value="assets/images/diamond_rings.jpg">Diamond Solitaire & Bands</option>
+                <option value="assets/images/earrings_jhumka.jpg">Chandbali Jhumkas & Mangalsutra</option>
+                <option value="assets/images/mens_chain_kada.jpg">Men's Lion Kada & Italian Chain</option>
+                <option value="assets/images/gold_coin.jpg">24K 999 Lakshmi Gold Coin</option>
+                <option value="assets/images/silver_collection.jpg">925 Pure Silver Bridal Payal</option>
+              </select>
+            </div>
+
+            <div class="form-field" style="grid-column: 1 / -1;">
+              <label>Stone / Pearl Detailing</label>
+              <input type="text" id="new-item-stone" placeholder="e.g. Zambian Emeralds, Basra Pearls, or Pure Solid Gold">
+            </div>
+
+            <div class="form-field" style="grid-column: 1 / -1;">
+              <label>Product Description / विवरण</label>
+              <textarea id="new-item-desc" rows="2" placeholder="Brief description of the design and craftsmanship..."></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%; padding: 0.95rem;">
+            + Publish Ornament to Online Store Now
+          </button>
+        </form>
+      </div>
+
+      <!-- Tab 2: Update Live Bullion Rates -->
+      <div class="dealer-tab-pane" id="dealer-rates-tab">
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          Change today's bullion market rates. As soon as you save, <strong>all product prices across the website will instantly recalculate</strong> based on net gold weight!
+        </p>
+
+        <form onsubmit="saveDealerRates(event)">
+          <div class="rate-editor-grid">
+            <div class="form-field">
+              <label>24K Gold (₹ / 1g)</label>
+              <input type="number" id="dealer-rate-24k" step="1" required>
+              <small style="color: var(--text-dim);">₹7,845 = ₹78,450/10g</small>
+            </div>
+            <div class="form-field">
+              <label>22K 916 Gold (₹ / 1g)</label>
+              <input type="number" id="dealer-rate-22k" step="1" required>
+              <small style="color: var(--text-dim);">₹7,195 = ₹71,950/10g</small>
+            </div>
+            <div class="form-field">
+              <label>18K Gold (₹ / 1g)</label>
+              <input type="number" id="dealer-rate-18k" step="1" required>
+              <small style="color: var(--text-dim);">₹5,885 = ₹58,850/10g</small>
+            </div>
+            <div class="form-field">
+              <label>Silver 999 (₹ / 1g)</label>
+              <input type="number" id="dealer-rate-silver" step="0.1" required>
+              <small style="color: var(--text-dim);">₹94.5 = ₹94,500/kg</small>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-gold" style="padding: 0.9rem 2rem;">
+            💾 Save Rates & Update All Store Prices
+          </button>
+        </form>
+      </div>
+
+      <!-- Tab 3: Current Online Inventory -->
+      <div class="dealer-tab-pane" id="dealer-inventory-tab">
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Manage items currently displayed in the online store. You can remove or archive any piece.
+        </p>
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem;">
+            <thead>
+              <tr style="background: var(--bg-warm); border-bottom: 1.5px solid var(--border-medium);">
+                <th style="padding: 0.75rem;">Photo</th>
+                <th style="padding: 0.75rem;">Name & Code</th>
+                <th style="padding: 0.75rem;">Net Wt</th>
+                <th style="padding: 0.75rem;">Live Price</th>
+                <th style="padding: 0.75rem;">Status</th>
+                <th style="padding: 0.75rem;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="dealer-inventory-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       SLIDING CART / BAG DRAWER & WISHLIST DRAWER
+       ======================================================================== -->
+  <div class="side-drawer-overlay" id="drawer-overlay" onclick="closeDrawers()"></div>
+
+  <!-- Shopping Bag Drawer -->
+  <div class="side-drawer-panel" id="cart-drawer">
+    <div class="drawer-header">
+      <h3>Your Jewellery Bag (शॉपिंग बैग)</h3>
+      <button onclick="closeDrawers()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+    </div>
+    <div class="drawer-body" id="cart-drawer-items">
+      <!-- Injected dynamically -->
+    </div>
+    <div class="drawer-footer">
+      <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.15rem; color: var(--brand-plum); margin-bottom: 1rem;">
+        <span>Estimated Bag Total:</span>
+        <span id="cart-total-price">₹0</span>
+      </div>
+      <a href="#" id="cart-checkout-btn" class="btn btn-primary" style="width: 100%;" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/></svg>
+        Order All via WhatsApp with Wellesley Ganj
+      </a>
+    </div>
+  </div>
+
+  <!-- Wishlist Drawer -->
+  <div class="side-drawer-panel" id="wishlist-drawer">
+    <div class="drawer-header">
+      <h3>Saved Designs (पसंदीदा संग्रह)</h3>
+      <button onclick="closeDrawers()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+    </div>
+    <div class="drawer-body" id="wishlist-drawer-items">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
+
+  <!-- Quick View Modal -->
+  <div class="modal-overlay" id="quickview-modal">
+    <div class="modal-card">
+      <button onclick="closeModal('quickview-modal')" style="position: absolute; top: 1rem; right: 1.25rem; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--text-dim); z-index: 10;">&times;</button>
+      <div id="quickview-body">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp Concierge -->
+  <a href="https://wa.me/919450000000?text=Namaste%20Rajesh%20Jewellers%20Mirzapur%2C%20I%20am%20browsing%20your%20online%20store%20and%20need%20assistance." target="_blank" class="floating-whatsapp" title="Chat with Wellesley Ganj Showroom">
+    <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zM17.5 14.5c-.24.7-.82 1.28-1.5 1.5-.7.22-1.6.2-2.5-.2-1.5-.6-2.9-1.6-4-2.7-1.1-1.1-2.1-2.5-2.7-4-.4-.9-.4-1.8-.2-2.5.22-.68.8-1.26 1.5-1.5.2-.08.4-.08.6 0l1.4 1.1c.2.16.3.4.26.65l-.3 1.2c-.08.3 0 .6.2.8.6.6 1.3 1.3 1.9 1.9.2.2.5.28.8.2l1.2-.3c.25-.04.49.06.65.26l1.1 1.4c.08.2.08.4 0 .6z"/></svg>
+  </a>
+
+  <!-- ========================================================================
+       MOBILE LUXURY STICKY BOTTOM APP BAR (TANISHQ / BLUESTONE STYLE)
+       ======================================================================== -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+    <a href="#" class="mobile-nav-btn active" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="#catalog-section" class="mobile-nav-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      <span>Designs</span>
+    </a>
+    <a href="#calculator" class="mobile-nav-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="16" y1="18" x2="16" y2="18"/><line x1="12" y1="18" x2="12" y2="18"/><line x1="8" y1="18" x2="8" y2="18"/></svg>
+      <span>Rate Calc</span>
+    </a>
+    <a href="javascript:void(0)" class="mobile-nav-btn" onclick="openWishlistDrawer()">
+      <div style="position: relative; display: inline-flex;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="badge-count wishlist-count mobile-badge">0</span>
+      </div>
+      <span>Saved</span>
+    </a>
+    <a href="javascript:void(0)" class="mobile-nav-btn" onclick="openCartDrawer()">
+      <div style="position: relative; display: inline-flex;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="badge-count bag-count mobile-badge">0</span>
+      </div>
+      <span>Bag</span>
+    </a>
+  </nav>
+
+  <!-- JavaScript Engine -->
+  <script src="js/app.js"></script>
+</body>
+</html>
