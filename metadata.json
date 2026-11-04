@@ -1,0 +1,8 @@
+{
+  "name": "Rajesh Jewellers Mirzapur",
+  "description": "Shop 22K BIS 916 hallmarked bridal jewellery, gold necklaces, antique temple bangles, certified diamond solitaires, and 925 silver at Rajesh Jewellers, Sangmohal, Station Rd, Mirzapur.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
