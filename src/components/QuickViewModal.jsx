@@ -120,6 +120,10 @@ const QuickViewModal = () => {
                   transform: isHovered ? 'scale(2.3)' : 'scale(1)',
                   transition: isHovered ? 'none' : 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/assets/images/store/store_display_jewellery.jpg';
+                }}
               />
               <div className="zoom-guide-bar">
                 <span>🔍 Move cursor over jewellery to inspect filigree & Hallmark (2.3× Zoom)</span>

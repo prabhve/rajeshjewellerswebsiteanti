@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useJewellery } from '../context/JewelleryContext';
-import { Search, Heart, ShoppingBag, Calendar, Sparkles } from 'lucide-react';
+import { Search, Heart, ShoppingBag, Calendar, Sparkles, X } from 'lucide-react';
 
 const Header = () => {
   const {
@@ -78,10 +78,30 @@ const Header = () => {
                   setSearchTerm(e.target.value);
                   setIsDropdownOpen(e.target.value.trim().length > 0);
                 }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && filteredProducts.length > 0) {
+                    handleSelectItem(filteredProducts[0]);
+                  } else if (e.key === 'Escape') {
+                    setIsDropdownOpen(false);
+                  }
+                }}
                 onFocus={() => {
                   if (searchTerm.trim().length > 0) setIsDropdownOpen(true);
                 }}
               />
+              {searchTerm && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchTerm('');
+                    setIsDropdownOpen(false);
+                  }}
+                  style={{ background: 'none', border: 'none', color: '#B8AE9E', cursor: 'pointer', padding: '0 0.25rem', display: 'flex', alignItems: 'center' }}
+                  aria-label="Clear Search"
+                >
+                  <X size={15} />
+                </button>
+              )}
               <button type="button" aria-label="Search">
                 <Search size={18} />
               </button>

@@ -96,15 +96,24 @@ export const JewelleryProvider = ({ children }) => {
     }
   });
 
-  // Wishlist
+  // Wishlist with resilient storage initialization
   const [wishlist, setWishlist] = useState(() => {
     try {
       const saved = localStorage.getItem('rj_wishlist');
-      return saved ? JSON.parse(saved) : [];
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed;
+        }
+      }
+      return [];
     } catch {
       return [];
     }
   });
+
+  // Range-Based Price Filter ({ min: number, max: number })
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 1000000 });
 
   // Category, Shape, Occasion & Budget Filters
   const [activeCategory, setActiveCategory] = useState('all');
@@ -139,26 +148,86 @@ export const JewelleryProvider = ({ children }) => {
   // Toasts
   const [toasts, setToasts] = useState([]);
 
+  // Cross-tab Synchronization for Wishlist and Cart
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === 'rj_wishlist') {
+        try {
+          const parsed = e.newValue ? JSON.parse(e.newValue) : [];
+          if (Array.isArray(parsed)) setWishlist(parsed);
+        } catch (err) {
+          console.warn('Wishlist storage sync error:', err);
+        }
+      }
+      if (e.key === 'rj_cart') {
+        try {
+          const parsed = e.newValue ? JSON.parse(e.newValue) : [];
+          if (Array.isArray(parsed)) setCart(parsed);
+        } catch (err) {
+          console.warn('Cart storage sync error:', err);
+        }
+      }
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
+  // Global Keyboard Escape listener to dismiss any active drawer/modal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        if (quickViewProduct) setQuickViewProduct(null);
+        else if (isWishlistOpen) setIsWishlistOpen(false);
+        else if (isCartOpen) setIsCartOpen(false);
+        else if (isVipModalOpen) setIsVipModalOpen(false);
+        else if (isGiftWizardOpen) setIsGiftWizardOpen(false);
+        else if (isDealerModalOpen) setIsDealerModalOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [quickViewProduct, isWishlistOpen, isCartOpen, isVipModalOpen, isGiftWizardOpen, isDealerModalOpen]);
+
   // Persist State Changes
   useEffect(() => {
-    localStorage.setItem('rj_live_rates', JSON.stringify(liveRates));
+    try {
+      localStorage.setItem('rj_live_rates', JSON.stringify(liveRates));
+    } catch (e) {
+      console.warn('Failed to save live rates:', e);
+    }
   }, [liveRates]);
 
   useEffect(() => {
-    localStorage.setItem('rj_products_catalog_v3', JSON.stringify(products));
+    try {
+      localStorage.setItem('rj_products_catalog_v3', JSON.stringify(products));
+    } catch (e) {
+      console.warn('Failed to save products:', e);
+    }
   }, [products]);
 
   useEffect(() => {
-    localStorage.setItem('rj_cart', JSON.stringify(cart));
+    try {
+      localStorage.setItem('rj_cart', JSON.stringify(cart));
+    } catch (e) {
+      console.warn('Failed to save cart:', e);
+    }
   }, [cart]);
 
   useEffect(() => {
-    localStorage.setItem('rj_wishlist', JSON.stringify(wishlist));
+    try {
+      localStorage.setItem('rj_wishlist', JSON.stringify(wishlist));
+    } catch (e) {
+      console.warn('Failed to save wishlist:', e);
+    }
   }, [wishlist]);
 
   useEffect(() => {
     if (userPincode) {
-      localStorage.setItem('rj_user_pincode', userPincode);
+      try {
+        localStorage.setItem('rj_user_pincode', userPincode);
+      } catch (e) {
+        console.warn('Failed to save pincode:', e);
+      }
     }
   }, [userPincode]);
 
@@ -343,7 +412,7 @@ export const JewelleryProvider = ({ children }) => {
     );
   };
 
-  // Wishlist actions (Single notification guarantee)
+  // Wishlist actions (Single notification guarantee & persistent)
   const toggleWishlist = (product) => {
     if (!product) return;
     const exists = wishlist.some((item) => item.id === product.id);
@@ -357,6 +426,69 @@ export const JewelleryProvider = ({ children }) => {
   };
 
   const isInWishlist = (productId) => wishlist.some((item) => item.id === productId);
+
+  const clearWishlist = () => {
+    if (wishlist.length === 0) return;
+    setWishlist([]);
+    showToast('Wishlist has been cleared.', 'info');
+  };
+
+  const moveAllWishlistToBag = () => {
+    if (wishlist.length === 0) return;
+    const count = wishlist.length;
+    wishlist.forEach((item) => {
+      addToCart(item, 1);
+    });
+    setWishlist([]);
+    showToast(`Moved ${count} saved designs to your Royal Bag! 🛍️`, 'success');
+    setIsWishlistOpen(false);
+    setIsCartOpen(true);
+  };
+
+  const getWishlistTotals = () => {
+    let total = 0;
+    wishlist.forEach((item) => {
+      const price = calculatePrice(item);
+      total += price.totalPrice;
+    });
+    return {
+      count: wishlist.length,
+      total,
+      formattedTotal: '₹' + total.toLocaleString('en-IN')
+    };
+  };
+
+  const getWishlistShareUrl = () => {
+    if (wishlist.length === 0) return '#';
+    let totalEst = 0;
+    let message = `*👑 RAJESH JEWELLERS (${STORE_INFO.hindiName}) - MY JEWELLERY WISHLIST*\n`;
+    message += `📍 Sangmohal, Station Rd, Mirzapur (GSTIN: ${STORE_INFO.gstin})\n`;
+    message += `──────────────────────\n`;
+    message += `Namaste, I shortlisted these favourite designs from your online catalogue:\n\n`;
+
+    wishlist.forEach((item, index) => {
+      const price = calculatePrice(item);
+      totalEst += price.totalPrice;
+      message += `${index + 1}. *${item.name}* (${item.id})\n`;
+      message += `   • Purity: ${item.purity}\n`;
+      message += `   • Weight: ${item.netGoldWeight || item.grossWeight}\n`;
+      message += `   • Approx Live Est: ${price.formattedTotalPrice}\n\n`;
+    });
+
+    message += `──────────────────────\n`;
+    message += `*Total Saved Designs:* ${wishlist.length} Pieces\n`;
+    message += `*Total Estimated Value:* ₹${totalEst.toLocaleString('en-IN')}\n\n`;
+    message += `Please confirm showroom availability at Sangmohal, Mirzapur for viewing.`;
+
+    const encoded = encodeURIComponent(message);
+    const cleanPhone = STORE_INFO.whatsapp.replace(/[^0-9]/g, '');
+    return `https://wa.me/${cleanPhone}?text=${encoded}`;
+  };
+
+  const resetPriceRange = () => {
+    setPriceRange({ min: 0, max: 1000000 });
+    setActiveBudget('all');
+  };
 
   // Coupon handling
   const applyCoupon = (code) => {
@@ -494,6 +626,13 @@ export const JewelleryProvider = ({ children }) => {
         wishlist,
         toggleWishlist,
         isInWishlist,
+        clearWishlist,
+        moveAllWishlistToBag,
+        getWishlistTotals,
+        getWishlistShareUrl,
+        priceRange,
+        setPriceRange,
+        resetPriceRange,
         activeCategory,
         setActiveCategory,
         activeShape,

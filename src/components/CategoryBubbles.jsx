@@ -169,7 +169,15 @@ const CategoryBubbles = () => {
                         style={{ cursor: 'pointer' }}
                         title="Click to view details & certificate"
                       >
-                        <img src={product.image} alt={product.name} loading="lazy" />
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          loading="lazy"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = '/assets/images/store/store_display_jewellery.jpg';
+                          }}
+                        />
 
                         {product.badge && (
                           <span className="tray-item-badge">

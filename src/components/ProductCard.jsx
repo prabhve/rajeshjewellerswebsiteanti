@@ -25,6 +25,10 @@ const ProductCard = ({ product }) => {
           loading="lazy"
           onClick={() => setQuickViewProduct(product)}
           style={{ cursor: 'pointer' }}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = '/assets/images/store/store_display_jewellery.jpg';
+          }}
         />
 
         {/* Badge if exists */}

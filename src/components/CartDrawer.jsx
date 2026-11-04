@@ -47,7 +47,14 @@ const CartDrawer = () => {
                 const price = calculatePrice(item);
                 return (
                   <div key={item.id} className="drawer-item-row">
-                    <img src={item.image} alt={item.name} />
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = '/assets/images/store/store_display_jewellery.jpg';
+                      }}
+                    />
                     <div className="drawer-item-info">
                       <div className="drawer-item-title">{item.name}</div>
                       <div className="drawer-item-specs">

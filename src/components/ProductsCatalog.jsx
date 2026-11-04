@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useId } from 'react';
 import { useJewellery } from '../context/JewelleryContext';
-import { CATEGORY_CHIPS, SHAPE_FILTERS, OCCASION_FILTERS, BUDGET_FILTERS } from '../data/initialData';
+import { CATEGORY_CHIPS, SHAPE_FILTERS, OCCASION_FILTERS } from '../data/initialData';
 import { STORE_INFO } from '../data/storeInfo';
 import ProductCard from './ProductCard';
 import {
@@ -15,8 +15,10 @@ import {
   ShieldCheck,
   Building2,
   MessageCircle,
-  Clock,
-  Lock
+  ChevronDown,
+  ChevronUp,
+  SlidersHorizontal,
+  X
 } from 'lucide-react';
 
 // Elegant Diamond Cut Shape SVGs
@@ -81,6 +83,15 @@ const ShapeIcon = ({ shape, size = 18 }) => {
   }
 };
 
+const PRICE_PRESETS = [
+  { id: 'all', label: 'All Budgets', min: 0, max: 1000000 },
+  { id: 'under-50k', label: 'Under ₹50K', min: 0, max: 50000 },
+  { id: '50k-150k', label: '₹50K – ₹1.5L', min: 50000, max: 150000 },
+  { id: '150k-300k', label: '₹1.5L – ₹3L', min: 150000, max: 300000 },
+  { id: '300k-500k', label: '₹3L – ₹5L', min: 300000, max: 500000 },
+  { id: 'above-500k', label: '₹5 Lakh+', min: 500000, max: 1000000 }
+];
+
 const ProductsCatalog = () => {
   const {
     products,
@@ -92,6 +103,9 @@ const ProductsCatalog = () => {
     setActiveOccasion,
     activeBudget,
     setActiveBudget,
+    priceRange,
+    setPriceRange,
+    resetPriceRange,
     sortBy,
     setSortBy,
     calculatePrice,
@@ -102,9 +116,13 @@ const ProductsCatalog = () => {
     setIsGiftWizardOpen
   } = useJewellery();
 
+  const [isPriceFilterOpen, setIsPriceFilterOpen] = useState(false);
   const [pincodeInput, setPincodeInput] = useState(userPincode);
   const [pincodeCheckActive, setPincodeCheckActive] = useState(false);
   const [pincodeFeedback, setPincodeFeedback] = useState(() => getPincodeStatus(userPincode));
+
+  const minRangeId = useId();
+  const maxRangeId = useId();
 
   const QUICK_PINCODES = [
     { code: '231001', label: 'Mirzapur', detail: 'Sangmohal' },
@@ -144,13 +162,47 @@ const ProductsCatalog = () => {
     setActiveShape('all');
     setActiveOccasion('all');
     setActiveBudget('all');
+    resetPriceRange();
   };
 
-  const hasActiveSecondaryFilters =
+  // Preset Budget Selection handler
+  const handleSelectBudgetPreset = (preset) => {
+    setActiveBudget(preset.id);
+    setPriceRange({ min: preset.min, max: preset.max });
+  };
+
+  // Custom min/max price range slider handlers
+  const handleMinSliderChange = (e) => {
+    const newMin = Math.min(Number(e.target.value), priceRange.max - 5000);
+    setPriceRange((prev) => ({ ...prev, min: newMin }));
+    setActiveBudget('custom');
+  };
+
+  const handleMaxSliderChange = (e) => {
+    const newMax = Math.max(Number(e.target.value), priceRange.min + 5000);
+    setPriceRange((prev) => ({ ...prev, max: newMax }));
+    setActiveBudget('custom');
+  };
+
+  const handleAdjustPrice = (type, delta) => {
+    if (type === 'min') {
+      const next = Math.max(0, Math.min(priceRange.min + delta, priceRange.max - 5000));
+      setPriceRange((prev) => ({ ...prev, min: next }));
+    } else {
+      const next = Math.min(1000000, Math.max(priceRange.max + delta, priceRange.min + 5000));
+      setPriceRange((prev) => ({ ...prev, max: next }));
+    }
+    setActiveBudget('custom');
+  };
+
+  const isPriceRangeNarrowed = priceRange.min > 0 || priceRange.max < 1000000;
+
+  const hasAnyActiveFilters =
+    activeCategory !== 'all' ||
     activeShape !== 'all' ||
     activeOccasion !== 'all' ||
-    activeBudget !== 'all' ||
-    activeCategory !== 'all';
+    isPriceRangeNarrowed ||
+    activeBudget !== 'all';
 
   // Comprehensive Multi-Tier Filter Logic
   let displayed = products.filter((p) => {
@@ -173,13 +225,10 @@ const ProductsCatalog = () => {
       }
     }
 
-    // 4. Budget Filter
-    if (activeBudget !== 'all') {
-      const price = calculatePrice(p).totalPrice;
-      if (activeBudget === 'under-50k' && price >= 50000) return false;
-      if (activeBudget === '50k-150k' && (price < 50000 || price > 150000)) return false;
-      if (activeBudget === '150k-300k' && (price < 150000 || price > 300000)) return false;
-      if (activeBudget === 'above-300k' && price < 300000) return false;
+    // 4. Range-Based Price Filter (Exact Computed Live Price in INR)
+    const computedPrice = calculatePrice(p).totalPrice;
+    if (computedPrice < priceRange.min || computedPrice > priceRange.max) {
+      return false;
     }
 
     return true;
@@ -189,14 +238,14 @@ const ProductsCatalog = () => {
   displayed.sort((a, b) => {
     const priceA = calculatePrice(a).totalPrice;
     const priceB = calculatePrice(b).totalPrice;
+    const wtA = parseFloat((a.netGoldWeight || a.grossWeight || '0').match(/[\d.]+/)?.[0] || '0');
+    const wtB = parseFloat((b.netGoldWeight || b.grossWeight || '0').match(/[\d.]+/)?.[0] || '0');
 
     if (sortBy === 'price-low') return priceA - priceB;
     if (sortBy === 'price-high') return priceB - priceA;
-    if (sortBy === 'weight') {
-      const wtA = parseFloat((a.netGoldWeight || a.grossWeight || '0').match(/[\d.]+/)?.[0] || '0');
-      const wtB = parseFloat((b.netGoldWeight || b.grossWeight || '0').match(/[\d.]+/)?.[0] || '0');
-      return wtB - wtA;
-    }
+    if (sortBy === 'weight-heavy') return wtB - wtA;
+    if (sortBy === 'weight-light') return wtA - wtB;
+    if (sortBy === 'weight') return wtB - wtA;
     return 0; // featured default
   });
 
@@ -220,7 +269,7 @@ const ProductsCatalog = () => {
               राजेश ज्वेलर्स ऑनलाइन आभूषण संग्रह
             </h2>
             <p className="catalog-subtitle">
-              Showing <strong style={{ color: '#FFF6D6' }}>{displayed.length} Masterpiece Designs</strong> in Sangmohal, Mirzapur Showroom
+              Showing <strong style={{ color: '#FFF6D6' }}>{displayed.length} of {products.length} Masterpiece Designs</strong> in Sangmohal, Mirzapur Showroom
             </p>
           </div>
 
@@ -284,9 +333,9 @@ const ProductsCatalog = () => {
           </div>
         </div>
 
-        {/* 2. OCCASION & BUDGET FILTER ROW (BlueStone & Voylla Inspired) */}
+        {/* 2. OCCASION FILTER ROW */}
         <div className="multi-filter-bar">
-          <div className="filter-group">
+          <div className="filter-group" style={{ width: '100%' }}>
             <span className="filter-group-label">Occasion:</span>
             <div className="filter-chips-scroll">
               {OCCASION_FILTERS.map((occ) => (
@@ -301,25 +350,9 @@ const ProductsCatalog = () => {
               ))}
             </div>
           </div>
-
-          <div className="filter-group">
-            <span className="filter-group-label">Budget:</span>
-            <div className="filter-chips-scroll">
-              {BUDGET_FILTERS.map((bud) => (
-                <button
-                  key={bud.id}
-                  type="button"
-                  className={`filter-pill ${activeBudget === bud.id ? 'active' : ''}`}
-                  onClick={() => setActiveBudget(bud.id)}
-                >
-                  {bud.label}
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
 
-        {/* 3. CONTROLS BAR: CATEGORIES & SORT */}
+        {/* 3. CONTROLS BAR: CATEGORIES, RANGE-BASED PRICE FILTER & SORT */}
         <div className="catalog-controls-bar">
           <div className="category-filter-chips">
             {CATEGORY_CHIPS.map((chip) => (
@@ -333,21 +366,439 @@ const ProductsCatalog = () => {
             ))}
           </div>
 
-          <div className="sort-select-box">
-            <label htmlFor="catalog-sort-select">Sort By:</label>
-            <select
-              id="catalog-sort-select"
-              className="sort-dropdown-select"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
+          <div className="catalog-controls-right" style={{ display: 'flex', gap: '0.65rem', alignItems: 'center', flexWrap: 'wrap' }}>
+            {/* Price Filter Trigger Button in Controls Bar */}
+            <button
+              type="button"
+              className={`catalog-price-toggle-btn ${isPriceFilterOpen || isPriceRangeNarrowed ? 'active' : ''}`}
+              onClick={() => setIsPriceFilterOpen(!isPriceFilterOpen)}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                padding: '0.55rem 0.95rem',
+                borderRadius: '8px',
+                background: isPriceRangeNarrowed
+                  ? 'linear-gradient(135deg, rgba(229, 195, 120, 0.25) 0%, rgba(197, 157, 63, 0.15) 100%)'
+                  : 'rgba(255, 255, 255, 0.05)',
+                border: isPriceRangeNarrowed
+                  ? '1.5px solid var(--gold-primary)'
+                  : '1px solid rgba(229, 195, 120, 0.3)',
+                color: isPriceRangeNarrowed ? '#FFF6D6' : '#E6E0D6',
+                fontSize: '0.82rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
+              }}
+              title="Click to toggle budget and price range slider"
             >
-              <option value="featured">Featured / लोकप्रिय</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="weight">Weight: Heavy to Light</option>
-            </select>
+              <SlidersHorizontal size={14} style={{ color: 'var(--gold-primary)' }} />
+              <span>
+                {isPriceRangeNarrowed
+                  ? `₹${priceRange.min.toLocaleString('en-IN')} – ₹${priceRange.max.toLocaleString('en-IN')}`
+                  : 'Price / Budget Filter'}
+              </span>
+              {isPriceFilterOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+            </button>
+
+            {/* Sort Select Box */}
+            <div className="sort-select-box">
+              <label htmlFor="catalog-sort-select">Sort By:</label>
+              <select
+                id="catalog-sort-select"
+                className="sort-dropdown-select"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+              >
+                <option value="featured">Featured / लोकप्रिय</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="weight-heavy">Weight: Heavy to Light</option>
+                <option value="weight-light">Weight: Light to Heavy</option>
+              </select>
+            </div>
           </div>
         </div>
+
+        {/* 3B. RANGE-BASED PRICE FILTER EXPANDED CONTROLLER */}
+        <div
+          className={`price-range-panel ${isPriceFilterOpen || isPriceRangeNarrowed ? 'open' : ''}`}
+          style={{
+            background: 'linear-gradient(180deg, rgba(26, 6, 14, 0.98) 0%, rgba(14, 2, 7, 0.98) 100%)',
+            border: '1.5px solid rgba(229, 195, 120, 0.35)',
+            borderRadius: '12px',
+            padding: '1.25rem 1.5rem',
+            margin: '0.75rem 0 1.25rem',
+            boxShadow: '0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(229, 195, 120, 0.12)',
+            display: isPriceFilterOpen || isPriceRangeNarrowed ? 'block' : 'none'
+          }}
+        >
+          {/* Top Row: Title, Current Range & Reset */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '1rem',
+              flexWrap: 'wrap',
+              gap: '0.75rem'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span
+                style={{
+                  width: '28px',
+                  height: '28px',
+                  borderRadius: '6px',
+                  background: 'rgba(229, 195, 120, 0.15)',
+                  border: '1px solid rgba(229, 195, 120, 0.4)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#E5C378'
+                }}
+              >
+                <SlidersHorizontal size={14} />
+              </span>
+              <div>
+                <strong style={{ color: '#FFFDF9', fontSize: '0.94rem' }}>
+                  Filter by Price Range (बजट अनुसार छांटें)
+                </strong>
+                <span style={{ display: 'block', fontSize: '0.76rem', color: '#B8AE9E' }}>
+                  Live computed prices based on today's MCX bullion rates & 3% GST
+                </span>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+              <span
+                style={{
+                  background: 'rgba(229, 195, 120, 0.15)',
+                  border: '1px solid rgba(229, 195, 120, 0.4)',
+                  padding: '0.25rem 0.75rem',
+                  borderRadius: '20px',
+                  fontSize: '0.84rem',
+                  fontWeight: 800,
+                  color: '#FFF6D6',
+                  fontFamily: 'var(--font-serif-headline)',
+                  letterSpacing: '0.02em'
+                }}
+              >
+                ₹{priceRange.min.toLocaleString('en-IN')} – ₹{priceRange.max.toLocaleString('en-IN')}
+              </span>
+
+              {isPriceRangeNarrowed && (
+                <button
+                  type="button"
+                  onClick={resetPriceRange}
+                  style={{
+                    background: 'transparent',
+                    border: '1px solid rgba(239, 68, 68, 0.4)',
+                    color: '#F87171',
+                    padding: '0.25rem 0.65rem',
+                    borderRadius: '6px',
+                    fontSize: '0.74rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.25rem'
+                  }}
+                  title="Reset price range filter to ₹0 – ₹10 Lakhs"
+                >
+                  <RotateCcw size={11} />
+                  <span>Reset Range</span>
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Preset Quick Budget Chips */}
+          <div style={{ display: 'flex', gap: '0.45rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
+            <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#DFBE6B', alignSelf: 'center', marginRight: '0.25rem' }}>
+              Quick Presets:
+            </span>
+            {PRICE_PRESETS.map((preset) => {
+              const isActive =
+                activeBudget === preset.id ||
+                (!['all', 'custom'].includes(activeBudget) &&
+                  priceRange.min === preset.min &&
+                  priceRange.max === preset.max);
+
+              return (
+                <button
+                  key={preset.id}
+                  type="button"
+                  onClick={() => handleSelectBudgetPreset(preset)}
+                  style={{
+                    padding: '0.3rem 0.7rem',
+                    borderRadius: '6px',
+                    fontSize: '0.78rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    background: isActive
+                      ? 'linear-gradient(135deg, #FFF6D6 0%, #E5C378 100%)'
+                      : 'rgba(255, 255, 255, 0.05)',
+                    color: isActive ? '#080103' : '#D4C5B3',
+                    border: isActive
+                      ? '1px solid #FFF6D6'
+                      : '1px solid rgba(229, 195, 120, 0.22)',
+                    transition: 'all 0.18s ease'
+                  }}
+                >
+                  {preset.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Dual Sliders and Exact Numeric Inputs Grid */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '1.25rem',
+              alignItems: 'center'
+            }}
+          >
+            {/* Min Price Slider Block */}
+            <div style={{ background: 'rgba(0, 0, 0, 0.25)', padding: '0.85rem', borderRadius: '8px', border: '1px solid rgba(229, 195, 120, 0.15)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
+                <label htmlFor={minRangeId} style={{ fontSize: '0.78rem', color: '#B8AE9E', fontWeight: 600 }}>
+                  Minimum Budget (न्यूनतम)
+                </label>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <button
+                    type="button"
+                    onClick={() => handleAdjustPrice('min', -10000)}
+                    style={{ background: 'rgba(255, 255, 255, 0.08)', border: '1px solid rgba(229, 195, 120, 0.2)', color: '#FFFDF9', borderRadius: '4px', padding: '0.1rem 0.4rem', fontSize: '0.7rem', cursor: 'pointer' }}
+                    title="-₹10,000"
+                  >
+                    -10k
+                  </button>
+                  <strong style={{ fontSize: '0.92rem', color: '#FFFDF9', fontFamily: 'var(--font-serif-headline)' }}>
+                    ₹{priceRange.min.toLocaleString('en-IN')}
+                  </strong>
+                  <button
+                    type="button"
+                    onClick={() => handleAdjustPrice('min', 10000)}
+                    style={{ background: 'rgba(255, 255, 255, 0.08)', border: '1px solid rgba(229, 195, 120, 0.2)', color: '#FFFDF9', borderRadius: '4px', padding: '0.1rem 0.4rem', fontSize: '0.7rem', cursor: 'pointer' }}
+                    title="+₹10,000"
+                  >
+                    +10k
+                  </button>
+                </div>
+              </div>
+              <input
+                id={minRangeId}
+                type="range"
+                min="0"
+                max="500000"
+                step="5000"
+                value={priceRange.min}
+                onChange={handleMinSliderChange}
+                style={{
+                  width: '100%',
+                  accentColor: 'var(--gold-primary)',
+                  cursor: 'pointer'
+                }}
+                aria-label="Minimum Price Slider"
+              />
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: '#8A8074', marginTop: '0.2rem' }}>
+                <span>₹0</span>
+                <span>₹2.5 Lakhs</span>
+                <span>₹5 Lakhs</span>
+              </div>
+            </div>
+
+            {/* Max Price Slider Block */}
+            <div style={{ background: 'rgba(0, 0, 0, 0.25)', padding: '0.85rem', borderRadius: '8px', border: '1px solid rgba(229, 195, 120, 0.15)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
+                <label htmlFor={maxRangeId} style={{ fontSize: '0.78rem', color: '#B8AE9E', fontWeight: 600 }}>
+                  Maximum Budget (अधिकतम)
+                </label>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <button
+                    type="button"
+                    onClick={() => handleAdjustPrice('max', -25000)}
+                    style={{ background: 'rgba(255, 255, 255, 0.08)', border: '1px solid rgba(229, 195, 120, 0.2)', color: '#FFFDF9', borderRadius: '4px', padding: '0.1rem 0.4rem', fontSize: '0.7rem', cursor: 'pointer' }}
+                    title="-₹25,000"
+                  >
+                    -25k
+                  </button>
+                  <strong style={{ fontSize: '0.92rem', color: '#FFFDF9', fontFamily: 'var(--font-serif-headline)' }}>
+                    ₹{priceRange.max.toLocaleString('en-IN')}
+                  </strong>
+                  <button
+                    type="button"
+                    onClick={() => handleAdjustPrice('max', 25000)}
+                    style={{ background: 'rgba(255, 255, 255, 0.08)', border: '1px solid rgba(229, 195, 120, 0.2)', color: '#FFFDF9', borderRadius: '4px', padding: '0.1rem 0.4rem', fontSize: '0.7rem', cursor: 'pointer' }}
+                    title="+₹25,000"
+                  >
+                    +25k
+                  </button>
+                </div>
+              </div>
+              <input
+                id={maxRangeId}
+                type="range"
+                min="50000"
+                max="1000000"
+                step="10000"
+                value={priceRange.max}
+                onChange={handleMaxSliderChange}
+                style={{
+                  width: '100%',
+                  accentColor: 'var(--gold-primary)',
+                  cursor: 'pointer'
+                }}
+                aria-label="Maximum Price Slider"
+              />
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: '#8A8074', marginTop: '0.2rem' }}>
+                <span>₹50K</span>
+                <span>₹5 Lakhs</span>
+                <span>₹10 Lakhs+</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 3C. ACTIVE FILTER CHIPS SUMMARY STRIP */}
+        {hasAnyActiveFilters && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              flexWrap: 'wrap',
+              padding: '0.65rem 0.95rem',
+              background: 'rgba(229, 195, 120, 0.08)',
+              border: '1px solid rgba(229, 195, 120, 0.25)',
+              borderRadius: '8px',
+              marginBottom: '1.25rem',
+              fontSize: '0.78rem'
+            }}
+          >
+            <span style={{ color: '#DFBE6B', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+              <Filter size={12} /> Active Filters:
+            </span>
+
+            {activeCategory !== 'all' && (
+              <span
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  padding: '0.2rem 0.55rem',
+                  borderRadius: '4px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.3rem',
+                  color: '#FFFDF9'
+                }}
+              >
+                Category: <strong>{activeCategory}</strong>
+                <button
+                  type="button"
+                  onClick={() => setActiveCategory('all')}
+                  style={{ background: 'none', border: 'none', color: '#E5C378', cursor: 'pointer', padding: 0 }}
+                  title="Remove category filter"
+                >
+                  <X size={12} />
+                </button>
+              </span>
+            )}
+
+            {isPriceRangeNarrowed && (
+              <span
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  padding: '0.2rem 0.55rem',
+                  borderRadius: '4px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.3rem',
+                  color: '#FFFDF9'
+                }}
+              >
+                Budget: <strong>₹{priceRange.min.toLocaleString('en-IN')} – ₹{priceRange.max.toLocaleString('en-IN')}</strong>
+                <button
+                  type="button"
+                  onClick={resetPriceRange}
+                  style={{ background: 'none', border: 'none', color: '#E5C378', cursor: 'pointer', padding: 0 }}
+                  title="Reset price range"
+                >
+                  <X size={12} />
+                </button>
+              </span>
+            )}
+
+            {activeShape !== 'all' && (
+              <span
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  padding: '0.2rem 0.55rem',
+                  borderRadius: '4px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.3rem',
+                  color: '#FFFDF9'
+                }}
+              >
+                Cut: <strong>{activeShape}</strong>
+                <button
+                  type="button"
+                  onClick={() => setActiveShape('all')}
+                  style={{ background: 'none', border: 'none', color: '#E5C378', cursor: 'pointer', padding: 0 }}
+                  title="Remove cut filter"
+                >
+                  <X size={12} />
+                </button>
+              </span>
+            )}
+
+            {activeOccasion !== 'all' && (
+              <span
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  padding: '0.2rem 0.55rem',
+                  borderRadius: '4px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.3rem',
+                  color: '#FFFDF9'
+                }}
+              >
+                Occasion: <strong>{activeOccasion}</strong>
+                <button
+                  type="button"
+                  onClick={() => setActiveOccasion('all')}
+                  style={{ background: 'none', border: 'none', color: '#E5C378', cursor: 'pointer', padding: 0 }}
+                  title="Remove occasion filter"
+                >
+                  <X size={12} />
+                </button>
+              </span>
+            )}
+
+            <button
+              type="button"
+              onClick={handleResetFilters}
+              style={{
+                marginLeft: 'auto',
+                background: 'transparent',
+                border: 'none',
+                color: '#E5C378',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.25rem'
+              }}
+            >
+              <RotateCcw size={12} />
+              <span>Clear All</span>
+            </button>
+          </div>
+        )}
 
         {/* 4. PINCODE DELIVERY & SHOWROOM TRIAL CHECKER (CaratLane & BlueStone Benchmarked) */}
         <div className="pincode-trial-section">
@@ -400,7 +851,7 @@ const ProductsCatalog = () => {
             ))}
           </div>
 
-          {/* Luxury Result Dashboard (Replaces the stark pale mint bar) */}
+          {/* Luxury Result Dashboard */}
           {pincodeFeedback.isValid && (
             <div className={`pincode-dashboard-card ${pincodeFeedback.tier || 'local'}`}>
               {/* Top Status Header */}
@@ -524,7 +975,9 @@ const ProductsCatalog = () => {
                 No jewellery matched these active filters.
               </h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', maxWidth: '500px', margin: '0 auto 1.25rem' }}>
-                We craft custom bridal polki, solitaire cuts, and temple ornaments to any weight or budget in our Sangmohal karigar workshop.
+                {isPriceRangeNarrowed
+                  ? `No pieces found within ₹${priceRange.min.toLocaleString('en-IN')} – ₹${priceRange.max.toLocaleString('en-IN')}. We craft custom bridal polki, solitaire cuts, and temple ornaments to any budget in our Sangmohal karigar workshop.`
+                  : 'We craft custom bridal polki, solitaire cuts, and temple ornaments to any weight or budget in our Sangmohal karigar workshop.'}
               </p>
               <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <button
