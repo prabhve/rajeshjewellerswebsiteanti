@@ -7352,7 +7352,7 @@ body {
   display: grid !important;
   grid-template-columns: 56fr 44fr !important;
   gap: 2rem !important;
-  align-items: start !important;
+  align-items: stretch !important;
 }
 
 .calc-card-panel {
@@ -7362,6 +7362,8 @@ body {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45) !important;
   display: flex !important;
   flex-direction: column !important;
+  height: 100% !important;
+  min-height: 0 !important;
 }
 
 /* 3. Left Section — Gold Calculator */
@@ -7776,38 +7778,41 @@ body {
    4. Right Section — Live Price Slip / Invoice
    ========================================================================== */
 .calc-right-slip {
-  padding: 1.5rem 1.75rem !important;
-  gap: 1.15rem !important;
+  padding: 1.35rem 1.65rem 1.25rem 1.65rem !important;
+  gap: 0.75rem !important;
   justify-content: space-between !important;
+  height: 100% !important;
+  min-height: 0 !important;
 }
 
 .slip-invoice-header {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
-  padding-bottom: 0.8rem !important;
+  padding-bottom: 0.6rem !important;
   border-bottom: 1px solid rgba(198, 161, 91, 0.2) !important;
 }
 
 .slip-brand-identity {
   display: flex !important;
   align-items: center !important;
-  gap: 0.65rem !important;
+  gap: 0.6rem !important;
 }
 
 .slip-brand-monogram {
-  width: 38px !important;
-  height: 38px !important;
+  width: 34px !important;
+  height: 34px !important;
   border-radius: 50% !important;
   background: #350F1B !important;
   border: 1.5px solid #C6A15B !important;
   color: #E2C58B !important;
   font-family: var(--font-serif-headline), serif !important;
-  font-size: 0.92rem !important;
+  font-size: 0.86rem !important;
   font-weight: 800 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  flex-shrink: 0 !important;
 }
 
 .slip-brand-meta {
@@ -7816,7 +7821,7 @@ body {
 }
 
 .slip-brand-title {
-  font-size: 0.96rem !important;
+  font-size: 0.92rem !important;
   font-weight: 800 !important;
   color: #FFFDF8 !important;
   letter-spacing: 0.05em !important;
@@ -7825,7 +7830,7 @@ body {
 }
 
 .slip-brand-showroom {
-  font-size: 0.7rem !important;
+  font-size: 0.68rem !important;
   color: #E2C58B !important;
   font-weight: 500 !important;
 }
@@ -7834,14 +7839,15 @@ body {
   display: inline-flex !important;
   align-items: center !important;
   gap: 0.35rem !important;
-  font-size: 0.68rem !important;
+  font-size: 0.65rem !important;
   font-weight: 700 !important;
   color: #4ADE80 !important;
   background: rgba(22, 134, 83, 0.16) !important;
   border: 1px solid rgba(22, 134, 83, 0.45) !important;
   border-radius: 999px !important;
-  padding: 0.2rem 0.6rem !important;
+  padding: 0.18rem 0.55rem !important;
   letter-spacing: 0.05em !important;
+  flex-shrink: 0 !important;
 }
 
 .slip-live-pulsing-dot {
@@ -7860,8 +7866,8 @@ body {
   background: #350F1B !important;
   border: 1px solid rgba(198, 161, 91, 0.25) !important;
   border-radius: 8px !important;
-  padding: 0.55rem 0.85rem !important;
-  font-size: 0.78rem !important;
+  padding: 0.42rem 0.75rem !important;
+  font-size: 0.74rem !important;
   font-weight: 600 !important;
   color: #F8F3E9 !important;
   white-space: nowrap !important;
@@ -7883,42 +7889,42 @@ body {
 .slip-breakdown-ledger {
   display: flex !important;
   flex-direction: column !important;
-  gap: 0.65rem !important;
+  gap: 0.45rem !important;
 }
 
 .slip-breakdown-row {
   display: flex !important;
   justify-content: space-between !important;
   align-items: flex-start !important;
-  padding-bottom: 0.45rem !important;
+  padding-bottom: 0.35rem !important;
   border-bottom: 1px dashed rgba(198, 161, 91, 0.16) !important;
 }
 
 .slip-breakdown-row.slip-row-subtotal {
   border-bottom: 1.5px solid rgba(198, 161, 91, 0.32) !important;
-  padding-bottom: 0.55rem !important;
-  margin: 0.05rem 0 !important;
+  padding-bottom: 0.45rem !important;
+  margin: 0.02rem 0 !important;
 }
 
 .slip-row-label {
   display: flex !important;
   flex-direction: column !important;
-  gap: 0.05rem !important;
+  gap: 0.02rem !important;
 }
 
 .slip-row-primary {
-  font-size: 0.84rem !important;
+  font-size: 0.81rem !important;
   font-weight: 600 !important;
   color: #FFFDF8 !important;
 }
 
 .slip-row-secondary {
-  font-size: 0.7rem !important;
+  font-size: 0.67rem !important;
   color: #A99A91 !important;
 }
 
 .slip-row-price {
-  font-size: 0.95rem !important;
+  font-size: 0.9rem !important;
   font-weight: 700 !important;
   color: #FFFDF8 !important;
   text-align: right !important;
@@ -7931,7 +7937,7 @@ body {
 
 .slip-price-subtotal {
   color: #FFFDF8 !important;
-  font-size: 1.05rem !important;
+  font-size: 0.98rem !important;
   font-weight: 800 !important;
 }
 
@@ -7943,13 +7949,13 @@ body {
 .slip-total-showcase-box {
   background: linear-gradient(135deg, #350F1B 0%, #2A0B15 100%) !important;
   border: 1.5px solid #C6A15B !important;
-  border-radius: 12px !important;
-  padding: 1.1rem 1.25rem !important;
+  border-radius: 11px !important;
+  padding: 0.75rem 1.15rem 0.65rem 1.15rem !important;
   text-align: center !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 0.2rem !important;
+  gap: 0.12rem !important;
 }
 
 .slip-total-meta-row {
@@ -7959,7 +7965,7 @@ body {
 }
 
 .slip-total-title {
-  font-size: 0.72rem !important;
+  font-size: 0.68rem !important;
   font-weight: 800 !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
@@ -7967,7 +7973,7 @@ body {
 }
 
 .slip-total-tag {
-  font-size: 0.65rem !important;
+  font-size: 0.62rem !important;
   color: #A99A91 !important;
 }
 
@@ -7975,20 +7981,20 @@ body {
   display: flex !important;
   align-items: baseline !important;
   justify-content: center !important;
-  gap: 0.35rem !important;
-  margin: 0.2rem 0 !important;
+  gap: 0.3rem !important;
+  margin: 0.1rem 0 !important;
 }
 
 .slip-currency-mark {
   font-family: var(--font-serif-headline), serif !important;
-  font-size: 1.6rem !important;
+  font-size: 1.35rem !important;
   font-weight: 800 !important;
   color: #E2C58B !important;
 }
 
 .slip-price-digits {
   font-family: var(--font-serif-headline), serif !important;
-  font-size: clamp(2.2rem, 3.2vw, 2.75rem) !important;
+  font-size: clamp(1.9rem, 2.6vw, 2.35rem) !important;
   font-weight: 900 !important;
   color: #FFFDF8 !important;
   line-height: 1 !important;
@@ -7996,41 +8002,41 @@ body {
 }
 
 .slip-total-guarantee-note {
-  font-size: 0.72rem !important;
+  font-size: 0.68rem !important;
   color: #A99A91 !important;
   margin: 0 !important;
-  line-height: 1.35 !important;
+  line-height: 1.25 !important;
 }
 
 /* Primary WhatsApp CTA */
 .slip-actions-group {
   display: flex !important;
   flex-direction: column !important;
-  gap: 0.65rem !important;
+  gap: 0.45rem !important;
 }
 
 .btn-whatsapp-estimate-lock {
   background: #168653 !important;
   color: #FFFDF8 !important;
   border: 1px solid #1ba565 !important;
-  border-radius: 10px !important;
-  padding: 0.85rem 1.25rem !important;
-  font-size: 0.95rem !important;
+  border-radius: 9px !important;
+  padding: 0.65rem 1.15rem !important;
+  font-size: 0.88rem !important;
   font-weight: 700 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 0.6rem !important;
+  gap: 0.55rem !important;
   cursor: pointer !important;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  box-shadow: 0 4px 16px rgba(22, 134, 83, 0.35) !important;
+  box-shadow: 0 4px 14px rgba(22, 134, 83, 0.35) !important;
   width: 100% !important;
 }
 
 .btn-whatsapp-estimate-lock:hover {
   background: #19995e !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 22px rgba(22, 134, 83, 0.5) !important;
+  box-shadow: 0 6px 20px rgba(22, 134, 83, 0.5) !important;
 }
 
 .whatsapp-action-icon {
@@ -8040,15 +8046,15 @@ body {
 .slip-secondary-actions-bar {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
-  gap: 0.65rem !important;
+  gap: 0.5rem !important;
 }
 
 .btn-slip-action-secondary {
   background: #350F1B !important;
   border: 1px solid rgba(198, 161, 91, 0.25) !important;
-  border-radius: 8px !important;
-  padding: 0.5rem 0.75rem !important;
-  font-size: 0.78rem !important;
+  border-radius: 7px !important;
+  padding: 0.42rem 0.65rem !important;
+  font-size: 0.74rem !important;
   font-weight: 600 !important;
   color: #F8F3E9 !important;
   display: flex !important;
@@ -8070,9 +8076,10 @@ body {
   align-items: center !important;
   justify-content: center !important;
   gap: 0.4rem !important;
-  font-size: 0.72rem !important;
+  font-size: 0.68rem !important;
   color: #A99A91 !important;
-  padding-top: 0.25rem !important;
+  padding-top: 0.1rem !important;
+  margin-top: 0 !important;
 }
 
 .slip-trust-icon {
@@ -8086,6 +8093,11 @@ body {
   .calc-two-column-layout {
     grid-template-columns: 1fr !important;
     gap: 1.75rem !important;
+    align-items: start !important;
+  }
+
+  .calc-card-panel {
+    height: auto !important;
   }
 }
 
