@@ -22,7 +22,8 @@ import {
   RefreshCw,
   ChevronRight,
   Star,
-  Gift
+  Gift,
+  Delete
 } from 'lucide-react';
 
 // Secure hardcoded showroom master passcode
@@ -385,12 +386,10 @@ const DealerPortalModal = () => {
   };
 
   const handleDeleteReview = (id) => {
-    if (window.confirm('Delete this customer testimonial?')) {
-      const updated = reviewsList.filter((r) => r.id !== id);
-      setReviewsList(updated);
-      updateStoreInfo({ googleReviews: updated });
-      showToast('Review removed.');
-    }
+    const updated = reviewsList.filter((r) => r.id !== id);
+    setReviewsList(updated);
+    updateStoreInfo({ googleReviews: updated });
+    showToast('Customer testimonial removed.');
   };
 
   // 6. Schemes
@@ -569,8 +568,9 @@ const DealerPortalModal = () => {
                 className="admin-keypad-btn admin-keypad-action"
                 onClick={() => handleKeypadPress('backspace')}
                 title="Delete last digit"
+                aria-label="Delete last digit"
               >
-                ⌫
+                <Delete size={19} />
               </button>
             </div>
 
@@ -764,9 +764,12 @@ const DealerPortalModal = () => {
 
                   <form onSubmit={handleSaveRates} className="admin-card-surface">
                     <h3 className="admin-form-group-title">Base Rates (₹ per Gram)</h3>
-                    <div className="flex flex-col gap-4">
+                    <div className="admin-grid-2">
                       <div className="admin-field-box">
-                        <label className="admin-label">24K Pure Gold (999 Bullion)</label>
+                        <label className="admin-label">
+                          <span>24K Pure Gold (999)</span>
+                          <span className="text-[11px] text-amber-300 font-mono">10g = ₹{(ratesForm.gold24k * 10).toLocaleString('en-IN')}</span>
+                        </label>
                         <div className="admin-input-addon-wrap">
                           <span className="admin-input-addon">₹</span>
                           <input
@@ -784,7 +787,10 @@ const DealerPortalModal = () => {
                       </div>
 
                       <div className="admin-field-box">
-                        <label className="admin-label">22K Standard Gold (BIS 916 Hallmark)</label>
+                        <label className="admin-label">
+                          <span>22K Hallmark (BIS 916)</span>
+                          <span className="text-[11px] text-amber-300 font-mono">10g = ₹{(ratesForm.gold22k * 10).toLocaleString('en-IN')}</span>
+                        </label>
                         <div className="admin-input-addon-wrap">
                           <span className="admin-input-addon">₹</span>
                           <input
@@ -802,7 +808,10 @@ const DealerPortalModal = () => {
                       </div>
 
                       <div className="admin-field-box">
-                        <label className="admin-label">18K Diamond Gold (750 Alloy)</label>
+                        <label className="admin-label">
+                          <span>18K Diamond Gold (750)</span>
+                          <span className="text-[11px] text-amber-300 font-mono">10g = ₹{(ratesForm.gold18k * 10).toLocaleString('en-IN')}</span>
+                        </label>
                         <div className="admin-input-addon-wrap">
                           <span className="admin-input-addon">₹</span>
                           <input
@@ -820,7 +829,10 @@ const DealerPortalModal = () => {
                       </div>
 
                       <div className="admin-field-box">
-                        <label className="admin-label">Fine Silver 999 (99.9% Purity)</label>
+                        <label className="admin-label">
+                          <span>Fine Silver 999 (Pure)</span>
+                          <span className="text-[11px] text-gray-300 font-mono">1kg = ₹{Math.round(ratesForm.silver999 * 1000).toLocaleString('en-IN')}</span>
+                        </label>
                         <div className="admin-input-addon-wrap">
                           <span className="admin-input-addon">₹</span>
                           <input
@@ -875,7 +887,7 @@ const DealerPortalModal = () => {
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3 mb-4">
+                    <div className="admin-grid-2 mb-4">
                       <div className="p-3 rounded-lg bg-black/40 border border-amber-500/20">
                         <span className="text-xs text-amber-200/70 block">24K Pure Gold (10g)</span>
                         <strong className="text-lg text-amber-300 font-serif">₹{(ratesForm.gold24k * 10).toLocaleString('en-IN')}</strong>
@@ -960,7 +972,7 @@ const DealerPortalModal = () => {
                     </div>
 
                     <div className="space-y-3">
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="admin-grid-2">
                         <div className="admin-field-box">
                           <label className="admin-label">Title (English)</label>
                           <input
@@ -968,7 +980,7 @@ const DealerPortalModal = () => {
                             value={productForm.name}
                             onChange={(e) => setProductForm({ ...productForm, name: e.target.value })}
                             placeholder="e.g. Royal Polki Choker"
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                             required
                           />
                         </div>
@@ -979,12 +991,12 @@ const DealerPortalModal = () => {
                             value={productForm.hindiName}
                             onChange={(e) => setProductForm({ ...productForm, hindiName: e.target.value })}
                             placeholder="e.g. शाही पोलकी चोकर"
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           />
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="admin-grid-2">
                         <div className="admin-field-box">
                           <label className="admin-label">Category</label>
                           <select
@@ -1007,7 +1019,7 @@ const DealerPortalModal = () => {
                                 categoryLabel: labels[cat] || 'Jewellery'
                               });
                             }}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           >
                             <option value="bridal">Royal Bridal</option>
                             <option value="gold">22K Gold Necklaces</option>
@@ -1038,7 +1050,7 @@ const DealerPortalModal = () => {
                                 purity: purities[key] || '22K BIS 916 Hallmark'
                               });
                             }}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           >
                             <option value="gold22k">22K BIS 916 Hallmark (91.6%)</option>
                             <option value="gold24k">24K Pure Bullion (99.9%)</option>
@@ -1048,7 +1060,7 @@ const DealerPortalModal = () => {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="admin-grid-2">
                         <div className="admin-field-box">
                           <label className="admin-label">Net Gold Weight (e.g. 24.50g)</label>
                           <input
@@ -1056,7 +1068,7 @@ const DealerPortalModal = () => {
                             value={productForm.netGoldWeight}
                             onChange={(e) => setProductForm({ ...productForm, netGoldWeight: e.target.value })}
                             placeholder="24.50g"
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                             required
                           />
                         </div>
@@ -1068,7 +1080,7 @@ const DealerPortalModal = () => {
                             max="30"
                             value={productForm.makingPercent}
                             onChange={(e) => setProductForm({ ...productForm, makingPercent: parseFloat(e.target.value) || 10 })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                             required
                           />
                         </div>
@@ -1115,13 +1127,13 @@ const DealerPortalModal = () => {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="admin-grid-2">
                         <div className="admin-field-box">
                           <label className="admin-label">Badge Tag</label>
                           <select
                             value={productForm.badge}
                             onChange={(e) => setProductForm({ ...productForm, badge: e.target.value })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           >
                             <option value="Showroom Original">Showroom Original</option>
                             <option value="Masterpiece">Masterpiece</option>
@@ -1138,7 +1150,7 @@ const DealerPortalModal = () => {
                             value={productForm.stoneType}
                             onChange={(e) => setProductForm({ ...productForm, stoneType: e.target.value })}
                             placeholder="e.g. Kundan / Meenakari"
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           />
                         </div>
                       </div>
@@ -1161,32 +1173,36 @@ const DealerPortalModal = () => {
                 {/* RIGHT PANE: Catalog List & Management Table */}
                 <div className="admin-pane-right">
                   <div className="admin-card-surface">
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="relative flex-1">
-                        <Search size={14} className="absolute left-2.5 top-2.5 text-amber-400" />
+                    <div className="admin-inventory-toolbar">
+                      <div className="admin-search-box">
+                        <Search size={16} className="admin-search-icon" />
                         <input
                           type="text"
                           value={inventorySearch}
                           onChange={(e) => setInventorySearch(e.target.value)}
                           placeholder="Search designs by title or ID..."
-                          className="w-full pl-8 pr-3 py-1.5 text-xs bg-black/40 border border-amber-600/30 rounded text-white"
+                          className="admin-search-input"
                         />
                       </div>
                       <select
                         value={inventoryCategoryFilter}
                         onChange={(e) => setInventoryCategoryFilter(e.target.value)}
-                        className="text-xs bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5 text-white"
+                        className="admin-filter-select"
                       >
-                        <option value="all">All ({products.length})</option>
-                        <option value="bridal">Bridal</option>
-                        <option value="gold">Gold</option>
-                        <option value="bangles">Bangles</option>
-                        <option value="diamond">Diamond</option>
+                        <option value="all">All Categories ({products.length})</option>
+                        <option value="bridal">Royal Bridal</option>
+                        <option value="gold">22K Gold Necklaces</option>
+                        <option value="bangles">Temple Bangles</option>
+                        <option value="diamond">Diamonds</option>
+                        <option value="everyday">Everyday &amp; Festive</option>
+                        <option value="mens">Men's Jewels</option>
+                        <option value="coins">24K Coins &amp; Bars</option>
+                        <option value="silver">Silver &amp; Pooja</option>
                       </select>
                     </div>
 
-                    {/* Compact Scrollable List */}
-                    <div className="space-y-2 max-h-[500px] overflow-y-auto pr-1">
+                    {/* Scrollable Inventory List */}
+                    <div className="space-y-2.5 max-h-[580px] overflow-y-auto pr-1">
                       {filteredProducts.map((p) => {
                         const price = calculatePrice(p);
                         const isSelected = p.id === editingProductId;
@@ -1239,9 +1255,8 @@ const DealerPortalModal = () => {
                                 <button
                                   type="button"
                                   onClick={() => {
-                                    if (window.confirm(`Delete "${p.name}"?`)) {
-                                      deleteProduct(p.id);
-                                    }
+                                    deleteProduct(p.id);
+                                    showToast(`Removed "${p.name}" from catalog.`);
                                   }}
                                   className="p-1.5 rounded bg-red-950/40 hover:bg-red-800 text-red-300 transition-colors"
                                   title="Delete design"
@@ -1331,7 +1346,7 @@ const DealerPortalModal = () => {
                             copy[selectedGalleryIdx].title = e.target.value;
                             setPhotosList(copy);
                           }}
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                           required
                         />
                       </div>
@@ -1346,7 +1361,7 @@ const DealerPortalModal = () => {
                             copy[selectedGalleryIdx].subtitle = e.target.value;
                             setPhotosList(copy);
                           }}
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                         />
                       </div>
 
@@ -1360,7 +1375,7 @@ const DealerPortalModal = () => {
                             copy[selectedGalleryIdx].desc = e.target.value;
                             setPhotosList(copy);
                           }}
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                         />
                       </div>
                     </div>
@@ -1451,7 +1466,7 @@ const DealerPortalModal = () => {
                           value={videoForm.url}
                           onChange={(e) => setVideoForm({ ...videoForm, url: e.target.value })}
                           placeholder="https://www.youtube.com/embed/..."
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                           required
                         />
                         <span className="text-[11px] text-gray-400">
@@ -1465,7 +1480,7 @@ const DealerPortalModal = () => {
                           type="text"
                           value={videoForm.title}
                           onChange={(e) => setVideoForm({ ...videoForm, title: e.target.value })}
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                         />
                       </div>
 
@@ -1475,7 +1490,7 @@ const DealerPortalModal = () => {
                           type="text"
                           value={videoForm.qualityBadge}
                           onChange={(e) => setVideoForm({ ...videoForm, qualityBadge: e.target.value })}
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                         />
                       </div>
 
@@ -1485,7 +1500,7 @@ const DealerPortalModal = () => {
                           rows={3}
                           value={videoForm.description}
                           onChange={(e) => setVideoForm({ ...videoForm, description: e.target.value })}
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                         />
                       </div>
                     </div>
@@ -1575,7 +1590,7 @@ const DealerPortalModal = () => {
                     </div>
 
                     <div className="space-y-3">
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="admin-grid-2">
                         <div className="admin-field-box">
                           <label className="admin-label">Customer Name</label>
                           <input
@@ -1583,7 +1598,7 @@ const DealerPortalModal = () => {
                             value={reviewForm.author}
                             onChange={(e) => setReviewForm({ ...reviewForm, author: e.target.value })}
                             placeholder="e.g. Ramesh Chandra Verma"
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                             required
                           />
                         </div>
@@ -1595,18 +1610,18 @@ const DealerPortalModal = () => {
                             value={reviewForm.location}
                             onChange={(e) => setReviewForm({ ...reviewForm, location: e.target.value })}
                             placeholder="e.g. Station Road, Mirzapur"
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           />
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="admin-grid-2">
                         <div className="admin-field-box">
                           <label className="admin-label">Star Rating (1 to 5)</label>
                           <select
                             value={reviewForm.rating}
                             onChange={(e) => setReviewForm({ ...reviewForm, rating: parseInt(e.target.value) || 5 })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           >
                             <option value="5">★★★★★ (5 Stars - Exceptional)</option>
                             <option value="4">★★★★☆ (4 Stars - Highly Satisfied)</option>
@@ -1621,7 +1636,7 @@ const DealerPortalModal = () => {
                             value={reviewForm.tag}
                             onChange={(e) => setReviewForm({ ...reviewForm, tag: e.target.value })}
                             placeholder="e.g. Google Verified Review"
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           />
                         </div>
                       </div>
@@ -1633,7 +1648,7 @@ const DealerPortalModal = () => {
                           value={reviewForm.comment}
                           onChange={(e) => setReviewForm({ ...reviewForm, comment: e.target.value })}
                           placeholder="What did the customer say about our jewellery purity, billing or gaddi hospitality?"
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                           required
                         />
                       </div>
@@ -1729,18 +1744,18 @@ const DealerPortalModal = () => {
                           type="text"
                           value={schemeForm.title}
                           onChange={(e) => setSchemeForm({ ...schemeForm, title: e.target.value })}
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                         />
                       </div>
 
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="admin-grid-2">
                         <div className="admin-field-box">
                           <label className="admin-label">Customer Tenure (Months)</label>
                           <input
                             type="number"
                             value={schemeForm.tenureMonths}
                             onChange={(e) => setSchemeForm({ ...schemeForm, tenureMonths: parseInt(e.target.value) || 11 })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           />
                         </div>
 
@@ -1750,7 +1765,7 @@ const DealerPortalModal = () => {
                             type="text"
                             value={schemeForm.bonusMonth}
                             onChange={(e) => setSchemeForm({ ...schemeForm, bonusMonth: e.target.value })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           />
                         </div>
                       </div>
@@ -1761,7 +1776,7 @@ const DealerPortalModal = () => {
                           rows={3}
                           value={schemeForm.benefits}
                           onChange={(e) => setSchemeForm({ ...schemeForm, benefits: e.target.value })}
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                         />
                       </div>
 
@@ -1771,7 +1786,7 @@ const DealerPortalModal = () => {
                           rows={3}
                           value={schemeForm.whatsappTemplate}
                           onChange={(e) => setSchemeForm({ ...schemeForm, whatsappTemplate: e.target.value })}
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                         />
                       </div>
                     </div>
@@ -1860,14 +1875,14 @@ const DealerPortalModal = () => {
                     <h3 className="admin-form-group-title">Official Store Profile</h3>
 
                     <div className="space-y-3">
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="admin-grid-2">
                         <div className="admin-field-box">
                           <label className="admin-label">Brand Name (English)</label>
                           <input
                             type="text"
                             value={showroomInfoForm.name}
                             onChange={(e) => setShowroomInfoForm({ ...showroomInfoForm, name: e.target.value })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                             required
                           />
                         </div>
@@ -1878,20 +1893,20 @@ const DealerPortalModal = () => {
                             type="text"
                             value={showroomInfoForm.hindiName}
                             onChange={(e) => setShowroomInfoForm({ ...showroomInfoForm, hindiName: e.target.value })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                             required
                           />
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="admin-grid-2">
                         <div className="admin-field-box">
                           <label className="admin-label">Proprietor Name</label>
                           <input
                             type="text"
                             value={showroomInfoForm.proprietor}
                             onChange={(e) => setShowroomInfoForm({ ...showroomInfoForm, proprietor: e.target.value })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           />
                         </div>
 
@@ -1901,13 +1916,13 @@ const DealerPortalModal = () => {
                             type="text"
                             value={showroomInfoForm.gstin}
                             onChange={(e) => setShowroomInfoForm({ ...showroomInfoForm, gstin: e.target.value })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5 font-mono"
+                            className="admin-input-field font-mono"
                             required
                           />
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="admin-grid-2">
                         <div className="admin-field-box">
                           <label className="admin-label">Google Rating (e.g. 4.9)</label>
                           <input
@@ -1917,7 +1932,7 @@ const DealerPortalModal = () => {
                             max="5.0"
                             value={showroomInfoForm.googleRating}
                             onChange={(e) => setShowroomInfoForm({ ...showroomInfoForm, googleRating: parseFloat(e.target.value) || 4.9 })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           />
                         </div>
 
@@ -1927,7 +1942,7 @@ const DealerPortalModal = () => {
                             type="number"
                             value={showroomInfoForm.googleReviewCount}
                             onChange={(e) => setShowroomInfoForm({ ...showroomInfoForm, googleReviewCount: parseInt(e.target.value) || 10 })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           />
                         </div>
                       </div>
@@ -1938,7 +1953,7 @@ const DealerPortalModal = () => {
                           type="text"
                           value={showroomInfoForm.tagline}
                           onChange={(e) => setShowroomInfoForm({ ...showroomInfoForm, tagline: e.target.value })}
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                         />
                       </div>
 
@@ -1948,7 +1963,7 @@ const DealerPortalModal = () => {
                           rows={4}
                           value={showroomInfoForm.officialMerchantBio}
                           onChange={(e) => setShowroomInfoForm({ ...showroomInfoForm, officialMerchantBio: e.target.value })}
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                         />
                       </div>
                     </div>
@@ -2021,7 +2036,7 @@ const DealerPortalModal = () => {
                           type="text"
                           value={contactsForm.fullAddress}
                           onChange={(e) => setContactsForm({ ...contactsForm, fullAddress: e.target.value })}
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                           required
                         />
                       </div>
@@ -2032,18 +2047,18 @@ const DealerPortalModal = () => {
                           type="text"
                           value={contactsForm.landmark}
                           onChange={(e) => setContactsForm({ ...contactsForm, landmark: e.target.value })}
-                          className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                          className="admin-input-field"
                         />
                       </div>
 
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="admin-grid-2">
                         <div className="admin-field-box">
                           <label className="admin-label">Main Counter Phone</label>
                           <input
                             type="text"
                             value={contactsForm.phonePrimary}
                             onChange={(e) => setContactsForm({ ...contactsForm, phonePrimary: e.target.value })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                             required
                           />
                         </div>
@@ -2054,19 +2069,19 @@ const DealerPortalModal = () => {
                             type="text"
                             value={contactsForm.phoneSecondary}
                             onChange={(e) => setContactsForm({ ...contactsForm, phoneSecondary: e.target.value })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           />
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="admin-grid-2">
                         <div className="admin-field-box">
                           <label className="admin-label">Inquiries Desk Phone</label>
                           <input
                             type="text"
                             value={contactsForm.phoneTertiary}
                             onChange={(e) => setContactsForm({ ...contactsForm, phoneTertiary: e.target.value })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           />
                         </div>
 
@@ -2076,20 +2091,20 @@ const DealerPortalModal = () => {
                             type="text"
                             value={contactsForm.whatsapp}
                             onChange={(e) => setContactsForm({ ...contactsForm, whatsapp: e.target.value })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                             required
                           />
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="admin-grid-2">
                         <div className="admin-field-box">
                           <label className="admin-label">Regular Hours (Mon – Sat)</label>
                           <input
                             type="text"
                             value={contactsForm.hoursRegular}
                             onChange={(e) => setContactsForm({ ...contactsForm, hoursRegular: e.target.value })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           />
                         </div>
 
@@ -2099,7 +2114,7 @@ const DealerPortalModal = () => {
                             type="text"
                             value={contactsForm.hoursSunday}
                             onChange={(e) => setContactsForm({ ...contactsForm, hoursSunday: e.target.value })}
-                            className="admin-input-field bg-black/40 border border-amber-600/30 rounded px-2.5 py-1.5"
+                            className="admin-input-field"
                           />
                         </div>
                       </div>
@@ -2139,7 +2154,7 @@ const DealerPortalModal = () => {
                         <strong className="text-sm text-white font-mono block">{contactsForm.whatsapp}</strong>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="admin-grid-2">
                         <div className="p-2.5 rounded bg-black/40 border border-white/5">
                           <span className="text-[10px] text-gray-400 block">Main Counter</span>
                           <strong className="text-xs text-amber-300">{contactsForm.phonePrimary}</strong>

@@ -97,7 +97,10 @@ const AdminSidebarNav = React.memo(({
 }) => {
   return (
     <aside className="admin-portal-sidebar" aria-label="Admin CMS Features Navigation">
-      <div className="admin-sidebar-section-title">8 CMS MODULES</div>
+      <div className="admin-sidebar-section-title">
+        <span>CMS MODULES</span>
+        <span className="text-[10px] text-amber-400 font-bold bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-600/30">8 SECTIONS</span>
+      </div>
 
       <nav className="admin-sidebar-nav">
         {NAV_ITEMS.map((item) => {
