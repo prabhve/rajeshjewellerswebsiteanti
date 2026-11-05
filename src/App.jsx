@@ -22,6 +22,7 @@ import DealerPortalModal from './components/DealerPortalModal';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import MobileBottomNav from './components/MobileBottomNav';
 import ToastContainer from './components/ToastContainer';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   return (
@@ -78,6 +79,9 @@ function App() {
         <FloatingWhatsApp />
         <MobileBottomNav />
         <ToastContainer />
+
+        {/* Vercel Web Analytics */}
+        <Analytics />
       </div>
     </JewelleryProvider>
   );
