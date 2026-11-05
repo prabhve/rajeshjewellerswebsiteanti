@@ -12,7 +12,6 @@ import {
   CheckCheck, 
   RotateCcw,
   Scale,
-  Gem,
   Award
 } from 'lucide-react';
 
@@ -36,7 +35,7 @@ const PriceEstimator = () => {
   const gst = Math.round(subtotal * 0.03);
   const grandTotal = subtotal + gst;
 
-  // Traditional Tola calculations (Mirzapur/Eastern UP standard: 1 Tola = 10g metric / 8g traditional)
+  // Traditional Tola calculations
   const tolaMetric = (validWeight / 10).toFixed(2);
   const tolaTraditional = (validWeight / 8).toFixed(2);
 
@@ -44,61 +43,58 @@ const PriceEstimator = () => {
     {
       id: 'gold22k',
       label: '22K Gold',
-      fineness: '91.6% Pure (BIS 916)',
-      tag: 'Most Chosen for Jewellery',
-      desc: 'Ideal for necklaces, chains, bangles & bridal sets',
+      fineness: 'BIS 916 (91.6%)',
+      tag: 'Jewellery',
       rate: liveRates.gold22k,
       popular: true
     },
     {
       id: 'gold24k',
       label: '24K Gold',
-      fineness: '99.9% Pure (999)',
-      tag: 'Pure Investment Bullion',
-      desc: 'Certified gold coins, mint biscuits & savings bars',
+      fineness: '999 (99.9% Pure)',
+      tag: 'Bullion',
       rate: liveRates.gold24k,
       popular: false
     },
     {
       id: 'gold18k',
       label: '18K Gold',
-      fineness: '75.0% Pure (750)',
-      tag: 'Diamond & Daily Wear',
-      desc: 'High-strength alloy engineered for diamond studding',
+      fineness: '750 (Diamond Craft)',
+      tag: 'Diamond',
       rate: liveRates.gold18k,
       popular: false
     }
   ];
 
   const quickWeights = [
-    { label: '5g', val: 5, hint: 'Light Tops / Ring' },
-    { label: '8g (1 Tola)', val: 8, hint: '1 Traditional Tola' },
-    { label: '10g (1 Tola)', val: 10, hint: '1 Metric Tola' },
-    { label: '16g (2 Tola)', val: 16, hint: 'Daily Wear Chain' },
-    { label: '24g (3 Tola)', val: 24, hint: 'Partywear Choker' },
-    { label: '40g (5 Tola)', val: 40, hint: 'Bridal Haar Set' },
-    { label: '80g (10 Tola)', val: 80, hint: 'Royal Bridal Trousseau' }
+    { label: '5g', val: 5 },
+    { label: '8g (1T)', val: 8, hint: '1 Vedic Tola' },
+    { label: '10g (1T)', val: 10, hint: '1 Metric Tola' },
+    { label: '16g (2T)', val: 16 },
+    { label: '24g (3T)', val: 24 },
+    { label: '40g (5T)', val: 40 },
+    { label: '80g (10T)', val: 80 }
   ];
 
   const makingCategories = [
     {
       percent: 8,
-      title: 'Chains & Daily Wear',
-      desc: 'सादी चेन, कड़े व हल्के आभूषण • Machine Finish',
-      tag: '8% Craftsmanship'
+      title: 'Chains & Daily',
+      desc: 'सादी चेन व कड़े',
+      tag: '8%'
     },
     {
       percent: 10,
-      title: 'Necklaces & Fancy Sets',
-      desc: 'बारीक जालीदार हार, झुमकी व पार्टी वियर • Filigree',
-      tag: '10% Benchmark',
+      title: 'Necklaces & Sets',
+      desc: 'हार, झुमकी व फैंसी',
+      tag: '10% Popular',
       popular: true
     },
     {
       percent: 14,
-      title: 'Royal Bridal & Antique',
-      desc: 'शाही ब्राइडल, कुंदन, मीनाकारी व टेम्पल ज्वेलरी',
-      tag: '14% Master Craft'
+      title: 'Bridal & Antique',
+      desc: 'शाही कुंदन व ब्राइडल',
+      tag: '14%'
     }
   ];
 
@@ -140,7 +136,7 @@ const PriceEstimator = () => {
       `*🏛️ Live Gold Price & Making Estimate Slip*\n` +
       `───────────────────────\n` +
       `• *Purity:* ${activePurityObj.label} (${activePurityObj.fineness})\n` +
-      `• *Weight:* ${validWeight} Grams (≈ ${tolaMetric} Tola / ${tolaTraditional} Vedic Tola)\n` +
+      `• *Weight:* ${validWeight}g (≈ ${tolaMetric} Tola / ${tolaTraditional} Vedic Tola)\n` +
       `• *Today's Rate:* ₹${currentRate.toLocaleString('en-IN')}/g\n` +
       `───────────────────────\n` +
       `• *Gold Metal Value:* ₹${metalValue.toLocaleString('en-IN')}\n` +
@@ -177,37 +173,36 @@ const PriceEstimator = () => {
     <section className="calc-section" id="calculator" aria-label="Gold Price and Making Calculator">
       <div className="container">
         <div className="calc-bespoke-shell">
-          {/* Majestic Royal Header */}
-          <div className="calc-bespoke-header">
-            <div className="calc-eyebrow-row">
-              <span className="calc-eyebrow-accent">RAJESH JEWELLERS</span>
-              <span className="calc-eyebrow-sep">◆</span>
-              <span>SANGMOHAL ATELIER</span>
-              <span className="calc-eyebrow-sep">◆</span>
-              <span className="calc-eyebrow-gold">100% TRANSPARENT BENCHMARK</span>
+          {/* Streamlined Viewport-Optimized Header */}
+          <div className="calc-viewport-header">
+            <div className="calc-title-cluster">
+              <div className="calc-brand-kicker">
+                <span>RAJESH JEWELLERS</span>
+                <span className="kicker-sep">◆</span>
+                <span className="kicker-gold">SANGMOHAL ATELIER</span>
+              </div>
+              <h2 className="calc-viewport-title">
+                गोल्ड मूल्य एवं मेकिंग कैलकुलेटर
+              </h2>
             </div>
 
-            <h2 className="calc-bespoke-title">
-              गोल्ड मूल्य एवं मेकिंग कैलकुलेटर
-            </h2>
-
-            <p className="calc-bespoke-subtitle">
-              Calculate live bullion rates, artisan making charges, and 3% Govt. GST with complete hallmark transparency before visiting our Sangmohal showroom.
-            </p>
-
-            {/* Clean Unboxed Trust Separators (Anti-Slop Discipline) */}
-            <div className="calc-trust-metadata">
-              <span>MCX Live Rates</span>
-              <span className="meta-dot">·</span>
-              <span>100% BIS 916 Hallmark HUID</span>
-              <span className="meta-dot">·</span>
-              <span>Govt. Tax Invoice</span>
-              <span className="meta-dot">·</span>
-              <span>Free German Karatmeter Testing</span>
+            <div className="calc-header-trust-bar">
+              <div className="trust-pill">
+                <ShieldCheck size={13} className="text-emerald-400" />
+                <span>100% BIS 916 Hallmark (HUID)</span>
+              </div>
+              <div className="trust-pill">
+                <Scale size={13} className="text-amber-400" />
+                <span>MCX Live Rates</span>
+              </div>
+              <div className="trust-pill">
+                <Award size={13} className="text-amber-400" />
+                <span>Free Karatmeter Testing</span>
+              </div>
             </div>
           </div>
 
-          {/* Master 2-Column Luxury Atelier Pavilion */}
+          {/* Master 2-Column Balanced Pavilion — Viewport Perfect Fit */}
           <div className="calc-bespoke-pavilion">
             {/* Left Column: Interactive Valuation Studio */}
             <div className="calc-studio-col">
@@ -217,11 +212,11 @@ const PriceEstimator = () => {
                   <div className="calc-step-title-group">
                     <span className="calc-step-index">01</span>
                     <h3 className="calc-step-heading">
-                      Select Gold Purity <span>(सोने की शुद्धता चुनें)</span>
+                      Gold Purity <span>(शुद्धता)</span>
                     </h3>
                   </div>
                   <span className="calc-step-note">
-                    <ShieldCheck size={14} className="text-amber-300" />
+                    <Check size={12} className="text-amber-300" />
                     Govt. Hallmark Certified
                   </span>
                 </div>
@@ -238,21 +233,12 @@ const PriceEstimator = () => {
                         aria-pressed={isSelected}
                       >
                         <div className="karat-card-top">
+                          <span className="karat-name">{opt.label}</span>
                           <span className="karat-tag">{opt.tag}</span>
-                          <span className="karat-select-indicator">
-                            {isSelected ? <Check size={12} strokeWidth={3} /> : null}
-                          </span>
                         </div>
-
-                        <div className="karat-card-body">
-                          <strong className="karat-name">{opt.label}</strong>
+                        <div className="karat-card-bottom">
+                          <span className="karat-rate-val">₹{opt.rate.toLocaleString('en-IN')}<small>/g</small></span>
                           <span className="karat-fineness">{opt.fineness}</span>
-                          <p className="karat-desc">{opt.desc}</p>
-                        </div>
-
-                        <div className="karat-card-rate">
-                          <span className="karat-rate-val">₹{opt.rate.toLocaleString('en-IN')}</span>
-                          <span className="karat-rate-unit">/ gram</span>
                         </div>
                       </button>
                     );
@@ -266,26 +252,26 @@ const PriceEstimator = () => {
                   <div className="calc-step-title-group">
                     <span className="calc-step-index">02</span>
                     <h3 className="calc-step-heading">
-                      Gold Weight <span>(आभूषण का वज़न)</span>
+                      Weight <span>(वज़न)</span>
                     </h3>
                   </div>
                   <span className="calc-tola-readout">
-                    ≈ {tolaMetric} Metric Tola (10g) · {tolaTraditional} Vedic Tola (8g)
+                    ≈ {tolaMetric} Tola (10g) · {tolaTraditional} Vedic Tola (8g)
                   </span>
                 </div>
 
                 {/* Tactile Master Weight Controller */}
                 <div className="calc-weight-console">
-                  <button
-                    type="button"
-                    className="calc-stepper-btn minus"
-                    onClick={decrementWeight}
-                    aria-label="Decrease weight by 1 gram"
-                  >
-                    <Minus size={18} />
-                  </button>
+                  <div className="calc-weight-stepper-wrap">
+                    <button
+                      type="button"
+                      className="calc-stepper-btn minus"
+                      onClick={decrementWeight}
+                      aria-label="Decrease weight"
+                    >
+                      <Minus size={16} />
+                    </button>
 
-                  <div className="calc-weight-primary-display">
                     <div className="calc-weight-numeric-wrap">
                       <input
                         type="number"
@@ -299,24 +285,18 @@ const PriceEstimator = () => {
                       />
                       <span className="calc-weight-unit-badge">Grams (ग्राम)</span>
                     </div>
-                    <span className="calc-weight-conversion-caption">
-                      Equates to {tolaMetric} Tola standard · {Math.round(validWeight * 8)} Ratti approx.
-                    </span>
+
+                    <button
+                      type="button"
+                      className="calc-stepper-btn plus"
+                      onClick={incrementWeight}
+                      aria-label="Increase weight"
+                    >
+                      <Plus size={16} />
+                    </button>
                   </div>
 
-                  <button
-                    type="button"
-                    className="calc-stepper-btn plus"
-                    onClick={incrementWeight}
-                    aria-label="Increase weight by 1 gram"
-                  >
-                    <Plus size={18} />
-                  </button>
-                </div>
-
-                {/* Refined Indian Quick-Weight Preset Strips */}
-                <div className="calc-weight-presets-bar">
-                  <span className="presets-label">Popular Weights:</span>
+                  {/* Compact Quick-Weight Presets */}
                   <div className="presets-list">
                     {quickWeights.map((w) => {
                       const isActive = Number(weight) === w.val;
@@ -326,9 +306,8 @@ const PriceEstimator = () => {
                           type="button"
                           className={`preset-btn ${isActive ? 'active' : ''}`}
                           onClick={() => setWeight(w.val)}
-                          title={w.hint}
                         >
-                          <span className="preset-val">{w.label}</span>
+                          {w.label}
                         </button>
                       );
                     })}
@@ -342,12 +321,12 @@ const PriceEstimator = () => {
                   <div className="calc-step-title-group">
                     <span className="calc-step-index">03</span>
                     <h3 className="calc-step-heading">
-                      Artisan Making Charges <span>(कारीगरी शुल्क)</span>
+                      Making Charges <span>(कारीगरी शुल्क)</span>
                     </h3>
                   </div>
                   <div className="calc-making-live-badge">
                     <span className="making-live-percent">{makingPercent}%</span>
-                    <span className="making-live-rupees">₹{makingCharges.toLocaleString('en-IN')} Artistry</span>
+                    <span className="making-live-rupees">+ ₹{makingCharges.toLocaleString('en-IN')}</span>
                   </div>
                 </div>
 
@@ -364,13 +343,13 @@ const PriceEstimator = () => {
                     aria-label="Making charge percentage slider"
                   />
                   <div className="calc-slider-scale-labels">
-                    <span>7% (Minimal Machine)</span>
-                    <span className="scale-center-indicator">10% Showroom Standard Benchmark</span>
-                    <span>16% (Royal Bridal Antique)</span>
+                    <span>7% Min</span>
+                    <span className="scale-center-indicator">10% Standard Benchmark</span>
+                    <span>16% Bridal</span>
                   </div>
                 </div>
 
-                {/* 3 Craftsmanship Tier Selection Cards */}
+                {/* 3 Streamlined Craft Tiers */}
                 <div className="calc-craft-tiers-grid">
                   {makingCategories.map((cat) => {
                     const isSelected = makingPercent === cat.percent;
@@ -383,10 +362,9 @@ const PriceEstimator = () => {
                       >
                         <div className="craft-tier-header">
                           <span className="craft-tier-rate">{cat.percent}%</span>
-                          <span className="craft-tier-tag">{cat.tag}</span>
+                          <span className="craft-tier-title">{cat.title}</span>
                         </div>
-                        <strong className="craft-tier-title">{cat.title}</strong>
-                        <p className="craft-tier-desc">{cat.desc}</p>
+                        <span className="craft-tier-desc">{cat.desc}</span>
                       </button>
                     );
                   })}
@@ -408,75 +386,58 @@ const PriceEstimator = () => {
                   </div>
                   <div className="calc-memo-status-badge">
                     <span className="status-indicator-dot"></span>
-                    <span>Live Estimate</span>
+                    <span>Live Slip</span>
                   </div>
                 </div>
 
                 {/* Active Parameters Ribbon */}
                 <div className="calc-memo-spec-ribbon">
-                  <span className="spec-item-purity">{activePurityObj.label}</span>
+                  <span>{activePurityObj.label}</span>
                   <span className="spec-sep">•</span>
-                  <span className="spec-item-weight">{validWeight}g</span>
+                  <span>{validWeight}g</span>
                   <span className="spec-sep">•</span>
-                  <span className="spec-item-tola">≈ {tolaMetric} Tola</span>
+                  <span>≈ {tolaMetric} Tola</span>
                   <span className="spec-sep">•</span>
-                  <span className="spec-item-rate">₹{currentRate.toLocaleString('en-IN')}/g</span>
+                  <span>₹{currentRate.toLocaleString('en-IN')}/g</span>
+                  <span className="spec-sep">•</span>
+                  <span>{makingPercent}% Craft</span>
                 </div>
 
                 {/* Itemized Calculation Breakdown Ledger */}
                 <div className="calc-memo-ledger">
                   <div className="ledger-entry">
-                    <div className="ledger-desc">
-                      <span className="ledger-title">Pure Gold Metal Value</span>
-                      <span className="ledger-formula">{validWeight}g × ₹{currentRate.toLocaleString('en-IN')} base rate</span>
-                    </div>
+                    <span className="ledger-title">Pure Gold Metal ({validWeight}g × ₹{currentRate.toLocaleString('en-IN')})</span>
                     <strong className="ledger-amount">₹{metalValue.toLocaleString('en-IN')}</strong>
                   </div>
 
                   <div className="ledger-entry">
-                    <div className="ledger-desc">
-                      <span className="ledger-title">Artisan Making Charges ({makingPercent}%)</span>
-                      <span className="ledger-formula">Goldsmith filigree, hallmarking &amp; crafting</span>
-                    </div>
+                    <span className="ledger-title">Artisan Making ({makingPercent}% कारीगरी)</span>
                     <strong className="ledger-amount add">+ ₹{makingCharges.toLocaleString('en-IN')}</strong>
                   </div>
 
                   <div className="ledger-entry subtotal-entry">
-                    <div className="ledger-desc">
-                      <span className="ledger-title">Net Showroom Subtotal</span>
-                      <span className="ledger-formula">Pure bullion metal + artisan making</span>
-                    </div>
+                    <span className="ledger-title">Net Showroom Subtotal (सोना + मेकिंग)</span>
                     <strong className="ledger-amount highlight">₹{subtotal.toLocaleString('en-IN')}</strong>
                   </div>
 
                   <div className="ledger-entry">
-                    <div className="ledger-desc">
-                      <span className="ledger-title">Govt. GST (3%)</span>
-                      <span className="ledger-formula">Official tax invoice with HUID laser certificate</span>
-                    </div>
+                    <span className="ledger-title">Govt. GST (3% पक्का बिल - HUID)</span>
                     <strong className="ledger-amount add">+ ₹{gst.toLocaleString('en-IN')}</strong>
                   </div>
-                </div>
-
-                {/* Royal Filigree Ornament Separator */}
-                <div className="calc-memo-filigree-line">
-                  <span className="line-segment"></span>
-                  <span className="filigree-emblem">✦ RJ ✦</span>
-                  <span className="line-segment"></span>
                 </div>
 
                 {/* Grand Total Showcase Box */}
                 <div className="calc-grand-total-showcase">
                   <div className="grand-total-label-wrap">
                     <span className="grand-total-label">TOTAL ESTIMATED PRICE (कर सहित)</span>
-                    <span className="grand-total-tag">Final All-Inclusive Amount</span>
+                    <span className="grand-total-tag">Final Invoice Amount</span>
                   </div>
                   <div className="grand-total-amount-display">
                     <span className="currency-symbol">₹</span>
                     <span className="amount-digits">{grandTotal.toLocaleString('en-IN')}</span>
                   </div>
                   <span className="grand-total-guarantee-note">
-                    Verified live at showroom on German Karatmeter with zero wastage deduction.
+                    Verified on German Karatmeter with zero wastage deduction.
                   </span>
                 </div>
 
@@ -487,7 +448,7 @@ const PriceEstimator = () => {
                     className="btn-royal-whatsapp-lock"
                     onClick={handleShareEstimate}
                   >
-                    <MessageCircle size={18} className="whatsapp-icon" />
+                    <MessageCircle size={17} className="whatsapp-icon" />
                     <span>Lock Estimate on WhatsApp in 2 Mins</span>
                   </button>
 
@@ -500,13 +461,13 @@ const PriceEstimator = () => {
                     >
                       {copied ? (
                         <>
-                          <CheckCheck size={15} className="text-emerald-400" />
-                          <span className="text-emerald-300">Slip Copied to Clipboard!</span>
+                          <CheckCheck size={14} className="text-emerald-400" />
+                          <span className="text-emerald-300">Copied to Clipboard!</span>
                         </>
                       ) : (
                         <>
-                          <Copy size={15} />
-                          <span>Copy Breakdown Slip</span>
+                          <Copy size={14} />
+                          <span>Copy Slip</span>
                         </>
                       )}
                     </button>
@@ -515,29 +476,16 @@ const PriceEstimator = () => {
                       type="button"
                       className="btn-memo-reset"
                       onClick={handleReset}
-                      title="Reset calculator to default 10g 22K"
+                      title="Reset to default"
                     >
-                      <RotateCcw size={14} />
+                      <RotateCcw size={13} />
                       <span>Reset</span>
                     </button>
-                  </div>
-                </div>
 
-                {/* Showroom Authenticity Badges */}
-                <div className="calc-memo-footer-trust">
-                  <div className="trust-item">
-                    <Award size={13} className="text-amber-400" />
-                    <span>100% BIS 916 Hallmark (HUID)</span>
-                  </div>
-                  <div className="trust-sep">·</div>
-                  <div className="trust-item">
-                    <Scale size={13} className="text-amber-400" />
-                    <span>Free Karatmeter Testing</span>
-                  </div>
-                  <div className="trust-sep">·</div>
-                  <div className="trust-item">
-                    <Gem size={13} className="text-amber-400" />
-                    <span>Sangmohal Showroom</span>
+                    <div className="calc-quick-hallmark-tag">
+                      <ShieldCheck size={12} className="text-amber-400" />
+                      <span>BIS 916 Hallmark Guaranteed</span>
+                    </div>
                   </div>
                 </div>
               </div>

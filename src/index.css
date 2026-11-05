@@ -7237,120 +7237,113 @@ body {
   background: radial-gradient(circle at 50% 15%, rgba(35, 7, 18, 0.96) 0%, #080103 80%) !important;
   border-top: 1px solid rgba(229, 195, 120, 0.25) !important;
   border-bottom: 1px solid rgba(229, 195, 120, 0.25) !important;
-  padding: 3.25rem 0 3.5rem !important;
+  padding: 1.15rem 0 1.25rem !important;
   overflow: hidden;
 }
 
 .calc-bespoke-shell {
-  max-width: 1180px;
+  max-width: 1140px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
 }
 
-/* Grand Royal Header */
-.calc-bespoke-header {
-  text-align: center;
-  margin-bottom: 1.75rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
+/* Streamlined Viewport-Optimized Header (Never cuts off) */
+.calc-viewport-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 0.75rem !important;
+  flex-wrap: wrap !important;
+  gap: 0.5rem !important;
 }
 
-.calc-eyebrow-row {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #D4C5B3;
-  margin-bottom: 0.15rem;
+.calc-title-cluster {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.1rem !important;
 }
 
-.calc-eyebrow-accent {
-  color: #FFFDF9;
-  letter-spacing: 0.16em;
+.calc-brand-kicker {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  font-size: 0.65rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #D4C5B3 !important;
+  line-height: 1 !important;
 }
 
-.calc-eyebrow-sep {
-  color: #E5C378;
-  font-size: 0.55rem;
-  opacity: 0.8;
+.kicker-sep {
+  color: #E5C378 !important;
+  font-size: 0.5rem !important;
 }
 
-.calc-eyebrow-gold {
-  color: #E5C378;
+.kicker-gold {
+  color: #E5C378 !important;
 }
 
-.calc-bespoke-title {
+.calc-viewport-title {
   font-family: var(--font-serif-headline), 'Playfair Display', Georgia, serif !important;
-  font-size: clamp(1.85rem, 3.2vw, 2.5rem) !important;
+  font-size: clamp(1.35rem, 2vw, 1.65rem) !important;
   font-weight: 900 !important;
-  background: linear-gradient(135deg, #FFFFFF 0%, #FFF3D1 28%, #F5D77F 65%, #C4973B 100%) !important;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF3D1 30%, #F5D77F 65%, #C4973B 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   margin: 0 !important;
-  letter-spacing: 0.015em !important;
-  line-height: 1.2 !important;
-  text-shadow: 0 0 25px rgba(229, 195, 120, 0.25);
+  letter-spacing: 0.01em !important;
+  line-height: 1.15 !important;
 }
 
-.calc-bespoke-subtitle {
-  font-size: 0.92rem !important;
-  color: #D4C5B3 !important;
-  max-width: 720px !important;
-  margin: 0.25rem auto 0 !important;
-  line-height: 1.55 !important;
-  text-wrap: balance !important;
+.calc-header-trust-bar {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  flex-wrap: wrap !important;
 }
 
-.calc-trust-metadata {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.45rem;
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: #BFA992;
+.trust-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.3rem !important;
+  background: rgba(229, 195, 120, 0.08) !important;
+  border: 1px solid rgba(229, 195, 120, 0.28) !important;
+  border-radius: 999px !important;
+  padding: 0.18rem 0.55rem !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  color: #FFFDF9 !important;
+  white-space: nowrap !important;
 }
 
-.meta-dot {
-  color: #E5C378;
-  opacity: 0.75;
-  font-weight: 800;
-}
-
-/* Master 2-Column Luxury Atelier Pavilion */
+/* Master 2-Column Balanced Pavilion — Compact Fit */
 .calc-bespoke-pavilion {
   display: grid !important;
-  grid-template-columns: 1.24fr 1fr !important;
-  gap: 1.75rem !important;
+  grid-template-columns: 1.18fr 1fr !important;
+  gap: 1.05rem !important;
   align-items: stretch !important;
 }
 
 /* Left Column: Interactive Valuation Studio */
 .calc-studio-col {
   background: radial-gradient(circle at 10% 0%, rgba(32, 7, 16, 0.96) 0%, rgba(14, 3, 7, 0.98) 100%) !important;
-  border: 1px solid rgba(229, 195, 120, 0.3) !important;
-  border-radius: 18px !important;
-  padding: 1.65rem 1.75rem !important;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(229, 195, 120, 0.28) !important;
+  border-radius: 14px !important;
+  padding: 0.85rem 1.05rem !important;
+  box-shadow: 0 14px 45px rgba(0, 0, 0, 0.85) !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  gap: 1.45rem !important;
+  gap: 0.65rem !important;
 }
 
 .calc-step-chamber {
   display: flex !important;
   flex-direction: column !important;
-  gap: 0.75rem !important;
-  padding-bottom: 1.25rem !important;
+  gap: 0.35rem !important;
+  padding-bottom: 0.55rem !important;
   border-bottom: 1px solid rgba(229, 195, 120, 0.12) !important;
 }
 
@@ -7364,25 +7357,25 @@ body {
   justify-content: space-between !important;
   align-items: baseline !important;
   flex-wrap: wrap !important;
-  gap: 0.5rem !important;
+  gap: 0.35rem !important;
 }
 
 .calc-step-title-group {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 0.6rem !important;
+  gap: 0.45rem !important;
 }
 
 .calc-step-index {
   font-family: var(--font-serif-headline), serif !important;
-  font-size: 0.82rem !important;
+  font-size: 0.72rem !important;
   font-weight: 900 !important;
   color: #FFF3D1 !important;
   background: rgba(229, 195, 120, 0.18) !important;
   border: 1px solid rgba(229, 195, 120, 0.45) !important;
-  border-radius: 6px !important;
-  width: 24px !important;
-  height: 24px !important;
+  border-radius: 5px !important;
+  width: 20px !important;
+  height: 20px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -7390,7 +7383,7 @@ body {
 }
 
 .calc-step-heading {
-  font-size: 0.96rem !important;
+  font-size: 0.86rem !important;
   font-weight: 800 !important;
   color: #FFFDF9 !important;
   margin: 0 !important;
@@ -7398,53 +7391,52 @@ body {
 }
 
 .calc-step-heading span {
-  font-size: 0.84rem !important;
+  font-size: 0.76rem !important;
   color: #E5C378 !important;
   font-weight: 600 !important;
-  margin-left: 0.25rem !important;
+  margin-left: 0.2rem !important;
 }
 
 .calc-step-note {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 0.35rem !important;
-  font-size: 0.74rem !important;
+  gap: 0.25rem !important;
+  font-size: 0.68rem !important;
   font-weight: 700 !important;
   color: #4ADE80 !important;
 }
 
 .calc-tola-readout {
-  font-size: 0.76rem !important;
+  font-size: 0.7rem !important;
   font-weight: 700 !important;
   color: #E5C378 !important;
-  letter-spacing: 0.02em !important;
 }
 
 /* Step 1: Karat Cards */
 .calc-karat-grid {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
-  gap: 0.75rem !important;
+  gap: 0.45rem !important;
 }
 
 .calc-karat-card {
   position: relative !important;
   background: rgba(255, 255, 255, 0.025) !important;
   border: 1.5px solid rgba(229, 195, 120, 0.2) !important;
-  border-radius: 12px !important;
-  padding: 0.85rem 0.85rem !important;
+  border-radius: 9px !important;
+  padding: 0.45rem 0.6rem !important;
   text-align: left !important;
   cursor: pointer !important;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  gap: 0.55rem !important;
-  min-height: 135px !important;
+  gap: 0.25rem !important;
+  min-height: 52px !important;
 }
 
 .calc-karat-card:hover {
-  transform: translateY(-2px) !important;
+  transform: translateY(-1px) !important;
   background: rgba(229, 195, 120, 0.06) !important;
   border-color: rgba(229, 195, 120, 0.5) !important;
 }
@@ -7452,7 +7444,7 @@ body {
 .calc-karat-card.is-selected {
   background: radial-gradient(circle at 50% 0%, rgba(229, 195, 120, 0.2) 0%, rgba(35, 7, 18, 0.95) 100%) !important;
   border-color: #E5C378 !important;
-  box-shadow: 0 0 18px rgba(229, 195, 120, 0.25) !important;
+  box-shadow: 0 0 12px rgba(229, 195, 120, 0.22) !important;
 }
 
 .karat-card-top {
@@ -7461,74 +7453,30 @@ body {
   align-items: center !important;
 }
 
-.karat-tag {
-  font-size: 0.64rem !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.04em !important;
-  text-transform: uppercase !important;
-  color: #E5C378 !important;
-}
-
-.karat-select-indicator {
-  width: 17px !important;
-  height: 17px !important;
-  border-radius: 50% !important;
-  background: #E5C378 !important;
-  color: #080103 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-.calc-karat-card:not(.is-selected) .karat-select-indicator {
-  display: none !important;
-}
-
-.karat-card-body {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0.15rem !important;
-}
-
 .karat-name {
   font-family: var(--font-serif-headline), serif !important;
-  font-size: 1.12rem !important;
+  font-size: 0.94rem !important;
   font-weight: 800 !important;
   color: #FFFDF9 !important;
-  line-height: 1.15 !important;
+  line-height: 1.1 !important;
 }
 
 .calc-karat-card.is-selected .karat-name {
   color: #FFF6D6 !important;
 }
 
-.karat-fineness {
-  font-size: 0.72rem !important;
-  font-weight: 600 !important;
-  color: #F5D77F !important;
+.karat-tag {
+  font-size: 0.56rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.03em !important;
+  text-transform: uppercase !important;
+  color: #E5C378 !important;
 }
 
-.karat-desc {
-  font-size: 0.68rem !important;
-  color: #BFA992 !important;
-  margin: 0.2rem 0 0 !important;
-  line-height: 1.3 !important;
-}
-
-.karat-card-rate {
+.karat-card-bottom {
   display: flex !important;
+  justify-content: space-between !important;
   align-items: baseline !important;
-  gap: 0.2rem !important;
-  background: rgba(0, 0, 0, 0.45) !important;
-  border: 1px solid rgba(229, 195, 120, 0.25) !important;
-  border-radius: 6px !important;
-  padding: 0.22rem 0.5rem !important;
-  align-self: flex-start !important;
-}
-
-.calc-karat-card.is-selected .karat-card-rate {
-  background: rgba(229, 195, 120, 0.18) !important;
-  border-color: rgba(229, 195, 120, 0.55) !important;
 }
 
 .karat-rate-val {
@@ -7536,35 +7484,45 @@ body {
   font-weight: 900 !important;
   color: #FFFDF9 !important;
   font-variant-numeric: tabular-nums !important;
+  line-height: 1 !important;
 }
 
-.karat-rate-unit {
-  font-size: 0.68rem !important;
+.karat-rate-val small {
+  font-size: 0.65rem !important;
   color: #E5C378 !important;
+  font-weight: 600 !important;
+  margin-left: 0.1rem !important;
+}
+
+.karat-fineness {
+  font-size: 0.62rem !important;
+  color: #A18D74 !important;
   font-weight: 600 !important;
 }
 
-/* Step 2: Weight Console */
+/* Step 2: Weight Console — Integrated Compact */
 .calc-weight-console {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  background: rgba(0, 0, 0, 0.6) !important;
-  border: 1.5px solid rgba(229, 195, 120, 0.35) !important;
-  border-radius: 12px !important;
-  padding: 0.65rem 1rem !important;
-  transition: all 0.2s ease !important;
+  gap: 0.65rem !important;
+  background: rgba(0, 0, 0, 0.55) !important;
+  border: 1px solid rgba(229, 195, 120, 0.3) !important;
+  border-radius: 9px !important;
+  padding: 0.35rem 0.65rem !important;
 }
 
-.calc-weight-console:focus-within {
-  border-color: #E5C378 !important;
-  box-shadow: 0 0 14px rgba(229, 195, 120, 0.28) !important;
+.calc-weight-stepper-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  flex-shrink: 0 !important;
 }
 
 .calc-stepper-btn {
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 8px !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 6px !important;
   background: rgba(229, 195, 120, 0.12) !important;
   border: 1px solid rgba(229, 195, 120, 0.35) !important;
   color: #FFF3D1 !important;
@@ -7579,33 +7537,24 @@ body {
 .calc-stepper-btn:hover {
   background: #E5C378 !important;
   color: #080103 !important;
-  transform: scale(1.04) !important;
-}
-
-.calc-weight-primary-display {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
 }
 
 .calc-weight-numeric-wrap {
   display: flex !important;
   align-items: baseline !important;
-  justify-content: center !important;
-  gap: 0.4rem !important;
+  gap: 0.25rem !important;
 }
 
 .calc-weight-master-input {
   font-family: var(--font-serif-headline), serif !important;
-  font-size: 2.1rem !important;
+  font-size: 1.35rem !important;
   font-weight: 900 !important;
   color: #FFF6D6 !important;
   background: transparent !important;
   border: none !important;
   outline: none !important;
   text-align: center !important;
-  width: 140px !important;
+  width: 65px !important;
   padding: 0 !important;
   margin: 0 !important;
   line-height: 1 !important;
@@ -7613,58 +7562,36 @@ body {
 }
 
 .calc-weight-unit-badge {
-  font-size: 0.82rem !important;
-  font-weight: 800 !important;
-  color: #E5C378 !important;
-  letter-spacing: 0.04em !important;
-}
-
-.calc-weight-conversion-caption {
   font-size: 0.72rem !important;
-  color: #A18D74 !important;
-  font-weight: 600 !important;
-  margin-top: 0.2rem !important;
-}
-
-/* Weight Presets Bar */
-.calc-weight-presets-bar {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.65rem !important;
-  flex-wrap: wrap !important;
-}
-
-.presets-label {
-  font-size: 0.74rem !important;
   font-weight: 700 !important;
-  color: #BFA992 !important;
-  white-space: nowrap !important;
+  color: #E5C378 !important;
 }
 
 .presets-list {
   display: flex !important;
-  gap: 0.45rem !important;
+  gap: 0.3rem !important;
   flex-wrap: wrap !important;
+  justify-content: flex-end !important;
   flex: 1 !important;
 }
 
 .preset-btn {
   background: rgba(255, 255, 255, 0.035) !important;
-  border: 1px solid rgba(229, 195, 120, 0.22) !important;
-  border-radius: 7px !important;
-  padding: 0.28rem 0.65rem !important;
-  font-size: 0.75rem !important;
+  border: 1px solid rgba(229, 195, 120, 0.2) !important;
+  border-radius: 6px !important;
+  padding: 0.2rem 0.45rem !important;
+  font-size: 0.68rem !important;
   color: #D4C5B3 !important;
   cursor: pointer !important;
   transition: all 0.15s ease !important;
   font-weight: 600 !important;
   white-space: nowrap !important;
+  line-height: 1.1 !important;
 }
 
 .preset-btn:hover {
   border-color: #E5C378 !important;
   color: #FFF3D1 !important;
-  background: rgba(229, 195, 120, 0.08) !important;
 }
 
 .preset-btn.active {
@@ -7672,42 +7599,41 @@ body {
   color: #080103 !important;
   font-weight: 800 !important;
   border-color: #FFF3D1 !important;
-  box-shadow: 0 2px 8px rgba(229, 195, 120, 0.35) !important;
 }
 
 /* Step 3: Making Charges */
 .calc-making-live-badge {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 0.45rem !important;
+  gap: 0.35rem !important;
 }
 
 .making-live-percent {
   font-family: var(--font-serif-headline), serif !important;
-  font-size: 1.05rem !important;
+  font-size: 0.96rem !important;
   font-weight: 900 !important;
   color: #FFF3D1 !important;
 }
 
 .making-live-rupees {
-  font-size: 0.74rem !important;
+  font-size: 0.68rem !important;
   font-weight: 700 !important;
   color: #E5C378 !important;
-  background: rgba(229, 195, 120, 0.14) !important;
-  border: 1px solid rgba(229, 195, 120, 0.35) !important;
-  border-radius: 5px !important;
-  padding: 0.12rem 0.45rem !important;
+  background: rgba(229, 195, 120, 0.12) !important;
+  border: 1px solid rgba(229, 195, 120, 0.3) !important;
+  border-radius: 4px !important;
+  padding: 0.08rem 0.35rem !important;
 }
 
 .calc-bespoke-slider-wrap {
   display: flex !important;
   flex-direction: column !important;
-  gap: 0.35rem !important;
+  gap: 0.2rem !important;
 }
 
 .calc-gold-range-slider {
   width: 100% !important;
-  height: 6px !important;
+  height: 4px !important;
   border-radius: 999px !important;
   outline: none !important;
   cursor: pointer !important;
@@ -7718,7 +7644,7 @@ body {
 .calc-slider-scale-labels {
   display: flex !important;
   justify-content: space-between !important;
-  font-size: 0.7rem !important;
+  font-size: 0.64rem !important;
   color: #A18D74 !important;
   font-weight: 600 !important;
 }
@@ -7732,20 +7658,20 @@ body {
 .calc-craft-tiers-grid {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
-  gap: 0.65rem !important;
+  gap: 0.45rem !important;
 }
 
 .calc-craft-tier-card {
   background: rgba(255, 255, 255, 0.025) !important;
   border: 1px solid rgba(229, 195, 120, 0.2) !important;
-  border-radius: 10px !important;
-  padding: 0.75rem 0.8rem !important;
+  border-radius: 8px !important;
+  padding: 0.4rem 0.55rem !important;
   text-align: left !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 0.25rem !important;
+  gap: 0.1rem !important;
 }
 
 .calc-craft-tier-card:hover {
@@ -7756,43 +7682,41 @@ body {
 .calc-craft-tier-card.active {
   background: rgba(229, 195, 120, 0.14) !important;
   border-color: #E5C378 !important;
-  box-shadow: 0 0 12px rgba(229, 195, 120, 0.22) !important;
+  box-shadow: 0 0 10px rgba(229, 195, 120, 0.22) !important;
 }
 
 .craft-tier-header {
   display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
+  align-items: baseline !important;
+  gap: 0.35rem !important;
 }
 
 .craft-tier-rate {
   font-family: var(--font-serif-headline), serif !important;
-  font-size: 1.05rem !important;
+  font-size: 0.88rem !important;
   font-weight: 900 !important;
   color: #FFF3D1 !important;
   line-height: 1 !important;
 }
 
-.craft-tier-tag {
-  font-size: 0.6rem !important;
-  font-weight: 800 !important;
-  color: #E5C378 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.03em !important;
-}
-
 .craft-tier-title {
-  font-size: 0.8rem !important;
+  font-size: 0.72rem !important;
   font-weight: 700 !important;
   color: #FFFDF9 !important;
-  line-height: 1.25 !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 .craft-tier-desc {
-  font-size: 0.68rem !important;
+  font-size: 0.62rem !important;
   color: #A18D74 !important;
   margin: 0 !important;
-  line-height: 1.35 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 /* Right Column: The Royal Showroom Purchase Memo Slip */
@@ -7804,13 +7728,13 @@ body {
 .calc-royal-memo-card {
   background: radial-gradient(circle at 50% 0%, rgba(32, 7, 16, 0.98) 0%, rgba(10, 2, 5, 0.98) 100%) !important;
   border: 1.5px solid rgba(229, 195, 120, 0.38) !important;
-  border-radius: 18px !important;
-  padding: 1.65rem 1.75rem !important;
+  border-radius: 14px !important;
+  padding: 0.85rem 1.05rem !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  gap: 1.05rem !important;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9) !important;
+  gap: 0.6rem !important;
+  box-shadow: 0 14px 45px rgba(0, 0, 0, 0.9) !important;
   height: 100% !important;
 }
 
@@ -7818,27 +7742,27 @@ body {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
-  padding-bottom: 0.75rem !important;
-  border-bottom: 1px solid rgba(229, 195, 120, 0.22) !important;
+  padding-bottom: 0.45rem !important;
+  border-bottom: 1px solid rgba(229, 195, 120, 0.2) !important;
 }
 
 .calc-memo-brand {
   display: flex !important;
   align-items: center !important;
-  gap: 0.65rem !important;
+  gap: 0.5rem !important;
 }
 
 .calc-memo-emblem {
-  width: 36px !important;
-  height: 36px !important;
+  width: 28px !important;
+  height: 28px !important;
   border-radius: 50% !important;
   background: linear-gradient(135deg, rgba(229, 195, 120, 0.35) 0%, rgba(197, 157, 63, 0.15) 100%) !important;
-  border: 1.5px solid #E5C378 !important;
+  border: 1.2px solid #E5C378 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   font-family: var(--font-serif-headline), serif !important;
-  font-size: 0.95rem !important;
+  font-size: 0.8rem !important;
   font-weight: 900 !important;
   color: #FFF6D6 !important;
 }
@@ -7850,15 +7774,15 @@ body {
 
 .memo-brand-name {
   font-family: var(--font-serif-headline), serif !important;
-  font-size: 0.94rem !important;
+  font-size: 0.84rem !important;
   font-weight: 800 !important;
-  letter-spacing: 0.05em !important;
+  letter-spacing: 0.04em !important;
   color: #FFFDF9 !important;
-  line-height: 1.15 !important;
+  line-height: 1.1 !important;
 }
 
 .memo-brand-location {
-  font-size: 0.68rem !important;
+  font-size: 0.62rem !important;
   color: #E5C378 !important;
   font-weight: 600 !important;
 }
@@ -7866,8 +7790,8 @@ body {
 .calc-memo-status-badge {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 0.35rem !important;
-  font-size: 0.68rem !important;
+  gap: 0.3rem !important;
+  font-size: 0.64rem !important;
   font-weight: 800 !important;
   color: #4ADE80 !important;
   letter-spacing: 0.04em !important;
@@ -7875,8 +7799,8 @@ body {
 }
 
 .status-indicator-dot {
-  width: 6px !important;
-  height: 6px !important;
+  width: 5px !important;
+  height: 5px !important;
   border-radius: 50% !important;
   background: #22C55E !important;
   box-shadow: 0 0 6px #22C55E !important;
@@ -7888,11 +7812,14 @@ body {
   justify-content: space-between !important;
   background: rgba(229, 195, 120, 0.08) !important;
   border: 1px solid rgba(229, 195, 120, 0.28) !important;
-  border-radius: 8px !important;
-  padding: 0.45rem 0.85rem !important;
-  font-size: 0.78rem !important;
+  border-radius: 6px !important;
+  padding: 0.25rem 0.65rem !important;
+  font-size: 0.72rem !important;
   font-weight: 700 !important;
   color: #FFF6D6 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 .spec-sep {
@@ -7904,43 +7831,30 @@ body {
 .calc-memo-ledger {
   display: flex !important;
   flex-direction: column !important;
-  gap: 0.65rem !important;
+  gap: 0.35rem !important;
 }
 
 .ledger-entry {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
-  padding-bottom: 0.45rem !important;
+  padding-bottom: 0.25rem !important;
   border-bottom: 1px dashed rgba(229, 195, 120, 0.15) !important;
 }
 
 .ledger-entry.subtotal-entry {
-  border-bottom: 1.5px solid rgba(229, 195, 120, 0.32) !important;
-  padding-bottom: 0.55rem !important;
-  margin: 0.1rem 0 !important;
-}
-
-.ledger-desc {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0.05rem !important;
+  border-bottom: 1px solid rgba(229, 195, 120, 0.3) !important;
+  padding-bottom: 0.3rem !important;
 }
 
 .ledger-title {
-  font-size: 0.82rem !important;
+  font-size: 0.76rem !important;
   color: #FFFDF9 !important;
-  font-weight: 700 !important;
-}
-
-.ledger-formula {
-  font-size: 0.68rem !important;
-  color: #A18D74 !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
 }
 
 .ledger-amount {
-  font-size: 0.94rem !important;
+  font-size: 0.86rem !important;
   color: #FFFDF9 !important;
   font-weight: 800 !important;
   text-align: right !important;
@@ -7953,41 +7867,20 @@ body {
 
 .ledger-amount.highlight {
   color: #E5C378 !important;
-  font-size: 1.02rem !important;
-}
-
-/* Filigree line */
-.calc-memo-filigree-line {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.6rem !important;
-  margin: 0 !important;
-}
-
-.line-segment {
-  flex: 1 !important;
-  height: 1px !important;
-  background: linear-gradient(90deg, transparent, rgba(229, 195, 120, 0.45), transparent) !important;
-}
-
-.filigree-emblem {
-  font-size: 0.62rem !important;
-  color: #E5C378 !important;
-  letter-spacing: 0.15em !important;
-  font-weight: 800 !important;
+  font-size: 0.92rem !important;
 }
 
 /* Grand Total Box */
 .calc-grand-total-showcase {
   background: radial-gradient(circle at 50% 50%, rgba(229, 195, 120, 0.18) 0%, rgba(26, 4, 11, 0.95) 100%) !important;
   border: 1.5px solid rgba(229, 195, 120, 0.5) !important;
-  border-radius: 12px !important;
-  padding: 0.9rem 1.15rem !important;
+  border-radius: 9px !important;
+  padding: 0.45rem 0.75rem !important;
   text-align: center !important;
-  box-shadow: inset 0 0 16px rgba(229, 195, 120, 0.1) !important;
+  box-shadow: inset 0 0 12px rgba(229, 195, 120, 0.1) !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 0.25rem !important;
+  gap: 0.1rem !important;
 }
 
 .grand-total-label-wrap {
@@ -7997,7 +7890,7 @@ body {
 }
 
 .grand-total-label {
-  font-size: 0.68rem !important;
+  font-size: 0.62rem !important;
   text-transform: uppercase !important;
   letter-spacing: 0.08em !important;
   color: #E5C378 !important;
@@ -8005,7 +7898,7 @@ body {
 }
 
 .grand-total-tag {
-  font-size: 0.62rem !important;
+  font-size: 0.58rem !important;
   color: #FFF3D1 !important;
   opacity: 0.8 !important;
 }
@@ -8014,62 +7907,62 @@ body {
   display: flex !important;
   align-items: baseline !important;
   justify-content: center !important;
-  gap: 0.35rem !important;
-  margin: 0.15rem 0 !important;
+  gap: 0.25rem !important;
+  margin: 0 !important;
 }
 
 .currency-symbol {
   font-family: var(--font-serif-headline), serif !important;
-  font-size: 1.5rem !important;
+  font-size: 1.25rem !important;
   font-weight: 800 !important;
   color: #F5D77F !important;
 }
 
 .amount-digits {
   font-family: var(--font-serif-headline), serif !important;
-  font-size: clamp(2.1rem, 3.2vw, 2.7rem) !important;
+  font-size: clamp(1.6rem, 2.2vw, 1.95rem) !important;
   font-weight: 900 !important;
   color: #FFF6D6 !important;
-  text-shadow: 0 0 20px rgba(229, 195, 120, 0.6) !important;
+  text-shadow: 0 0 14px rgba(229, 195, 120, 0.55) !important;
   line-height: 1 !important;
   font-variant-numeric: tabular-nums !important;
 }
 
 .grand-total-guarantee-note {
-  font-size: 0.68rem !important;
+  font-size: 0.62rem !important;
   color: #BFA992 !important;
-  line-height: 1.35 !important;
+  line-height: 1.2 !important;
 }
 
 /* Action CTAs */
 .calc-memo-actions {
   display: flex !important;
   flex-direction: column !important;
-  gap: 0.55rem !important;
+  gap: 0.4rem !important;
 }
 
 .btn-royal-whatsapp-lock {
   background: linear-gradient(135deg, #106236 0%, #198754 50%, #137343 100%) !important;
   color: #FFFFFF !important;
   border: 1.5px solid #28A745 !important;
-  border-radius: 10px !important;
-  padding: 0.82rem 1.25rem !important;
-  font-size: 0.94rem !important;
+  border-radius: 8px !important;
+  padding: 0.52rem 1rem !important;
+  font-size: 0.84rem !important;
   font-weight: 800 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 0.55rem !important;
+  gap: 0.45rem !important;
   cursor: pointer !important;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  box-shadow: 0 6px 20px rgba(25, 135, 84, 0.4) !important;
+  box-shadow: 0 4px 14px rgba(25, 135, 84, 0.4) !important;
   width: 100% !important;
 }
 
 .btn-royal-whatsapp-lock:hover {
   background: linear-gradient(135deg, #137340 0%, #20A064 50%, #16824D 100%) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 24px rgba(25, 135, 84, 0.6) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(25, 135, 84, 0.6) !important;
 }
 
 .whatsapp-icon {
@@ -8077,23 +7970,24 @@ body {
 }
 
 .calc-secondary-action-row {
-  display: grid !important;
-  grid-template-columns: 1fr auto !important;
-  gap: 0.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.4rem !important;
 }
 
 .btn-memo-copy {
   background: rgba(255, 255, 255, 0.04) !important;
-  border: 1px solid rgba(229, 195, 120, 0.3) !important;
-  border-radius: 8px !important;
-  padding: 0.5rem 0.85rem !important;
-  font-size: 0.78rem !important;
+  border: 1px solid rgba(229, 195, 120, 0.25) !important;
+  border-radius: 6px !important;
+  padding: 0.25rem 0.55rem !important;
+  font-size: 0.68rem !important;
   font-weight: 700 !important;
   color: #FFFDF9 !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 0.45rem !important;
+  gap: 0.35rem !important;
   cursor: pointer !important;
   transition: all 0.15s ease !important;
 }
@@ -8107,15 +8001,15 @@ body {
 .btn-memo-reset {
   background: transparent !important;
   border: 1px solid rgba(229, 195, 120, 0.2) !important;
-  border-radius: 8px !important;
-  padding: 0.5rem 0.85rem !important;
-  font-size: 0.78rem !important;
+  border-radius: 6px !important;
+  padding: 0.25rem 0.5rem !important;
+  font-size: 0.68rem !important;
   font-weight: 600 !important;
   color: #BFA992 !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 0.35rem !important;
+  gap: 0.25rem !important;
   cursor: pointer !important;
   transition: all 0.15s ease !important;
 }
@@ -8125,66 +8019,47 @@ body {
   color: #FFF3D1 !important;
 }
 
-/* Footer Trust Badges */
-.calc-memo-footer-trust {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  flex-wrap: wrap !important;
-  gap: 0.45rem !important;
-  font-size: 0.68rem !important;
-  color: #A18D74 !important;
-  font-weight: 600 !important;
-  padding-top: 0.35rem !important;
-}
-
-.trust-item {
+.calc-quick-hallmark-tag {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 0.3rem !important;
-}
-
-.trust-sep {
-  color: #E5C378 !important;
-  opacity: 0.6 !important;
+  gap: 0.25rem !important;
+  font-size: 0.64rem !important;
+  color: #A18D74 !important;
+  font-weight: 600 !important;
 }
 
 /* Responsive Rules for Luxury Calculator */
-@media (max-width: 992px) {
+@media (max-width: 900px) {
   .calc-bespoke-pavilion {
     grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
+    gap: 1.15rem !important;
   }
 }
 
 @media (max-width: 640px) {
   .calc-section {
-    padding: 2.25rem 0 2.5rem !important;
+    padding: 1.25rem 0 1.5rem !important;
+  }
+
+  .calc-viewport-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
   }
 
   .calc-studio-col,
   .calc-royal-memo-card {
-    padding: 1.25rem 1.15rem !important;
-    border-radius: 14px !important;
+    padding: 0.85rem !important;
+    border-radius: 12px !important;
   }
 
   .calc-karat-grid {
-    grid-template-columns: 1fr !important;
-    gap: 0.65rem !important;
-  }
-
-  .calc-karat-card {
-    min-height: auto !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.35rem !important;
   }
 
   .calc-craft-tiers-grid {
     grid-template-columns: 1fr !important;
-    gap: 0.55rem !important;
-  }
-
-  .calc-weight-master-input {
-    font-size: 1.75rem !important;
-    width: 110px !important;
+    gap: 0.35rem !important;
   }
 }
 
