@@ -1,10 +1,11 @@
 import React from 'react';
 import { useJewellery } from '../context/JewelleryContext';
 import { STORE_INFO } from '../data/storeInfo';
-import { ShieldCheck, Phone, MapPin, Lock, ExternalLink } from 'lucide-react';
+import { ShieldCheck, Phone, MapPin, Lock } from 'lucide-react';
 
 const Footer = () => {
-  const { setIsDealerModalOpen, setActiveCategory } = useJewellery();
+  const { setIsDealerModalOpen, setActiveCategory, storeInfo } = useJewellery();
+  const info = storeInfo || STORE_INFO;
 
   return (
     <footer className="site-footer">
@@ -21,12 +22,12 @@ const Footer = () => {
                 />
               </div>
               <div className="brand-title-box">
-                <span className="brand-name">{STORE_INFO.name}</span>
+                <span className="brand-name">{info.name}</span>
                 <span className="brand-sub">SANGMOHAL • STATION RD • MIRZAPUR</span>
               </div>
             </div>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.65', marginBottom: '1.25rem' }}>
-              {STORE_INFO.officialMerchantBio}
+              {info.officialMerchantBio}
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', color: 'var(--brand-plum)', fontSize: '0.82rem', fontWeight: 700 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -34,7 +35,7 @@ const Footer = () => {
                 <span>100% BIS 916 Hallmark (Govt. Laser HUID)</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.78rem' }}>
-                <span>GSTIN: <strong>{STORE_INFO.gstin}</strong></span>
+                <span>GSTIN: <strong>{info.gstin}</strong></span>
               </div>
             </div>
           </div>
@@ -62,16 +63,16 @@ const Footer = () => {
               <li><a href="#trust">Karatmeter Purity Guarantee</a></li>
               <li>
                 <a
-                  href={STORE_INFO.whatsappCatalogUrl}
+                  href={info.whatsappCatalogUrl}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  WhatsApp Catalog ({STORE_INFO.whatsappDisplay})
+                  WhatsApp Catalog ({info.whatsappDisplay})
                 </a>
               </li>
               <li>
                 <a
-                  href={STORE_INFO.googleMapsUrl}
+                  href={info.googleMapsUrl}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -87,42 +88,42 @@ const Footer = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <MapPin size={16} style={{ color: 'var(--brand-plum)', flexShrink: 0 }} />
-                <span>{STORE_INFO.fullAddress}</span>
+                <span>{info.fullAddress}</span>
               </div>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <Phone size={16} style={{ color: 'var(--brand-plum)', flexShrink: 0 }} />
                 <div>
-                  <a href={`tel:${STORE_INFO.phonePrimary}`} style={{ color: 'inherit', display: 'block' }}>
-                    {STORE_INFO.phonePrimaryDisplay}
+                  <a href={`tel:${info.phonePrimary}`} style={{ color: 'inherit', display: 'block' }}>
+                    {info.phonePrimaryDisplay}
                   </a>
-                  <a href={`tel:${STORE_INFO.phoneSecondary}`} style={{ color: 'inherit', display: 'block' }}>
-                    {STORE_INFO.phoneSecondaryDisplay}
+                  <a href={`tel:${info.phoneSecondary}`} style={{ color: 'inherit', display: 'block' }}>
+                    {info.phoneSecondaryDisplay}
                   </a>
                 </div>
               </div>
               <div style={{ color: 'var(--text-dim)', fontSize: '0.78rem', lineHeight: '1.5' }}>
-                Visiting Hours: {STORE_INFO.hours.regular}<br />
-                Sunday: {STORE_INFO.hours.sunday}
+                Visiting Hours: {info.hours?.regular || STORE_INFO.hours.regular}<br />
+                Sunday: {info.hours?.sunday || STORE_INFO.hours.sunday}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar with Discreet Dealer Access */}
+        {/* Bottom Bar with Discreet Admin Passcode Access */}
         <div className="footer-bottom">
           <div>
-            © {new Date().getFullYear()} {STORE_INFO.name} ({STORE_INFO.hindiName}). GSTIN: {STORE_INFO.gstin}. Sangmohal, Mirzapur. All Rights Reserved.
+            © {new Date().getFullYear()} {info.name} ({info.hindiName}). GSTIN: {info.gstin}. Sangmohal, Mirzapur. All Rights Reserved.
           </div>
 
-          {/* Discreet Dealer Portal Trigger in Footer */}
+          {/* Showroom Master Admin Trigger with Passcode Access */}
           <button
             type="button"
             className="footer-dealer-btn"
             onClick={() => setIsDealerModalOpen(true)}
-            title="Showroom Staff & Dealer Inventory Portal"
+            title="Showroom Master Admin & CMS Portal (Passcode: 1994)"
           >
             <Lock size={13} />
-            <span>Dealer & Rate Management</span>
+            <span>Showroom Admin &amp; CMS (Passcode)</span>
           </button>
         </div>
       </div>

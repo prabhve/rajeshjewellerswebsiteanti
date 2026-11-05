@@ -29,14 +29,15 @@ import {
 } from 'lucide-react';
 
 const ShowroomTour = () => {
-  const { setIsVipModalOpen, addToast } = useJewellery();
+  const { setIsVipModalOpen, addToast, storeInfo } = useJewellery();
+  const info = storeInfo || STORE_INFO;
   const [activeTab, setActiveTab] = useState('photos'); // 'photos' | 'video'
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [copiedField, setCopiedField] = useState(null);
 
-  const photos = STORE_INFO.photos;
+  const photos = info.photos || STORE_INFO.photos;
   const activePhoto = photos[selectedPhotoIndex] || photos[0];
 
   const handlePrevPhoto = (e) => {
@@ -72,16 +73,16 @@ const ShowroomTour = () => {
           </div>
 
           <h2 className="showroom-grand-title">
-            {STORE_INFO.hindiName}
+            {info.hindiName}
             <span className="showroom-title-sub">Rajesh Jewellers Flagship Showroom</span>
           </h2>
 
           <p className="showroom-proprietor-subtitle">
-            Proprietor: <strong>{STORE_INFO.proprietor}</strong> • Landmark Showroom Near Jila Karagar
+            Proprietor: <strong>{info.proprietor}</strong> • Landmark Showroom Near Jila Karagar
           </p>
 
           <p className="showroom-official-bio">
-            "{STORE_INFO.officialMerchantBio}"
+            "{info.officialMerchantBio}"
           </p>
 
           {/* 4 Pillars Trust Seals Bar */}
@@ -98,10 +99,10 @@ const ShowroomTour = () => {
               <Award size={18} className="text-gold" />
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <strong>GSTIN: {STORE_INFO.gstin}</strong>
+                  <strong>GSTIN: {info.gstin}</strong>
                   <button
                     type="button"
-                    onClick={() => handleCopyText(STORE_INFO.gstin, 'GSTIN')}
+                    onClick={() => handleCopyText(info.gstin, 'GSTIN')}
                     className="trust-copy-btn"
                     title="Copy GSTIN"
                   >
@@ -115,8 +116,8 @@ const ShowroomTour = () => {
             <div className="trust-seal-item">
               <Star size={18} fill="#F59E0B" color="#F59E0B" />
               <div>
-                <strong>{STORE_INFO.googleRating}★ Google Verified</strong>
-                <span>{STORE_INFO.googleReviewCount} Genuine Local Reviews</span>
+                <strong>{info.googleRating}★ Google Verified</strong>
+                <span>{info.googleReviewCount} Genuine Local Reviews</span>
               </div>
             </div>
 
@@ -177,6 +178,8 @@ const ShowroomTour = () => {
                     alt={activePhoto.title}
                     key={activePhoto.id}
                     className="gallery-stage-image"
+                    loading="lazy"
+                    decoding="async"
                     style={{ objectPosition: activePhoto.objectPosition || 'center center' }}
                   />
 
@@ -284,7 +287,7 @@ const ShowroomTour = () => {
                       className={`gallery-thumb-chip ${selectedPhotoIndex === idx ? 'active' : ''}`}
                       title={`${photo.title} (${photo.badge})`}
                     >
-                      <img src={photo.image} alt={photo.title} />
+                      <img src={photo.image} alt={photo.title} loading="lazy" decoding="async" />
                       <span className="thumb-chip-label">{shortLabels[idx] || `View 0${idx + 1}`}</span>
                     </button>
                   );
@@ -358,7 +361,7 @@ const ShowroomTour = () => {
                     <button
                       type="button"
                       className="flow-copy-action"
-                      onClick={() => handleCopyText(STORE_INFO.fullAddress, 'Address')}
+                      onClick={() => handleCopyText(info.fullAddress, 'Address')}
                       title="Copy Showroom Address"
                     >
                       {copiedField === 'Address' ? <Check size={12} color="#10B981" /> : <Copy size={12} />}
@@ -366,11 +369,11 @@ const ShowroomTour = () => {
                     </button>
                   </div>
                   <p className="flow-address-text">
-                    {STORE_INFO.fullAddress}
+                    {info.fullAddress}
                   </p>
                   <div className="flow-landmark-stripe">
                     <span className="landmark-tag-badge">Landmark:</span>
-                    <span>Opposite / Near Jila Karagar (District Jail), Station Road, Sangmohal, Mirzapur (231001)</span>
+                    <span>{info.landmark || 'Opposite / Near Jila Karagar (District Jail), Station Road, Sangmohal, Mirzapur (231001)'}</span>
                   </div>
                 </div>
               </div>
@@ -386,11 +389,11 @@ const ShowroomTour = () => {
                 <div className="flow-timings-grid">
                   <div className="timing-tile">
                     <span className="tile-days">Mon – Sat (Regular)</span>
-                    <strong className="tile-hours">10:00 AM – 8:00 PM</strong>
+                    <strong className="tile-hours">{info.hours?.regular || STORE_INFO.hours.regular}</strong>
                   </div>
                   <div className="timing-tile sunday">
                     <span className="tile-days">Sunday Special</span>
-                    <strong className="tile-hours">10:30 AM – 4:30 PM</strong>
+                    <strong className="tile-hours">{info.hours?.sunday || STORE_INFO.hours.sunday}</strong>
                   </div>
                 </div>
               </div>
@@ -406,7 +409,7 @@ const ShowroomTour = () => {
 
                 {/* WhatsApp Video Showcase Banner */}
                 <a
-                  href={STORE_INFO.whatsappCatalogUrl}
+                  href={info.whatsappCatalogUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="concierge-wa-banner"
@@ -419,25 +422,25 @@ const ShowroomTour = () => {
                       <span className="wa-banner-kicker">WhatsApp Video Shopping</span>
                       <span className="wa-banner-action">Chat Now ➔</span>
                     </div>
-                    <strong className="wa-banner-phone">{STORE_INFO.whatsappDisplay}</strong>
+                    <strong className="wa-banner-phone">{info.whatsappDisplay}</strong>
                     <span className="wa-banner-sub">1-on-1 video call to inspect hallmarked designs live from home</span>
                   </div>
                 </a>
 
                 {/* Direct Calling Line Tiles */}
                 <div className="calling-tiles-row">
-                  <a href={`tel:${STORE_INFO.phonePrimary}`} className="calling-tile-link">
+                  <a href={`tel:${info.phonePrimary}`} className="calling-tile-link">
                     <span className="tile-dept">Main Counter</span>
-                    <strong className="tile-num">📞 {STORE_INFO.phonePrimaryDisplay}</strong>
+                    <strong className="tile-num">📞 {info.phonePrimaryDisplay}</strong>
                   </a>
-                  <a href={`tel:${STORE_INFO.phoneSecondary}`} className="calling-tile-link">
+                  <a href={`tel:${info.phoneSecondary}`} className="calling-tile-link">
                     <span className="tile-dept">Store Manager</span>
-                    <strong className="tile-num">📞 {STORE_INFO.phoneSecondaryDisplay}</strong>
+                    <strong className="tile-num">📞 {info.phoneSecondaryDisplay}</strong>
                   </a>
-                  {STORE_INFO.phoneTertiary && (
-                    <a href={`tel:${STORE_INFO.phoneTertiary}`} className="calling-tile-link">
+                  {info.phoneTertiary && (
+                    <a href={`tel:${info.phoneTertiary}`} className="calling-tile-link">
                       <span className="tile-dept">Inquiries Desk</span>
-                      <strong className="tile-num">📞 {STORE_INFO.phoneTertiaryDisplay}</strong>
+                      <strong className="tile-num">📞 {info.phoneTertiaryDisplay}</strong>
                     </a>
                   )}
                 </div>

@@ -10,8 +10,7 @@ import {
   Sparkles,
   MessageCircle,
   Video,
-  Store,
-  ShieldCheck
+  Store
 } from 'lucide-react';
 
 const VipBookingModal = () => {

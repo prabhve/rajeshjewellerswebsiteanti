@@ -1,4 +1,4 @@
-import React, { useState, useId } from 'react';
+import React, { useState, useId, useMemo } from 'react';
 import { useJewellery } from '../context/JewelleryContext';
 import { CATEGORY_CHIPS, SHAPE_FILTERS, OCCASION_FILTERS } from '../data/initialData';
 import { STORE_INFO } from '../data/storeInfo';
@@ -204,50 +204,40 @@ const ProductsCatalog = () => {
     isPriceRangeNarrowed ||
     activeBudget !== 'all';
 
-  // Comprehensive Multi-Tier Filter Logic
-  let displayed = products.filter((p) => {
-    // 1. Category Filter
-    if (activeCategory !== 'all' && p.category !== activeCategory) {
-      return false;
-    }
+  // Comprehensive Multi-Tier Filter & Sort Logic with useMemo
+  const displayed = useMemo(() => {
+    // 1. Pre-map with calculated prices and numeric weights once per product
+    const mapped = products.map((p) => {
+      const priceObj = calculatePrice(p);
+      const wtMatch = (p.netGoldWeight || p.grossWeight || '10').match(/[\d.]+/);
+      const wt = wtMatch ? parseFloat(wtMatch[0]) : 10;
+      return {
+        product: p,
+        totalPrice: priceObj.totalPrice,
+        weight: wt
+      };
+    });
 
-    // 2. Diamond / Gemstone Shape Filter
-    if (activeShape !== 'all') {
-      if (p.shape !== activeShape) {
-        return false;
-      }
-    }
+    // 2. Filter matching criteria
+    const filtered = mapped.filter(({ product, totalPrice }) => {
+      if (activeCategory !== 'all' && product.category !== activeCategory) return false;
+      if (activeShape !== 'all' && product.shape !== activeShape) return false;
+      if (activeOccasion !== 'all' && product.occasion !== activeOccasion) return false;
+      if (totalPrice < priceRange.min || totalPrice > priceRange.max) return false;
+      return true;
+    });
 
-    // 3. Occasion Filter
-    if (activeOccasion !== 'all') {
-      if (p.occasion !== activeOccasion) {
-        return false;
-      }
-    }
+    // 3. Sort using pre-computed values
+    filtered.sort((a, b) => {
+      if (sortBy === 'price-low') return a.totalPrice - b.totalPrice;
+      if (sortBy === 'price-high') return b.totalPrice - a.totalPrice;
+      if (sortBy === 'weight-heavy' || sortBy === 'weight') return b.weight - a.weight;
+      if (sortBy === 'weight-light') return a.weight - b.weight;
+      return 0; // featured default
+    });
 
-    // 4. Range-Based Price Filter (Exact Computed Live Price in INR)
-    const computedPrice = calculatePrice(p).totalPrice;
-    if (computedPrice < priceRange.min || computedPrice > priceRange.max) {
-      return false;
-    }
-
-    return true;
-  });
-
-  // Sort products
-  displayed.sort((a, b) => {
-    const priceA = calculatePrice(a).totalPrice;
-    const priceB = calculatePrice(b).totalPrice;
-    const wtA = parseFloat((a.netGoldWeight || a.grossWeight || '0').match(/[\d.]+/)?.[0] || '0');
-    const wtB = parseFloat((b.netGoldWeight || b.grossWeight || '0').match(/[\d.]+/)?.[0] || '0');
-
-    if (sortBy === 'price-low') return priceA - priceB;
-    if (sortBy === 'price-high') return priceB - priceA;
-    if (sortBy === 'weight-heavy') return wtB - wtA;
-    if (sortBy === 'weight-light') return wtA - wtB;
-    if (sortBy === 'weight') return wtB - wtA;
-    return 0; // featured default
-  });
+    return filtered.map((item) => item.product);
+  }, [products, activeCategory, activeShape, activeOccasion, priceRange, sortBy, calculatePrice]);
 
   return (
     <section className="catalog-section" id="catalog-section">

@@ -23,6 +23,7 @@ const ProductCard = ({ product }) => {
           src={product.image}
           alt={product.name}
           loading="lazy"
+          decoding="async"
           onClick={() => setQuickViewProduct(product)}
           style={{ cursor: 'pointer' }}
           onError={(e) => {
@@ -149,4 +150,4 @@ const ProductCard = ({ product }) => {
   );
 };
 
-export default ProductCard;
+export default React.memo(ProductCard);

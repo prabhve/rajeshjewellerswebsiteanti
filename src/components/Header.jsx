@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useJewellery } from '../context/JewelleryContext';
-import { Search, Heart, ShoppingBag, Calendar, Sparkles, X } from 'lucide-react';
+import { Search, Heart, ShoppingBag, Calendar, X } from 'lucide-react';
 
 const Header = () => {
   const {
@@ -21,16 +21,20 @@ const Header = () => {
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
   const wishlistCount = wishlist.length;
 
-  // Filter products based on search
-  const filteredProducts = searchTerm.trim()
-    ? products.filter(
+  // Filter products based on search with useMemo & limit to 8 for instant response
+  const filteredProducts = useMemo(() => {
+    const term = searchTerm.trim().toLowerCase();
+    if (!term) return [];
+    return products
+      .filter(
         (p) =>
-          p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          p.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          (p.hindiName && p.hindiName.includes(searchTerm)) ||
-          p.purity.toLowerCase().includes(searchTerm.toLowerCase())
+          p.name?.toLowerCase().includes(term) ||
+          p.category?.toLowerCase().includes(term) ||
+          (p.hindiName && p.hindiName.includes(term)) ||
+          p.purity?.toLowerCase().includes(term)
       )
-    : [];
+      .slice(0, 8);
+  }, [searchTerm, products]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {

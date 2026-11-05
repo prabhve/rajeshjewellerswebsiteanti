@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useJewellery } from '../context/JewelleryContext';
-import { X, Sparkles, ArrowRight, RotateCcw, Check, CheckCircle2 } from 'lucide-react';
+import { X, Sparkles, ArrowRight, RotateCcw, Check } from 'lucide-react';
 
 const RECIPIENTS = [
   { id: 'partner', label: 'Wife / Partner', sub: 'Romantic & Timeless', icon: '👰' },

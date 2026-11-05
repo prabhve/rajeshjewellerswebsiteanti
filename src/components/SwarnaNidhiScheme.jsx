@@ -4,7 +4,8 @@ import { STORE_INFO } from '../data/storeInfo';
 import { Gift, MessageCircle } from 'lucide-react';
 
 const SwarnaNidhiScheme = () => {
-  const { liveRates } = useJewellery();
+  const { liveRates, storeInfo } = useJewellery();
+  const info = storeInfo || STORE_INFO;
   const [monthlyAmount, setMonthlyAmount] = useState(5000);
 
   const customerPaid = monthlyAmount * 11;
@@ -12,8 +13,8 @@ const SwarnaNidhiScheme = () => {
   const totalPurchaseValue = customerPaid + showroomBonus;
 
   const handleEnrollScheme = () => {
-    const message = `*👑 RAJESH JEWELLERS (${STORE_INFO.hindiName}) - SWARNA NIDHI (11+1) ENROLLMENT*\n` +
-      `📍 Sangmohal, Station Rd, Mirzapur (GSTIN: ${STORE_INFO.gstin})\n` +
+    const message = `*👑 RAJESH JEWELLERS (${info.hindiName}) - SWARNA NIDHI (11+1) ENROLLMENT*\n` +
+      `📍 Sangmohal, Station Rd, Mirzapur (GSTIN: ${info.gstin})\n` +
       `───────────────────────────────\n` +
       `Namaste, I want to enroll in the Swarna Nidhi 11+1 Gold Scheme:\n` +
       `• Monthly Installment: ₹${monthlyAmount.toLocaleString('en-IN')}\n` +
@@ -22,7 +23,7 @@ const SwarnaNidhiScheme = () => {
       `• Total Jewellery Shopping Value: ₹${totalPurchaseValue.toLocaleString('en-IN')}\n\n` +
       `Please share the enrollment form and digital receipt details for Sangmohal showroom visit.`;
 
-    const cleanPhone = STORE_INFO.whatsapp.replace(/[^0-9]/g, '');
+    const cleanPhone = (info.whatsapp || '919161123840').replace(/[^0-9]/g, '');
     window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`, '_blank');
   };
 

@@ -1,5 +1,4 @@
-// Rajesh Jewellers Mirzapur App
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { JewelleryProvider } from './context/JewelleryContext';
 import TopBullionBar from './components/TopBullionBar';
 import Header from './components/Header';
@@ -15,14 +14,16 @@ import TrustPillars from './components/TrustPillars';
 import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
 import WishlistDrawer from './components/WishlistDrawer';
-import QuickViewModal from './components/QuickViewModal';
-import VipBookingModal from './components/VipBookingModal';
-import GiftFinderModal from './components/GiftFinderModal';
-import DealerPortalModal from './components/DealerPortalModal';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import MobileBottomNav from './components/MobileBottomNav';
 import ToastContainer from './components/ToastContainer';
 import { Analytics } from '@vercel/analytics/react';
+
+// Lazy-load heavy overlay dialogs on demand to dramatically reduce initial bundle size & speed up FCP/LCP
+const QuickViewModal = lazy(() => import('./components/QuickViewModal'));
+const VipBookingModal = lazy(() => import('./components/VipBookingModal'));
+const GiftFinderModal = lazy(() => import('./components/GiftFinderModal'));
+const DealerPortalModal = lazy(() => import('./components/DealerPortalModal'));
 
 function App() {
   return (
@@ -70,10 +71,12 @@ function App() {
         {/* Interactive Drawers & Overlays */}
         <CartDrawer />
         <WishlistDrawer />
-        <QuickViewModal />
-        <VipBookingModal />
-        <GiftFinderModal />
-        <DealerPortalModal />
+        <Suspense fallback={null}>
+          <QuickViewModal />
+          <VipBookingModal />
+          <GiftFinderModal />
+          <DealerPortalModal />
+        </Suspense>
 
         {/* Floating Utilities */}
         <FloatingWhatsApp />

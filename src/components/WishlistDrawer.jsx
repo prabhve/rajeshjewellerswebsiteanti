@@ -11,8 +11,7 @@ import {
   Share2,
   Sparkles,
   ShieldCheck,
-  Eye,
-  Check
+  Eye
 } from 'lucide-react';
 
 const WishlistDrawer = () => {

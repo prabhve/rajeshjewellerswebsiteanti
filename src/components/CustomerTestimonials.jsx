@@ -1,8 +1,13 @@
 import React from 'react';
+import { useJewellery } from '../context/JewelleryContext';
 import { STORE_INFO } from '../data/storeInfo';
 import { Star, ShieldCheck, Heart, Sparkles, Quote, ExternalLink } from 'lucide-react';
 
 const CustomerTestimonials = () => {
+  const { storeInfo } = useJewellery();
+  const info = storeInfo || STORE_INFO;
+  const reviews = info.googleReviews || STORE_INFO.googleReviews;
+
   return (
     <section className="testimonials-section" id="reviews-section">
       <div className="container">
@@ -24,15 +29,15 @@ const CustomerTestimonials = () => {
                 <Star key={i} size={15} fill="#F59E0B" color="#F59E0B" />
               ))}
             </div>
-            <span className="rating-score">{STORE_INFO.googleRating} / 5.0</span>
+            <span className="rating-score">{info.googleRating} / 5.0</span>
             <span className="rating-divider">•</span>
-            <span className="rating-sub">Google Verified Mirzapur Showroom ({STORE_INFO.googleReviewCount} Reviews)</span>
+            <span className="rating-sub">Google Verified Mirzapur Showroom ({info.googleReviewCount} Reviews)</span>
           </div>
         </div>
 
         {/* Real Testimonial Cards from Google Maps */}
         <div className="testimonials-grid">
-          {STORE_INFO.googleReviews.map((review) => (
+          {reviews.map((review) => (
             <div key={review.id} className="testimonial-card">
               <div className="testimonial-quote-icon">
                 <Quote size={28} />

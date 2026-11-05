@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import { DEFAULT_RATES, DEFAULT_CATALOG } from '../data/initialData';
 import { STORE_INFO } from '../data/storeInfo';
 
@@ -28,39 +28,25 @@ export const JewelleryProvider = ({ children }) => {
 
   const [isTickActive, setIsTickActive] = useState(true);
 
-  // Auto-Update Real-Time Live Bullion Market Ticker every 7 seconds
+  // Smooth Bullion Rate Auto-Ticker Simulation (20s gentle interval to prevent lag)
   useEffect(() => {
     if (!isTickActive) return;
 
     const interval = setInterval(() => {
       setLiveRates((prev) => {
-        // Micro market fluctuation (-₹4 to +₹4 per gram = -₹40 to +₹40 per 10g)
-        const delta24k = Math.floor((Math.random() - 0.47) * 9);
+        const delta24k = Math.floor((Math.random() - 0.47) * 8);
         const current24k = prev.gold24k || 7845;
         let next24k = current24k + delta24k;
-        if (next24k < 7815) next24k = 7820 + Math.floor(Math.random() * 8);
-        if (next24k > 7935) next24k = 7925 - Math.floor(Math.random() * 8);
+        if (next24k < 7815) next24k = 7820;
+        if (next24k > 7935) next24k = 7925;
 
-        // Standard BIS Hallmark purity ratios:
-        // 22K = 91.6% of 24K
         const next22k = Math.round(next24k * 0.916);
-        // 18K = 75.0% of 24K
         const next18k = Math.round(next24k * 0.75);
 
-        // Silver micro fluctuation (-₹0.30 to +₹0.30 per gram = -₹300 to +₹300 per kg)
-        const deltaSilver = Number(((Math.random() - 0.47) * 0.35).toFixed(2));
+        const deltaSilver = Number(((Math.random() - 0.47) * 0.3).toFixed(2));
         let nextSilver = Number(((prev.silver999 || 94.5) + deltaSilver).toFixed(2));
         if (nextSilver < 93.8) nextSilver = 94.1;
         if (nextSilver > 96.2) nextSilver = 95.8;
-
-        setRateTicks({
-          gold24k: next24k - current24k,
-          gold22k: next22k - (prev.gold22k || 7195),
-          gold18k: next18k - (prev.gold18k || 5885),
-          silver999: Number((nextSilver - (prev.silver999 || 94.5)).toFixed(2))
-        });
-
-        setLastUpdated(new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
 
         return {
           gold24k: next24k,
@@ -69,7 +55,8 @@ export const JewelleryProvider = ({ children }) => {
           silver999: nextSilver
         };
       });
-    }, 7000);
+      setLastUpdated(new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }));
+    }, 20000);
 
     return () => clearInterval(interval);
   }, [isTickActive]);
@@ -131,6 +118,32 @@ export const JewelleryProvider = ({ children }) => {
   const [isDealerModalOpen, setIsDealerModalOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
+
+  // Showroom CMS Store Info State with LocalStorage Persistence
+  const [storeInfo, setStoreInfo] = useState(() => {
+    try {
+      const saved = localStorage.getItem('rj_store_info_v3');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        Object.assign(STORE_INFO, parsed);
+        return { ...STORE_INFO, ...parsed };
+      }
+      return { ...STORE_INFO };
+    } catch {
+      return { ...STORE_INFO };
+    }
+  });
+
+  // Master Admin Passcode (Default: 1994, configurable by store owner)
+  const [adminPasscode, setAdminPasscode] = useState(() => {
+    try {
+      return localStorage.getItem('rj_admin_passcode') || '1994';
+    } catch {
+      return '1994';
+    }
+  });
+
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
 
   // Delivery & Showroom Trial Pincode Checker
   const [userPincode, setUserPincode] = useState(() => {
@@ -253,13 +266,13 @@ export const JewelleryProvider = ({ children }) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
-  // Helper to calculate exact item price based on live rates
-  const calculatePrice = (product) => {
+  // Helper to calculate exact item price based on live rates (Memoized for zero-lag calculations)
+  const calculatePrice = useCallback((product) => {
     if (!product) return { goldValue: 0, makingCharge: 0, gst: 0, totalPrice: 0, formattedTotalPrice: '₹0' };
 
     // Extract net weight in grams
-    const netWeightMatch = (product.netGoldWeight || product.grossWeight || '10').match(/([\d.]+)/);
-    const weightGrams = netWeightMatch ? parseFloat(netWeightMatch[1]) : 10;
+    const netWeightMatch = (product.netGoldWeight || product.grossWeight || '10').match(/[\d.]+/);
+    const weightGrams = netWeightMatch ? parseFloat(netWeightMatch[0]) : 10;
 
     let ratePerGram = liveRates.gold22k;
     if (product.purityKey === 'gold24k') ratePerGram = liveRates.gold24k;
@@ -289,7 +302,7 @@ export const JewelleryProvider = ({ children }) => {
       totalPrice,
       formattedTotalPrice: '₹' + totalPrice.toLocaleString('en-IN')
     };
-  };
+  }, [liveRates.gold22k, liveRates.gold24k, liveRates.gold18k, liveRates.silver999]);
 
   // Pincode validation helper (CaratLane & BlueStone benchmarked)
   const getPincodeStatus = (code) => {
@@ -606,6 +619,109 @@ export const JewelleryProvider = ({ children }) => {
     });
   };
 
+  // CMS and Product Operations
+  const updateProduct = (id, updatedFields) => {
+    setProducts((prev) => {
+      const next = prev.map((item) => (item.id === id ? { ...item, ...updatedFields } : item));
+      try {
+        localStorage.setItem('rj_products_catalog_v3', JSON.stringify(next));
+      } catch (e) {
+        console.warn('Failed to save products:', e);
+      }
+      return next;
+    });
+    showToast(`Updated product "${updatedFields.name || id}" successfully! 💎`);
+  };
+
+  const updateStoreInfo = (newInfo) => {
+    setStoreInfo((prev) => {
+      const updated = { ...prev, ...newInfo };
+      Object.assign(STORE_INFO, updated);
+      try {
+        localStorage.setItem('rj_store_info_v3', JSON.stringify(updated));
+      } catch (err) {
+        console.warn('Failed to save store info:', err);
+      }
+      return updated;
+    });
+    showToast('✨ Showroom settings and media updated live!');
+  };
+
+  const changeAdminPasscode = (newCode) => {
+    if (!newCode || newCode.trim().length < 4) {
+      showToast('Passcode must be at least 4 digits.', 'error');
+      return false;
+    }
+    const clean = newCode.trim();
+    setAdminPasscode(clean);
+    try {
+      localStorage.setItem('rj_admin_passcode', clean);
+    } catch (e) {
+      console.warn('Failed to save passcode:', e);
+    }
+    showToast('🔒 Master Admin Passcode updated successfully!');
+    return true;
+  };
+
+  const resetAllDataToDefaults = () => {
+    setLiveRates(DEFAULT_RATES);
+    setProducts(DEFAULT_CATALOG);
+    setStoreInfo({ ...STORE_INFO });
+    setAdminPasscode('1994');
+    try {
+      localStorage.removeItem('rj_live_rates');
+      localStorage.removeItem('rj_products_catalog_v3');
+      localStorage.removeItem('rj_store_info_v3');
+      localStorage.removeItem('rj_admin_passcode');
+    } catch (e) {
+      console.warn(e);
+    }
+    showToast('All showroom content, rates & products restored to defaults! 🔄', 'info');
+  };
+
+  const exportAllDataJSON = () => {
+    const data = {
+      brand: 'Rajesh Jewellers Mirzapur',
+      exportedAt: new Date().toISOString(),
+      liveRates,
+      products,
+      storeInfo,
+      version: '3.0'
+    };
+    const jsonStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute('href', jsonStr);
+    downloadAnchor.setAttribute('download', `rajesh_jewellers_backup_${Date.now()}.json`);
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+    showToast('Showroom backup JSON downloaded! 📁');
+  };
+
+  const importAllDataJSON = (jsonString) => {
+    try {
+      const parsed = JSON.parse(jsonString);
+      if (parsed.liveRates) {
+        setLiveRates(parsed.liveRates);
+        localStorage.setItem('rj_live_rates', JSON.stringify(parsed.liveRates));
+      }
+      if (parsed.products && Array.isArray(parsed.products)) {
+        setProducts(parsed.products);
+        localStorage.setItem('rj_products_catalog_v3', JSON.stringify(parsed.products));
+      }
+      if (parsed.storeInfo) {
+        setStoreInfo(parsed.storeInfo);
+        Object.assign(STORE_INFO, parsed.storeInfo);
+        localStorage.setItem('rj_store_info_v3', JSON.stringify(parsed.storeInfo));
+      }
+      showToast('Successfully imported website data & media! 🎉');
+      return true;
+    } catch (err) {
+      showToast('Invalid backup JSON file format.', 'error');
+      return false;
+    }
+  };
+
   return (
     <JewelleryContext.Provider
       value={{
@@ -671,7 +787,18 @@ export const JewelleryProvider = ({ children }) => {
         calculatePrice,
         toasts,
         showToast,
-        dismissToast
+        dismissToast,
+        // CMS & Admin Extensions
+        storeInfo,
+        updateStoreInfo,
+        updateProduct,
+        adminPasscode,
+        changeAdminPasscode,
+        resetAllDataToDefaults,
+        exportAllDataJSON,
+        importAllDataJSON,
+        isAdminAuthenticated,
+        setIsAdminAuthenticated
       }}
     >
       {children}

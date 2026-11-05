@@ -58,12 +58,12 @@ const HeroSection = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Automatic slide cycling every 4 seconds (pauses when user hovers over visual frame)
+  // Smooth slide cycling (pauses when user hovers over visual frame)
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 4200);
+    }, 6500);
     return () => clearInterval(timer);
   }, [isPaused]);
 
@@ -200,6 +200,8 @@ const HeroSection = () => {
                 alt={slide.title}
                 key={slide.id}
                 className="hero-slide-img"
+                decoding="async"
+                fetchPriority="high"
               />
 
               {/* Floating Bottom Info Pill with high-contrast Hallmark Badge */}

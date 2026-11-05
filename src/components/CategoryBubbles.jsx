@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useJewellery } from '../context/JewelleryContext';
 import { CATEGORY_BUBBLES } from '../data/initialData';
 import { STORE_INFO } from '../data/storeInfo';
@@ -54,10 +54,10 @@ const CategoryBubbles = () => {
   // Find active category details
   const currentCategoryData = CATEGORY_BUBBLES.find((c) => c.id === openCategory);
 
-  // Filter products matching this category
-  const categoryProducts = openCategory
-    ? products.filter((p) => p.category === openCategory)
-    : [];
+  // Filter products matching this category with useMemo
+  const categoryProducts = useMemo(() => {
+    return openCategory ? products.filter((p) => p.category === openCategory) : [];
+  }, [openCategory, products]);
 
   return (
     <section className="category-bubbles-section" id="categories-section">
