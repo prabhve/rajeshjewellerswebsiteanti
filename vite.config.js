@@ -2,7 +2,27 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'force-exit-after-build',
+      apply: 'build',
+      closeBundle() {
+        process.exit(0);
+      }
+    }
+  ],
+  build: {
+    chunkSizeWarningLimit: 1600,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          icons: ['lucide-react']
+        }
+      }
+    }
+  },
   server: {
     port: 3000,
     open: false,

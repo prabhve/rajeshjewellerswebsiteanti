@@ -87,7 +87,7 @@ const ShowroomTour = () => {
           {/* 4 Pillars Trust Seals Bar */}
           <div className="showroom-trust-bar">
             <div className="trust-seal-item">
-              <ShieldCheck size={16} className="text-gold" />
+              <ShieldCheck size={18} className="text-gold" />
               <div>
                 <strong>100% BIS 916 Hallmark</strong>
                 <span>Govt. 6-Digit Laser HUID</span>
@@ -95,9 +95,9 @@ const ShowroomTour = () => {
             </div>
 
             <div className="trust-seal-item">
-              <Award size={16} className="text-gold" />
+              <Award size={18} className="text-gold" />
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <strong>GSTIN: {STORE_INFO.gstin}</strong>
                   <button
                     type="button"
@@ -113,7 +113,7 @@ const ShowroomTour = () => {
             </div>
 
             <div className="trust-seal-item">
-              <Star size={16} fill="#F59E0B" color="#F59E0B" />
+              <Star size={18} fill="#F59E0B" color="#F59E0B" />
               <div>
                 <strong>{STORE_INFO.googleRating}★ Google Verified</strong>
                 <span>{STORE_INFO.googleReviewCount} Genuine Local Reviews</span>
@@ -121,7 +121,7 @@ const ShowroomTour = () => {
             </div>
 
             <div className="trust-seal-item">
-              <CheckCircle2 size={16} className="text-gold" />
+              <CheckCircle2 size={18} className="text-gold" />
               <div>
                 <strong>Free Karatmeter Testing</strong>
                 <span>Instant In-Store Purity Check</span>
@@ -130,360 +130,366 @@ const ShowroomTour = () => {
           </div>
         </div>
 
-        {/* Unified Imperial Showroom Pavilion */}
-        <div className="showroom-pavilion-container">
-          {/* LEFT: Cinematic Gallery & Walkthrough Experience */}
-          <div className="showroom-pavilion-gallery">
-            {/* Gallery Media Switcher Tabs */}
-            <div className="gallery-tabs-row">
-              <button
-                type="button"
-                className={`gallery-nav-tab ${activeTab === 'photos' ? 'active' : ''}`}
-                onClick={() => setActiveTab('photos')}
-              >
-                <Camera size={15} />
-                <span>Showroom Gallery ({photos.length} Views)</span>
-              </button>
-              <button
-                type="button"
-                className={`gallery-nav-tab ${activeTab === 'video' ? 'active' : ''}`}
-                onClick={() => setActiveTab('video')}
-              >
-                <Video size={15} />
-                <span>Showroom Showcase Video Reel</span>
-              </button>
+        {/* Unified, Symmetrical Twin Pavilion (Exact Equal Height & Alignment) */}
+        <div className="showroom-twin-pavilion">
+          {/* LEFT WING: Architectural Showcase & Interactive Gallery */}
+          <div className="pavilion-wing pavilion-wing-left">
+            {/* Unified Top Header Bar */}
+            <div className="wing-header-bar">
+              <div className="wing-tabs-segmented">
+                <button
+                  type="button"
+                  className={`wing-segment-btn ${activeTab === 'photos' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('photos')}
+                >
+                  <Camera size={14} />
+                  <span>Showroom Gallery ({photos.length})</span>
+                </button>
+                <button
+                  type="button"
+                  className={`wing-segment-btn ${activeTab === 'video' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('video')}
+                >
+                  <Video size={14} />
+                  <span>4K Video Reel</span>
+                </button>
+              </div>
+
+              {activeTab === 'photos' && (
+                <div className="wing-gallery-counter">
+                  <span className="counter-curr">{String(selectedPhotoIndex + 1).padStart(2, '0')}</span>
+                  <span className="counter-sep">/</span>
+                  <span className="counter-tot">{String(photos.length).padStart(2, '0')}</span>
+                </div>
+              )}
             </div>
 
-            {activeTab === 'photos' ? (
-              <div className="gallery-viewport-card">
-                {/* Main Large Viewport */}
+            {/* Gallery Viewport / Video Area */}
+            <div className="wing-gallery-body">
+              {activeTab === 'photos' ? (
                 <div
-                  className="gallery-main-viewport"
+                  className="gallery-display-stage"
                   onClick={() => setIsLightboxOpen(true)}
-                  title="Click to view fullscreen photo"
+                  title="Click to view full photo in lightbox"
                 >
                   <img
                     src={activePhoto.image}
                     alt={activePhoto.title}
                     key={activePhoto.id}
-                    className="gallery-display-img"
+                    className="gallery-stage-image"
                     style={{ objectPosition: activePhoto.objectPosition || 'center center' }}
                   />
 
-                  {/* Top Bar HUD */}
-                  <div className="gallery-hud-top">
-                    <span className="gallery-badge-chip">
-                      <Sparkles size={12} />
+                  {/* Top Badge & Zoom */}
+                  <div className="stage-hud-top">
+                    <span className="stage-badge-tag">
+                      <Sparkles size={11} />
                       {activePhoto.badge}
                     </span>
-                    <div className="gallery-hud-actions">
-                      <span className="gallery-counter">
-                        {String(selectedPhotoIndex + 1).padStart(2, '0')} / {String(photos.length).padStart(2, '0')}
-                      </span>
-                      <button
-                        type="button"
-                        className="gallery-zoom-action"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setIsLightboxOpen(true);
-                        }}
-                        title="Fullscreen Lightbox"
-                      >
-                        <Maximize2 size={14} />
-                      </button>
+                    <button
+                      type="button"
+                      className="stage-zoom-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsLightboxOpen(true);
+                      }}
+                      title="Fullscreen Zoom"
+                    >
+                      <Maximize2 size={13} />
+                    </button>
+                  </div>
+
+                  {/* Slider Arrows */}
+                  <button
+                    type="button"
+                    className="stage-arrow-btn prev"
+                    onClick={handlePrevPhoto}
+                    aria-label="Previous Slide"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    className="stage-arrow-btn next"
+                    onClick={handleNextPhoto}
+                    aria-label="Next Slide"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+
+                  {/* Stage Caption Bottom Bar */}
+                  <div className="stage-caption-strip">
+                    <div className="stage-caption-content">
+                      <span className="stage-caption-sub">{activePhoto.subtitle}</span>
+                      <h4 className="stage-caption-title">{activePhoto.title}</h4>
+                      <p className="stage-caption-desc">{activePhoto.desc}</p>
                     </div>
                   </div>
-
-                  {/* Left / Right Arrow Controls */}
-                  <button
-                    type="button"
-                    className="gallery-slider-arrow prev"
-                    onClick={handlePrevPhoto}
-                    aria-label="Previous Photo"
-                  >
-                    <ChevronLeft size={20} />
-                  </button>
-                  <button
-                    type="button"
-                    className="gallery-slider-arrow next"
-                    onClick={handleNextPhoto}
-                    aria-label="Next Photo"
-                  >
-                    <ChevronRight size={20} />
-                  </button>
-
-                  {/* Bottom Caption Overlay */}
-                  <div className="gallery-hud-bottom">
-                    <span className="gallery-photo-subtitle">{activePhoto.subtitle}</span>
-                    <h3 className="gallery-photo-title">{activePhoto.title}</h3>
-                    <p className="gallery-photo-desc">{activePhoto.desc}</p>
+                </div>
+              ) : (
+                /* Video Showcase Player */
+                <div className="gallery-video-stage">
+                  <img
+                    src="/assets/images/store/store_showcase_video_thumb.jpg"
+                    alt="Showroom Video Reel"
+                    className="video-stage-bg"
+                  />
+                  <div className="video-stage-overlay">
+                    {!isVideoPlaying ? (
+                      <button
+                        type="button"
+                        className="video-stage-play"
+                        onClick={() => setIsVideoPlaying(true)}
+                        aria-label="Play Video Reel"
+                      >
+                        <Play size={26} fill="#080103" color="#080103" style={{ marginLeft: '3px' }} />
+                      </button>
+                    ) : (
+                      <div className="video-playing-tag">
+                        <div className="audio-wave-bars">
+                          <span /><span /><span /><span />
+                        </div>
+                        <span>4K Live Reel Playing</span>
+                      </div>
+                    )}
+                    <div className="video-bottom-info">
+                      <span className="video-hd-pill">
+                        <Volume2 size={12} />
+                        HD 1080p Showroom Showcase
+                      </span>
+                      <h5>Pure 22K Hallmarked Gold Bell Earrings (झुमका व लटकन)</h5>
+                      <p>Showroom recording showcasing fine filigree craftsmanship and hallmark stamp at Sangmohal.</p>
+                    </div>
                   </div>
                 </div>
+              )}
+            </div>
 
-                {/* Thumbnails Strip */}
-                <div className="gallery-thumbs-rail">
-                  {photos.map((photo, idx) => (
+            {/* Photo Thumbnails Strip */}
+            {activeTab === 'photos' && (
+              <div className="gallery-thumbnails-strip">
+                {photos.map((photo, idx) => {
+                  const shortLabels = [
+                    'Storefront',
+                    'Gaddi Lounge',
+                    'Bridal Haar',
+                    'Gold Jhumki',
+                    'Street View'
+                  ];
+                  return (
                     <button
                       key={photo.id}
                       type="button"
                       onClick={() => setSelectedPhotoIndex(idx)}
-                      className={`gallery-thumb-item ${selectedPhotoIndex === idx ? 'active' : ''}`}
-                      title={photo.title}
+                      className={`gallery-thumb-chip ${selectedPhotoIndex === idx ? 'active' : ''}`}
+                      title={`${photo.title} (${photo.badge})`}
                     >
                       <img src={photo.image} alt={photo.title} />
-                      <div className="thumb-info-bar">
-                        <span className="thumb-num">0{idx + 1}</span>
-                        <span className="thumb-tag">{photo.badge.split(' ')[0]}</span>
-                      </div>
+                      <span className="thumb-chip-label">{shortLabels[idx] || `View 0${idx + 1}`}</span>
                     </button>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              /* Video Showcase Reel Player */
-              <div className="gallery-video-card">
-                <img
-                  src="/assets/images/store/store_showcase_video_thumb.jpg"
-                  alt="Showroom Jewellery Showcase Video Reel"
-                  className="gallery-video-bg"
-                />
-                <div className="gallery-video-glass">
-                  {!isVideoPlaying ? (
-                    <button
-                      type="button"
-                      className="grand-play-btn"
-                      onClick={() => setIsVideoPlaying(true)}
-                      aria-label="Play Showroom Showcase Reel"
-                    >
-                      <Play size={28} fill="#080103" color="#080103" style={{ marginLeft: '4px' }} />
-                    </button>
-                  ) : (
-                    <div className="video-live-indicator">
-                      <div className="audio-wave-bars">
-                        <span /><span /><span /><span />
-                      </div>
-                      <span>Showroom 4K Live Reel Playing</span>
-                    </div>
-                  )}
-
-                  <div className="video-caption-block">
-                    <span className="video-badge-pill">
-                      <Volume2 size={13} />
-                      HD 1080p Showroom Showcase
-                    </span>
-                    <h4>Pure 22K Hallmarked Gold Bell Earrings (झुमका व लटकन)</h4>
-                    <p>Live showroom recording showcasing intricate filigree craftsmanship, mirror polish, and hallmark verification at Sangmohal showroom.</p>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             )}
 
-            {/* Showroom Amenities Feature Bar */}
-            <div className="showroom-amenities-ribbon">
-              <div className="amenity-card">
-                <div className="amenity-icon-box">
-                  <Coffee size={16} />
-                </div>
+            {/* 4 Amenities Strip Docked Cleanly at Bottom */}
+            <div className="gallery-amenities-dock">
+              <div className="amenity-cell">
+                <Coffee size={15} className="amenity-cell-icon" />
                 <div>
                   <strong>Royal Gaddi Seating</strong>
-                  <span>Air-conditioned family salon</span>
+                  <span>Air-conditioned lounge</span>
                 </div>
               </div>
-
-              <div className="amenity-card">
-                <div className="amenity-icon-box">
-                  <Award size={16} />
-                </div>
+              <div className="amenity-cell">
+                <Award size={15} className="amenity-cell-icon" />
                 <div>
                   <strong>Karatmeter Lab</strong>
-                  <span>Free computerized testing</span>
+                  <span>Free purity testing</span>
                 </div>
               </div>
-
-              <div className="amenity-card">
-                <div className="amenity-icon-box">
-                  <Car size={16} />
-                </div>
+              <div className="amenity-cell">
+                <Car size={15} className="amenity-cell-icon" />
                 <div>
                   <strong>Showroom Parking</strong>
-                  <span>Convenient Station Rd access</span>
+                  <span>Station Rd access</span>
                 </div>
               </div>
-
-              <div className="amenity-card">
-                <div className="amenity-icon-box">
-                  <ShieldCheck size={16} />
-                </div>
+              <div className="amenity-cell">
+                <ShieldCheck size={15} className="amenity-cell-icon" />
                 <div>
                   <strong>Armoured Security</strong>
-                  <span>Safe & insured environment</span>
+                  <span>Insured & safe billing</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* RIGHT: The Imperial Concierge & Hospitality Salon */}
-          <div className="showroom-pavilion-concierge">
-            <div className="concierge-card-inner">
-              {/* Salon Header with Gold Seal */}
-              <div className="concierge-header-block">
-                <div className="concierge-badge-wrap">
-                  <span className="concierge-crest-icon">
-                    <Compass size={18} />
-                  </span>
-                  <div>
-                    <span className="concierge-tag">VISITOR CONCIERGE & SALON</span>
-                    <h3 className="concierge-title">Sangmohal Flagship Showroom</h3>
-                  </div>
-                </div>
-                <span className="concierge-status-pill">
-                  <span className="pulse-dot" />
-                  Open Today
+          {/* RIGHT WING: Imperial Visitor Concierge & Hospitality Salon */}
+          <div className="pavilion-wing pavilion-wing-right">
+            {/* Unified Top Header Bar */}
+            <div className="wing-header-bar">
+              <div className="wing-brand-badge">
+                <span className="wing-crest-ico">
+                  <Compass size={15} />
                 </span>
-              </div>
-
-              {/* Showroom Address Section */}
-              <div className="concierge-address-box">
-                <div className="address-top-row">
-                  <div className="address-label">
-                    <MapPin size={16} className="text-gold" />
-                    <span>Showroom Address & Landmark</span>
-                  </div>
-                  <button
-                    type="button"
-                    className="concierge-copy-btn"
-                    onClick={() => handleCopyText(STORE_INFO.fullAddress, 'Address')}
-                    title="Copy Full Showroom Address"
-                  >
-                    {copiedField === 'Address' ? <Check size={12} color="#10B981" /> : <Copy size={12} />}
-                    <span>{copiedField === 'Address' ? 'Copied' : 'Copy'}</span>
-                  </button>
-                </div>
-
-                <p className="address-text-body">
-                  {STORE_INFO.fullAddress}
-                </p>
-
-                <div className="landmark-callout">
-                  <span className="landmark-pin">📍</span>
-                  <span>
-                    <strong>Landmark:</strong> Opposite / Near Jila Karagar (District Jail), Station Road, Sangmohal, Mirzapur (231001)
-                  </span>
+                <div>
+                  <span className="wing-pre-tag">VISITOR CONCIERGE & SALON</span>
+                  <h3 className="wing-salon-name">Sangmohal Flagship Showroom</h3>
                 </div>
               </div>
 
-              {/* Visiting Hours Section */}
-              <div className="concierge-hours-box">
-                <div className="hours-header">
-                  <Clock size={16} className="text-gold" />
-                  <span>Showroom Visiting Hours (खुलने का समय)</span>
-                </div>
-                <div className="hours-grid">
-                  <div className="hour-card regular">
-                    <span className="hour-days">Monday – Saturday</span>
-                    <strong className="hour-time">10:00 AM – 8:00 PM</strong>
-                    <span className="hour-badge">Regular Full Day</span>
+              <div className="wing-status-indicator">
+                <span className="pulse-emerald-dot" />
+                <span>Open Today</span>
+              </div>
+            </div>
+
+            {/* Main Concierge Body */}
+            <div className="concierge-content-flow">
+              {/* Showroom Address & Landmark Block */}
+              <div className="concierge-flow-row address-row">
+                <div className="concierge-address-card">
+                  <div className="flow-row-header">
+                    <div className="flow-title-with-icon">
+                      <MapPin size={15} className="text-gold" />
+                      <span>Showroom Address & Landmark</span>
+                    </div>
+                    <button
+                      type="button"
+                      className="flow-copy-action"
+                      onClick={() => handleCopyText(STORE_INFO.fullAddress, 'Address')}
+                      title="Copy Showroom Address"
+                    >
+                      {copiedField === 'Address' ? <Check size={12} color="#10B981" /> : <Copy size={12} />}
+                      <span>{copiedField === 'Address' ? 'Copied' : 'Copy'}</span>
+                    </button>
                   </div>
-                  <div className="hour-card sunday">
-                    <span className="hour-days">Sunday Special</span>
-                    <strong className="hour-time">10:30 AM – 4:30 PM</strong>
-                    <span className="hour-badge gold">Weekend Hours</span>
+                  <p className="flow-address-text">
+                    {STORE_INFO.fullAddress}
+                  </p>
+                  <div className="flow-landmark-stripe">
+                    <span className="landmark-tag-badge">Landmark:</span>
+                    <span>Opposite / Near Jila Karagar (District Jail), Station Road, Sangmohal, Mirzapur (231001)</span>
                   </div>
                 </div>
               </div>
 
-              {/* Direct Concierge Calling & WhatsApp Direct Line */}
-              <div className="concierge-comms-box">
-                <div className="comms-header">
-                  <Phone size={15} className="text-gold" />
-                  <span>Direct Showroom Desk & WhatsApp</span>
+              {/* Showroom Visiting Timings */}
+              <div className="concierge-flow-row timings-row">
+                <div className="flow-row-header">
+                  <div className="flow-title-with-icon">
+                    <Clock size={15} className="text-gold" />
+                    <span>Showroom Visiting Hours (खुलने का समय)</span>
+                  </div>
+                </div>
+                <div className="flow-timings-grid">
+                  <div className="timing-tile">
+                    <span className="tile-days">Mon – Sat (Regular)</span>
+                    <strong className="tile-hours">10:00 AM – 8:00 PM</strong>
+                  </div>
+                  <div className="timing-tile sunday">
+                    <span className="tile-days">Sunday Special</span>
+                    <strong className="tile-hours">10:30 AM – 4:30 PM</strong>
+                  </div>
+                </div>
+              </div>
+
+              {/* Communication: WhatsApp Video + Direct Call Lines */}
+              <div className="concierge-flow-row contact-row">
+                <div className="flow-row-header">
+                  <div className="flow-title-with-icon">
+                    <Phone size={15} className="text-gold" />
+                    <span>Direct Showroom Desk & WhatsApp</span>
+                  </div>
                 </div>
 
-                {/* WhatsApp Video Shopping Special Card */}
+                {/* WhatsApp Video Showcase Banner */}
                 <a
                   href={STORE_INFO.whatsappCatalogUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="whatsapp-concierge-card"
+                  className="concierge-wa-banner"
                 >
-                  <div className="wa-icon-bubble">
-                    <MessageCircle size={22} />
+                  <div className="wa-bubble-circle">
+                    <MessageCircle size={20} />
                   </div>
-                  <div className="wa-content-body">
-                    <div className="wa-badge-row">
-                      <span className="wa-pill">WhatsApp Video Catalog</span>
-                      <span className="wa-action-text">Chat Now ➔</span>
+                  <div className="wa-banner-details">
+                    <div className="wa-banner-top">
+                      <span className="wa-banner-kicker">WhatsApp Video Shopping</span>
+                      <span className="wa-banner-action">Chat Now ➔</span>
                     </div>
-                    <strong>{STORE_INFO.whatsappDisplay}</strong>
-                    <p>Live 1-on-1 video call to inspect hallmarked designs before visiting</p>
+                    <strong className="wa-banner-phone">{STORE_INFO.whatsappDisplay}</strong>
+                    <span className="wa-banner-sub">1-on-1 video call to inspect hallmarked designs live from home</span>
                   </div>
                 </a>
 
-                {/* Showroom Direct Phone Lines */}
-                <div className="phone-lines-grid">
-                  <a href={`tel:${STORE_INFO.phonePrimary}`} className="phone-line-card">
-                    <span className="line-label">Main Counter</span>
-                    <strong className="line-num">📞 {STORE_INFO.phonePrimaryDisplay}</strong>
+                {/* Direct Calling Line Tiles */}
+                <div className="calling-tiles-row">
+                  <a href={`tel:${STORE_INFO.phonePrimary}`} className="calling-tile-link">
+                    <span className="tile-dept">Main Counter</span>
+                    <strong className="tile-num">📞 {STORE_INFO.phonePrimaryDisplay}</strong>
                   </a>
-                  <a href={`tel:${STORE_INFO.phoneSecondary}`} className="phone-line-card">
-                    <span className="line-label">Store Manager</span>
-                    <strong className="line-num">📞 {STORE_INFO.phoneSecondaryDisplay}</strong>
+                  <a href={`tel:${STORE_INFO.phoneSecondary}`} className="calling-tile-link">
+                    <span className="tile-dept">Store Manager</span>
+                    <strong className="tile-num">📞 {STORE_INFO.phoneSecondaryDisplay}</strong>
                   </a>
                   {STORE_INFO.phoneTertiary && (
-                    <a href={`tel:${STORE_INFO.phoneTertiary}`} className="phone-line-card">
-                      <span className="line-label">Inquiries Desk</span>
-                      <strong className="line-num">📞 {STORE_INFO.phoneTertiaryDisplay}</strong>
+                    <a href={`tel:${STORE_INFO.phoneTertiary}`} className="calling-tile-link">
+                      <span className="tile-dept">Inquiries Desk</span>
+                      <strong className="tile-num">📞 {STORE_INFO.phoneTertiaryDisplay}</strong>
                     </a>
                   )}
                 </div>
               </div>
 
-              {/* Action Buttons: Regal Dual Primary CTAs */}
-              <div className="concierge-actions-row">
-                <a
-                  href={STORE_INFO.googleDirectionsUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-imperial-directions"
-                  title="Get GPS Turn-by-Turn Navigation to Showroom"
-                >
-                  <Navigation size={16} />
-                  <span>Start GPS Navigation</span>
-                  <ExternalLink size={13} style={{ marginLeft: '4px' }} />
-                </a>
+              {/* Action Buttons: Dual Primary CTAs & Sublinks */}
+              <div className="concierge-flow-row actions-row">
+                <div className="concierge-ctas-grid">
+                  <a
+                    href={STORE_INFO.googleDirectionsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-salon-directions"
+                    title="Get Turn-by-Turn GPS Directions to Showroom"
+                  >
+                    <Navigation size={15} />
+                    <span>Start GPS Navigation</span>
+                    <ExternalLink size={12} />
+                  </a>
 
-                <button
-                  type="button"
-                  className="btn-imperial-vip"
-                  onClick={() => setIsVipModalOpen(true)}
-                  title="Book Private VIP Gaddi Consultation"
-                >
-                  <Sparkles size={16} />
-                  <span>Book VIP Visit</span>
-                </button>
-              </div>
+                  <button
+                    type="button"
+                    className="btn-salon-vip"
+                    onClick={() => setIsVipModalOpen(true)}
+                    title="Book Private VIP Gaddi Consultation"
+                  >
+                    <Sparkles size={15} />
+                    <span>Book VIP Visit</span>
+                  </button>
+                </div>
 
-              {/* Quick Links Sub-bar */}
-              <div className="concierge-sublinks">
-                <a
-                  href={STORE_INFO.googleReviewsUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="sublink-item"
-                >
-                  <Star size={13} fill="#E5C378" color="#E5C378" />
-                  <span>Write Google Review</span>
-                </a>
-                <span className="sublink-separator">•</span>
-                <a
-                  href={STORE_INFO.googleMapsUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="sublink-item"
-                >
-                  <MapPin size={13} />
-                  <span>Open in Google Maps</span>
-                </a>
+                <div className="concierge-sublinks-bar">
+                  <a
+                    href={STORE_INFO.googleReviewsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="sublink-anchor"
+                  >
+                    <Star size={12} fill="#E5C378" color="#E5C378" />
+                    <span>Write Google Review</span>
+                  </a>
+                  <span className="sublink-dot">•</span>
+                  <a
+                    href={STORE_INFO.googleMapsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="sublink-anchor"
+                  >
+                    <MapPin size={12} />
+                    <span>Open in Google Maps</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -493,7 +499,7 @@ const ShowroomTour = () => {
         <div className="showroom-map-console">
           <div className="map-console-header">
             <div className="console-title">
-              <MapPin size={16} className="text-gold" />
+              <MapPin size={15} className="text-gold" />
               <span>Live Showroom Satellite & Street Map — Sangmohal, Mirzapur (231001)</span>
             </div>
             <a
@@ -509,7 +515,7 @@ const ShowroomTour = () => {
           <iframe
             src={STORE_INFO.googleEmbedMapUrl}
             width="100%"
-            height="340"
+            height="320"
             style={{ border: 0, display: 'block' }}
             allowFullScreen=""
             loading="lazy"
@@ -528,7 +534,7 @@ const ShowroomTour = () => {
               onClick={() => setIsLightboxOpen(false)}
               aria-label="Close Lightbox"
             >
-              <X size={22} />
+              <X size={20} />
             </button>
             <img src={activePhoto.image} alt={activePhoto.title} className="lightbox-img" />
             <div className="lightbox-caption">
@@ -540,20 +546,20 @@ const ShowroomTour = () => {
                   href={STORE_INFO.googleDirectionsUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-imperial-directions"
-                  style={{ padding: '0.65rem 1.25rem', fontSize: '0.85rem' }}
+                  className="btn-salon-directions"
+                  style={{ padding: '0.6rem 1.15rem', fontSize: '0.85rem' }}
                 >
                   <Navigation size={14} />
                   <span>Visit Showroom in Sangmohal</span>
                 </a>
                 <button
                   type="button"
-                  className="btn-imperial-vip"
+                  className="btn-salon-vip"
                   onClick={() => {
                     setIsLightboxOpen(false);
                     setIsVipModalOpen(true);
                   }}
-                  style={{ padding: '0.65rem 1.25rem', fontSize: '0.85rem' }}
+                  style={{ padding: '0.6rem 1.15rem', fontSize: '0.85rem' }}
                 >
                   <Sparkles size={14} />
                   <span>Book VIP Lounge Visit</span>
