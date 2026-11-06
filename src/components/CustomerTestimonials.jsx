@@ -22,16 +22,20 @@ const CustomerTestimonials = () => {
             Real reviews directly from our Google Business Profile in Sangmohal, Mirzapur. Experience 100% BIS 916 hallmarked pure jewellery and honest computerized billing.
           </p>
 
-          {/* Aggregated Rating Ribbon */}
-          <div className="google-rating-pill">
-            <div className="stars-cluster">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={15} fill="#F59E0B" color="#F59E0B" />
-              ))}
+          {/* Aggregated Rating Badge */}
+          <div className="google-rating-badge">
+            <div className="rating-top-row">
+              <div className="stars-cluster">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={16} fill="#F59E0B" color="#F59E0B" />
+                ))}
+              </div>
+              <span className="rating-score">{info.googleRating} / 5.0</span>
             </div>
-            <span className="rating-score">{info.googleRating} / 5.0</span>
-            <span className="rating-divider">•</span>
-            <span className="rating-sub">Google Verified Mirzapur Showroom ({info.googleReviewCount} Reviews)</span>
+            <div className="rating-sub-row">
+              <ShieldCheck size={14} style={{ color: '#E5C378', flexShrink: 0 }} />
+              <span className="rating-sub">Google Verified Mirzapur Showroom ({info.googleReviewCount} Reviews)</span>
+            </div>
           </div>
         </div>
 

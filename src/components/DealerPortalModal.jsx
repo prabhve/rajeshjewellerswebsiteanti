@@ -762,7 +762,7 @@ const DealerPortalModal = () => {
 
         {/* RIGHT MAIN CONTENT WORKSPACE (RESPONSIVE SIDE-BY-SIDE PANES - MEMOIZED WRAPPER) */}
         <AdminContentPane activeTab={activeTab}>
-          {/* Module 1: Dashboard */}
+          {/* Module 1: Dashboard (Fully Interactive & Direct Editable) */}
           {activeTab === 'dashboard' && (
             <DashboardModule
               products={products}
@@ -770,9 +770,19 @@ const DealerPortalModal = () => {
               storeInfo={storeInfo}
               leads={leads}
               reviews={reviewsList}
+              homepageSections={homepageSections}
               hasUnsavedDrafts={hasUnsavedDrafts}
               onNavigate={handleSelectTab}
               publishDraftToLiveSite={publishDraftToLiveSite}
+              updateRates={updateRates}
+              updateStoreInfo={updateStoreInfo}
+              addProduct={addProduct}
+              updateProduct={updateProduct}
+              deleteProduct={deleteProduct}
+              updateLeadStatus={updateLeadStatus}
+              showToast={showToast}
+              setHomepageSections={setHomepageSections}
+              setReviewsList={setReviewsList}
             />
           )}
 

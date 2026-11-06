@@ -305,7 +305,6 @@ const PriceEstimator = () => {
                     className="calc-weight-field"
                     aria-label="Gold Weight in Grams"
                   />
-                  <span className="calc-weight-field-unit">Grams (ग्राम)</span>
                 </div>
 
                 <button

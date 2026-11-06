@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Package,
   Grid,
@@ -14,7 +14,14 @@ import {
   FolderOpen,
   MapPin,
   Scale,
-  CheckCircle2
+  Edit3,
+  X,
+  CheckCircle2,
+  RefreshCw,
+  Eye,
+  Camera,
+  Trash2,
+  Star
 } from 'lucide-react';
 
 const DashboardModule = ({
@@ -26,14 +33,69 @@ const DashboardModule = ({
   homepageSections = [],
   hasUnsavedDrafts = false,
   onNavigate = () => {},
-  publishDraftToLiveSite = () => {}
+  publishDraftToLiveSite = () => {},
+  updateRates = () => {},
+  updateStoreInfo = () => {},
+  addProduct = () => {},
+  updateProduct = () => {},
+  deleteProduct = () => {},
+  updateLeadStatus = () => {},
+  showToast = () => {},
+  setHomepageSections = () => {},
+  setReviewsList = () => {}
 }) => {
+  // Modal states for direct editing on the dashboard
+  const [isRateModalOpen, setIsRateModalOpen] = useState(false);
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
+  const [isAddReviewModalOpen, setIsAddReviewModalOpen] = useState(false);
+
+  // Quick Rates Form State
+  const [ratesForm, setRatesForm] = useState({
+    gold24k: liveRates.gold24k || 7845,
+    gold22k: liveRates.gold22k || 7195,
+    gold18k: liveRates.gold18k || 5885,
+    silver999: liveRates.silver999 || 94.5
+  });
+
+  // Quick Store Info Form State
+  const [infoForm, setInfoForm] = useState({
+    name: storeInfo.name || 'Rajesh Jewellers',
+    hindiName: storeInfo.hindiName || 'राजेश ज्वेलर्स (सराफ़)',
+    fullAddress: storeInfo.fullAddress || 'Station Rd, nearby Jila Karagar, Mirzapur, UP 231001',
+    landmark: storeInfo.landmark || 'Sangmohal Showroom',
+    gstin: storeInfo.gstin || '09ADMPS4528E1Z8',
+    hallmarkCode: storeInfo.hallmarkCode || 'BIS 916 HUID',
+    googleRating: storeInfo.googleRating || 4.5
+  });
+
+  // Quick Add Product Form State
+  const [productForm, setProductForm] = useState({
+    name: '',
+    hindiName: '',
+    category: 'bridal',
+    purityKey: 'gold22k',
+    netGoldWeight: '22.50g',
+    makingPercent: 10,
+    image: '/assets/images/store/store_display_jewellery.jpg',
+    badge: 'Showroom Original'
+  });
+
+  // Quick Add Review Form State
+  const [reviewForm, setReviewForm] = useState({
+    author: '',
+    location: 'Mirzapur',
+    rating: 5,
+    tag: 'Google Verified Customer',
+    comment: ''
+  });
+
   const newLeadsCount = leads.filter((l) => l.status === 'New').length;
   const verifiedReviewsCount = reviews.filter((r) => r.tag?.includes('Verified') || r.tag?.includes('Google')).length;
   const activeSectionsCount = homepageSections.filter((s) => s.enabled !== false).length;
   const totalSectionsCount = homepageSections.length || 19;
 
-  // Inventory breakdown counts
+  // Category counts breakdown
   const categoryCounts = {
     bridal: products.filter((p) => p.category === 'bridal').length,
     gold: products.filter((p) => p.category === 'gold').length,
@@ -47,7 +109,7 @@ const DashboardModule = ({
 
   const readyInStoreCount = products.filter((p) => p.readyInShowroom !== false).length;
 
-  // Mask contact phone for dashboard privacy
+  // Mask phone for customer privacy
   const maskPhone = (phoneStr) => {
     if (!phoneStr) return '+91 ••••• •••••';
     const clean = phoneStr.trim();
@@ -57,7 +119,6 @@ const DashboardModule = ({
     return clean;
   };
 
-  // Format date helper
   const formatDateDisplay = (dateStr) => {
     if (!dateStr) return 'Recent Inquiry';
     if (dateStr.includes('-')) {
@@ -72,9 +133,83 @@ const DashboardModule = ({
     return dateStr;
   };
 
+  // Save Handlers for Quick Modals
+  const handleSaveRates = (e) => {
+    e.preventDefault();
+    updateRates({
+      gold24k: Number(ratesForm.gold24k),
+      gold22k: Number(ratesForm.gold22k),
+      gold18k: Number(ratesForm.gold18k),
+      silver999: Number(ratesForm.silver999)
+    });
+    setIsRateModalOpen(false);
+    showToast('Gold & Silver rates updated live across showroom! 💰');
+  };
+
+  const handleSaveInfo = (e) => {
+    e.preventDefault();
+    updateStoreInfo({
+      name: infoForm.name,
+      hindiName: infoForm.hindiName,
+      fullAddress: infoForm.fullAddress,
+      landmark: infoForm.landmark,
+      gstin: infoForm.gstin,
+      hallmarkCode: infoForm.hallmarkCode,
+      googleRating: Number(infoForm.googleRating)
+    });
+    setIsInfoModalOpen(false);
+    showToast('Showroom business profile & credentials updated! 👑');
+  };
+
+  const handleSaveProduct = (e) => {
+    e.preventDefault();
+    if (!productForm.name) {
+      showToast('Please enter item name.', 'error');
+      return;
+    }
+    addProduct({
+      ...productForm,
+      categoryLabel: productForm.category === 'bridal' ? 'Royal Bridal' : 'Gold Jewels',
+      purity: productForm.purityKey === 'gold24k' ? '24K Pure Bullion' : '22K BIS 916 Hallmark',
+      inStock: true,
+      readyInShowroom: true
+    });
+    setIsAddProductModalOpen(false);
+    setProductForm({
+      name: '',
+      hindiName: '',
+      category: 'bridal',
+      purityKey: 'gold22k',
+      netGoldWeight: '22.50g',
+      makingPercent: 10,
+      image: '/assets/images/store/store_display_jewellery.jpg',
+      badge: 'Showroom Original'
+    });
+    showToast(`Added design "${productForm.name}" directly from dashboard! 💎`);
+  };
+
+  const handleSaveReview = (e) => {
+    e.preventDefault();
+    if (!reviewForm.author || !reviewForm.comment) {
+      showToast('Please enter customer name and review comment.', 'error');
+      return;
+    }
+    const newRev = {
+      id: `rev_${Date.now()}`,
+      ...reviewForm
+    };
+    if (setReviewsList) {
+      setReviewsList((prev) => [newRev, ...prev]);
+    }
+    updateStoreInfo({ googleReviews: [newRev, ...reviews] });
+    setIsAddReviewModalOpen(false);
+    setReviewForm({ author: '', location: 'Mirzapur', rating: 5, tag: 'Google Verified Customer', comment: '' });
+    showToast('Customer review added directly from dashboard! ⭐');
+  };
+
   return (
     <div className="admin-tab-pane">
-      {/* SECTION A — DASHBOARD INTRODUCTION */}
+      {/* SECTION A — DASHBOARD INTRODUCTION HEADER */}
       <div className="admin-card-surface p-5 mb-5 bg-[#260F18] border-[#55372E]">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-1">
@@ -85,6 +220,14 @@ const DashboardModule = ({
               <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-[#168653]/20 text-[#34D399] border border-[#168653]">
                 System Operational
               </span>
+              <button
+                type="button"
+                className="text-xs text-[#C6A15B] hover:text-[#E7CB87] flex items-center gap-1 font-semibold underline"
+                onClick={() => setIsInfoModalOpen(true)}
+              >
+                <Edit3 size={13} />
+                <span>Edit Profile</span>
+              </button>
             </div>
             <p className="text-xs text-[#BAAEA3] max-w-2xl leading-relaxed">
               Manage jewellery inventory, bullion rates, customer enquiries and website operations from one central workspace.
@@ -92,6 +235,23 @@ const DashboardModule = ({
           </div>
 
           <div className="flex items-center gap-3 flex-wrap">
+            <button
+              type="button"
+              className="admin-btn-secondary text-xs px-3.5 py-2 font-bold flex items-center gap-1.5"
+              onClick={() => {
+                setRatesForm({
+                  gold24k: liveRates.gold24k || 7845,
+                  gold22k: liveRates.gold22k || 7195,
+                  gold18k: liveRates.gold18k || 5885,
+                  silver999: liveRates.silver999 || 94.5
+                });
+                setIsRateModalOpen(true);
+              }}
+            >
+              <Sliders size={14} />
+              <span>Quick Edit Gold Rates</span>
+            </button>
+
             {hasUnsavedDrafts && (
               <button
                 type="button"
@@ -99,14 +259,14 @@ const DashboardModule = ({
                 onClick={publishDraftToLiveSite}
               >
                 <Sparkles size={14} />
-                <span>Publish Drafts to Live Site</span>
+                <span>Publish Drafts</span>
               </button>
             )}
 
             <button
               type="button"
               className="admin-btn-primary text-xs px-4 py-2 font-bold flex items-center gap-1.5"
-              onClick={() => onNavigate('products')}
+              onClick={() => setIsAddProductModalOpen(true)}
             >
               <PlusCircle size={15} />
               <span>+ Add New Product</span>
@@ -114,6 +274,7 @@ const DashboardModule = ({
           </div>
         </div>
 
+        {/* Supporting Metadata Badges */}
         <div className="flex items-center gap-3 mt-4 pt-3 border-t border-[#55372E] text-xs text-[#BAAEA3] flex-wrap">
           <span className="inline-flex items-center gap-1">
             <span>Last Updated:</span>
@@ -122,17 +283,22 @@ const DashboardModule = ({
           <span className="text-[#55372E]">•</span>
           <span className="inline-flex items-center gap-1">
             <span>Showroom Location:</span>
-            <strong className="text-[#F8F2E9]">Sangmohal, Station Rd, Mirzapur</strong>
+            <strong className="text-[#F8F2E9]">{storeInfo.landmark || 'Sangmohal'}, Mirzapur</strong>
           </span>
           <span className="text-[#55372E]">•</span>
           <span className="inline-flex items-center gap-1">
             <span>GSTIN:</span>
             <strong className="text-[#E7CB87] tabular-nums">{storeInfo.gstin || '09ADMPS4528E1Z8'}</strong>
           </span>
+          <span className="text-[#55372E]">•</span>
+          <span className="inline-flex items-center gap-1">
+            <span>HUID:</span>
+            <strong className="text-[#34D399]">{storeInfo.hallmarkCode || 'BIS 916 Certified'}</strong>
+          </span>
         </div>
       </div>
 
-      {/* SECTION B — FOUR KPI CARDS (4-Column Grid on Desktop) */}
+      {/* SECTION B — FOUR KPI CARDS (Strict 4-Column Grid on Desktop) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
         {/* CARD 1: Active Products */}
         <div
@@ -242,13 +408,22 @@ const DashboardModule = ({
               <Package size={17} className="text-[#C6A15B]" />
               <h3 className="font-bold text-[#F8F2E9] text-base font-serif">Inventory &amp; Collection Breakdown</h3>
             </div>
-            <button
-              type="button"
-              className="admin-btn-secondary text-xs px-3 py-1"
-              onClick={() => onNavigate('products')}
-            >
-              <span>Catalog Manager →</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                className="admin-btn-primary text-xs px-2.5 py-1"
+                onClick={() => setIsAddProductModalOpen(true)}
+              >
+                <span>+ Add Item</span>
+              </button>
+              <button
+                type="button"
+                className="admin-btn-secondary text-xs px-3 py-1"
+                onClick={() => onNavigate('products')}
+              >
+                <span>Catalog Manager →</span>
+              </button>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
@@ -319,10 +494,19 @@ const DashboardModule = ({
             </div>
             <button
               type="button"
-              className="admin-btn-secondary text-xs px-3 py-1"
-              onClick={() => onNavigate('rates')}
+              className="admin-btn-secondary text-xs px-3 py-1 flex items-center gap-1"
+              onClick={() => {
+                setRatesForm({
+                  gold24k: liveRates.gold24k || 7845,
+                  gold22k: liveRates.gold22k || 7195,
+                  gold18k: liveRates.gold18k || 5885,
+                  silver999: liveRates.silver999 || 94.5
+                });
+                setIsRateModalOpen(true);
+              }}
             >
-              <span>Manage Rates →</span>
+              <Edit3 size={12} />
+              <span>Edit Rates</span>
             </button>
           </div>
 
@@ -337,7 +521,7 @@ const DashboardModule = ({
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#55372E]/40">
-                <tr>
+                <tr className="hover:bg-[#30141E]/40 cursor-pointer" onClick={() => setIsRateModalOpen(true)}>
                   <td className="py-2.5 pr-2">
                     <strong className="text-[#F8F2E9] block font-semibold">24K Gold</strong>
                     <span className="text-[10px] text-[#BAAEA3]">999 Fine Pure</span>
@@ -354,7 +538,7 @@ const DashboardModule = ({
                     </span>
                   </td>
                 </tr>
-                <tr>
+                <tr className="hover:bg-[#30141E]/40 cursor-pointer" onClick={() => setIsRateModalOpen(true)}>
                   <td className="py-2.5 pr-2">
                     <strong className="text-[#F8F2E9] block font-semibold">22K Gold</strong>
                     <span className="text-[10px] text-[#BAAEA3]">BIS 916 Hallmark</span>
@@ -371,7 +555,7 @@ const DashboardModule = ({
                     </span>
                   </td>
                 </tr>
-                <tr>
+                <tr className="hover:bg-[#30141E]/40 cursor-pointer" onClick={() => setIsRateModalOpen(true)}>
                   <td className="py-2.5 pr-2">
                     <strong className="text-[#F8F2E9] block font-semibold">18K Gold</strong>
                     <span className="text-[10px] text-[#BAAEA3]">750 Diamond Setting</span>
@@ -388,7 +572,7 @@ const DashboardModule = ({
                     </span>
                   </td>
                 </tr>
-                <tr>
+                <tr className="hover:bg-[#30141E]/40 cursor-pointer" onClick={() => setIsRateModalOpen(true)}>
                   <td className="py-2.5 pr-2">
                     <strong className="text-[#F8F2E9] block font-semibold">Silver 999</strong>
                     <span className="text-[10px] text-[#BAAEA3]">Pure Bullion</span>
@@ -438,7 +622,7 @@ const DashboardModule = ({
                   <th className="pb-2 px-2">Contact</th>
                   <th className="pb-2 px-2">Product Reference</th>
                   <th className="pb-2 px-2 text-center">Status</th>
-                  <th className="pb-2 pl-2 text-right">Action</th>
+                  <th className="pb-2 pl-2 text-right">Quick Toggle</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#55372E]/40">
@@ -475,13 +659,19 @@ const DashboardModule = ({
                       </span>
                     </td>
                     <td className="py-2.5 pl-2 text-right">
-                      <button
-                        type="button"
-                        className="text-xs font-bold text-[#C6A15B] hover:underline"
-                        onClick={() => onNavigate('bookings')}
+                      <select
+                        value={lead.status || 'New'}
+                        onChange={(e) => {
+                          updateLeadStatus(lead.id, e.target.value);
+                          showToast(`Updated lead status to ${e.target.value}`);
+                        }}
+                        className="bg-[#17090F] border border-[#55372E] text-[10px] text-[#E7CB87] rounded px-1.5 py-0.5 cursor-pointer outline-none"
                       >
-                        View
-                      </button>
+                        <option value="New">New</option>
+                        <option value="Contacted">Contacted</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Completed">Completed</option>
+                      </select>
                     </td>
                   </tr>
                 ))}
@@ -497,13 +687,22 @@ const DashboardModule = ({
               <MessageSquare size={17} className="text-[#C6A15B]" />
               <h3 className="font-bold text-[#F8F2E9] text-base font-serif">Google Reviews</h3>
             </div>
-            <button
-              type="button"
-              className="admin-btn-secondary text-xs px-3 py-1"
-              onClick={() => onNavigate('testimonials')}
-            >
-              <span>Manage Reviews →</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                className="admin-btn-primary text-xs px-2.5 py-1"
+                onClick={() => setIsAddReviewModalOpen(true)}
+              >
+                <span>+ Add Review</span>
+              </button>
+              <button
+                type="button"
+                className="admin-btn-secondary text-xs px-2.5 py-1"
+                onClick={() => onNavigate('testimonials')}
+              >
+                <span>Manage →</span>
+              </button>
+            </div>
           </div>
 
           <div className="p-3.5 rounded-lg bg-[#17090F] border border-[#55372E] flex items-center justify-between">
@@ -563,7 +762,7 @@ const DashboardModule = ({
             {/* Action 2 */}
             <div
               className="p-3.5 rounded-lg bg-[#17090F] border border-[#55372E] hover:border-[#C6A15B] transition cursor-pointer group space-y-1.5 h-[110px] flex flex-col justify-between"
-              onClick={() => onNavigate('products')}
+              onClick={() => setIsAddProductModalOpen(true)}
             >
               <div className="flex items-center justify-between">
                 <div className="w-7 h-7 rounded-lg bg-[#30141E] text-[#C6A15B] flex items-center justify-center border border-[#55372E]">
@@ -580,7 +779,7 @@ const DashboardModule = ({
             {/* Action 3 */}
             <div
               className="p-3.5 rounded-lg bg-[#17090F] border border-[#55372E] hover:border-[#C6A15B] transition cursor-pointer group space-y-1.5 h-[110px] flex flex-col justify-between"
-              onClick={() => onNavigate('rates')}
+              onClick={() => setIsRateModalOpen(true)}
             >
               <div className="flex items-center justify-between">
                 <div className="w-7 h-7 rounded-lg bg-[#30141E] text-[#C6A15B] flex items-center justify-center border border-[#55372E]">
@@ -615,9 +814,18 @@ const DashboardModule = ({
 
         {/* SECTION G: Showroom Verification Panel (4 Cols) */}
         <div className="lg:col-span-4 admin-card-surface p-5 space-y-3">
-          <h3 className="font-bold text-[#F8F2E9] text-base font-serif pb-3 border-b border-[#55372E]">
-            Showroom Verification
-          </h3>
+          <div className="flex items-center justify-between pb-3 border-b border-[#55372E]">
+            <h3 className="font-bold text-[#F8F2E9] text-base font-serif">
+              Showroom Verification
+            </h3>
+            <button
+              type="button"
+              className="text-xs text-[#C6A15B] hover:underline font-bold"
+              onClick={() => setIsInfoModalOpen(true)}
+            >
+              Edit Details
+            </button>
+          </div>
 
           <div className="space-y-2.5 text-xs">
             <div className="p-2.5 rounded-lg bg-[#17090F] border border-[#55372E] space-y-0.5">
@@ -625,7 +833,7 @@ const DashboardModule = ({
                 <ShieldCheck size={14} />
                 <span>BIS Hallmark Certification</span>
               </div>
-              <p className="text-[#BAAEA3] text-[11px]">100% BIS 916 Hallmark with 6-digit HUID purity code.</p>
+              <p className="text-[#BAAEA3] text-[11px]">100% BIS 916 Hallmark ({storeInfo.hallmarkCode || 'HUID Certified'})</p>
             </div>
 
             <div className="p-2.5 rounded-lg bg-[#17090F] border border-[#55372E] space-y-0.5">
@@ -633,7 +841,7 @@ const DashboardModule = ({
                 <Award size={14} />
                 <span>GSTIN Credentials</span>
               </div>
-              <p className="text-[#BAAEA3] font-mono text-[11px]">09ADMPS4528E1Z8 (Registered Enterprise)</p>
+              <p className="text-[#BAAEA3] font-mono text-[11px]">{storeInfo.gstin || '09ADMPS4528E1Z8'} (Registered Enterprise)</p>
             </div>
 
             <div className="p-2.5 rounded-lg bg-[#17090F] border border-[#55372E] space-y-0.5">
@@ -641,7 +849,7 @@ const DashboardModule = ({
                 <MapPin size={14} />
                 <span>Sangmohal Showroom Address</span>
               </div>
-              <p className="text-[#BAAEA3] text-[11px]">Station Rd, nearby Jila Karagar, Mirzapur, UP 231001</p>
+              <p className="text-[#BAAEA3] text-[11px]">{storeInfo.fullAddress || 'Station Rd, nearby Jila Karagar, Mirzapur, UP 231001'}</p>
             </div>
 
             <div className="p-2.5 rounded-lg bg-[#17090F] border border-[#55372E] space-y-0.5">
@@ -654,6 +862,362 @@ const DashboardModule = ({
           </div>
         </div>
       </div>
+
+      {/* ========================================================================= */}
+      {/* DIRECT INLINE EDITING MODALS ON DASHBOARD                                 */}
+      {/* ========================================================================= */}
+
+      {/* 1. QUICK GOLD RATES EDIT MODAL */}
+      {isRateModalOpen && (
+        <div className="fixed inset-0 z-[110000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#260F18] border border-[#C6A15B] rounded-xl max-w-lg w-full p-6 space-y-5 shadow-2xl animate-fadeIn">
+            <div className="flex items-center justify-between pb-3 border-b border-[#55372E]">
+              <div className="flex items-center gap-2">
+                <Sliders size={18} className="text-[#C6A15B]" />
+                <h3 className="font-serif text-lg font-bold text-[#F8F2E9]">Quick Edit Live Gold &amp; Silver Rates</h3>
+              </div>
+              <button
+                type="button"
+                className="text-[#BAAEA3] hover:text-[#F8F2E9] p-1"
+                onClick={() => setIsRateModalOpen(false)}
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveRates} className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs font-semibold text-[#E7CB87] block mb-1">
+                    24K Pure Gold (₹/g)
+                  </label>
+                  <input
+                    type="number"
+                    value={ratesForm.gold24k}
+                    onChange={(e) => setRatesForm({ ...ratesForm, gold24k: e.target.value })}
+                    className="admin-input-field font-mono"
+                    required
+                  />
+                  <span className="text-[10px] text-[#BAAEA3] block mt-0.5">10g = ₹{(ratesForm.gold24k * 10).toLocaleString('en-IN')}</span>
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold text-[#E7CB87] block mb-1">
+                    22K Hallmark Gold (₹/g)
+                  </label>
+                  <input
+                    type="number"
+                    value={ratesForm.gold22k}
+                    onChange={(e) => setRatesForm({ ...ratesForm, gold22k: e.target.value })}
+                    className="admin-input-field font-mono"
+                    required
+                  />
+                  <span className="text-[10px] text-[#BAAEA3] block mt-0.5">10g = ₹{(ratesForm.gold22k * 10).toLocaleString('en-IN')}</span>
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold text-[#E7CB87] block mb-1">
+                    18K Diamond Gold (₹/g)
+                  </label>
+                  <input
+                    type="number"
+                    value={ratesForm.gold18k}
+                    onChange={(e) => setRatesForm({ ...ratesForm, gold18k: e.target.value })}
+                    className="admin-input-field font-mono"
+                    required
+                  />
+                  <span className="text-[10px] text-[#BAAEA3] block mt-0.5">10g = ₹{(ratesForm.gold18k * 10).toLocaleString('en-IN')}</span>
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold text-[#E7CB87] block mb-1">
+                    Silver 999 (₹/g)
+                  </label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    value={ratesForm.silver999}
+                    onChange={(e) => setRatesForm({ ...ratesForm, silver999: e.target.value })}
+                    className="admin-input-field font-mono"
+                    required
+                  />
+                  <span className="text-[10px] text-[#BAAEA3] block mt-0.5">1kg = ₹{Math.round(ratesForm.silver999 * 1000).toLocaleString('en-IN')}</span>
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-3 pt-3 border-t border-[#55372E]">
+                <button
+                  type="button"
+                  className="admin-btn-secondary text-xs"
+                  onClick={() => setIsRateModalOpen(false)}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="admin-btn-primary text-xs">
+                  Save Rates Live
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* 2. QUICK STORE INFO EDIT MODAL */}
+      {isInfoModalOpen && (
+        <div className="fixed inset-0 z-[110000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#260F18] border border-[#C6A15B] rounded-xl max-w-lg w-full p-6 space-y-5 shadow-2xl animate-fadeIn">
+            <div className="flex items-center justify-between pb-3 border-b border-[#55372E]">
+              <div className="flex items-center gap-2">
+                <Edit3 size={18} className="text-[#C6A15B]" />
+                <h3 className="font-serif text-lg font-bold text-[#F8F2E9]">Quick Edit Showroom Profile</h3>
+              </div>
+              <button
+                type="button"
+                className="text-[#BAAEA3] hover:text-[#F8F2E9] p-1"
+                onClick={() => setIsInfoModalOpen(false)}
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveInfo} className="space-y-3">
+              <div>
+                <label className="text-xs font-semibold text-[#E7CB87] block mb-1">Store Name</label>
+                <input
+                  type="text"
+                  value={infoForm.name}
+                  onChange={(e) => setInfoForm({ ...infoForm, name: e.target.value })}
+                  className="admin-input-field"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="text-xs font-semibold text-[#E7CB87] block mb-1">Hindi Title</label>
+                <input
+                  type="text"
+                  value={infoForm.hindiName}
+                  onChange={(e) => setInfoForm({ ...infoForm, hindiName: e.target.value })}
+                  className="admin-input-field"
+                />
+              </div>
+
+              <div>
+                <label className="text-xs font-semibold text-[#E7CB87] block mb-1">GSTIN Number</label>
+                <input
+                  type="text"
+                  value={infoForm.gstin}
+                  onChange={(e) => setInfoForm({ ...infoForm, gstin: e.target.value })}
+                  className="admin-input-field font-mono"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="text-xs font-semibold text-[#E7CB87] block mb-1">Full Showroom Address</label>
+                <textarea
+                  rows={2}
+                  value={infoForm.fullAddress}
+                  onChange={(e) => setInfoForm({ ...infoForm, fullAddress: e.target.value })}
+                  className="admin-input-field"
+                  required
+                />
+              </div>
+
+              <div className="flex justify-end gap-3 pt-3 border-t border-[#55372E]">
+                <button
+                  type="button"
+                  className="admin-btn-secondary text-xs"
+                  onClick={() => setIsInfoModalOpen(false)}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="admin-btn-primary text-xs">
+                  Update Showroom Profile
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* 3. QUICK ADD PRODUCT MODAL */}
+      {isAddProductModalOpen && (
+        <div className="fixed inset-0 z-[110000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#260F18] border border-[#C6A15B] rounded-xl max-w-lg w-full p-6 space-y-4 shadow-2xl animate-fadeIn">
+            <div className="flex items-center justify-between pb-3 border-b border-[#55372E]">
+              <div className="flex items-center gap-2">
+                <PlusCircle size={18} className="text-[#C6A15B]" />
+                <h3 className="font-serif text-lg font-bold text-[#F8F2E9]">Add New Jewellery Design</h3>
+              </div>
+              <button
+                type="button"
+                className="text-[#BAAEA3] hover:text-[#F8F2E9] p-1"
+                onClick={() => setIsAddProductModalOpen(false)}
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveProduct} className="space-y-3">
+              <div>
+                <label className="text-xs font-semibold text-[#E7CB87] block mb-1">Product Title</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Royal Bridal Choker Set"
+                  value={productForm.name}
+                  onChange={(e) => setProductForm({ ...productForm, name: e.target.value })}
+                  className="admin-input-field"
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-xs font-semibold text-[#E7CB87] block mb-1">Category</label>
+                  <select
+                    value={productForm.category}
+                    onChange={(e) => setProductForm({ ...productForm, category: e.target.value })}
+                    className="admin-input-field"
+                  >
+                    <option value="bridal">Royal Bridal</option>
+                    <option value="gold">Gold Necklaces</option>
+                    <option value="bangles">Temple Bangles</option>
+                    <option value="diamond">Solitaires</option>
+                    <option value="everyday">Everyday &amp; Festive</option>
+                    <option value="mens">Men's Jewels</option>
+                    <option value="coins">24K Coins</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold text-[#E7CB87] block mb-1">Net Weight</label>
+                  <input
+                    type="text"
+                    value={productForm.netGoldWeight}
+                    onChange={(e) => setProductForm({ ...productForm, netGoldWeight: e.target.value })}
+                    placeholder="22.50g"
+                    className="admin-input-field"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-xs font-semibold text-[#E7CB87] block mb-1">Making Charge (%)</label>
+                  <input
+                    type="number"
+                    value={productForm.makingPercent}
+                    onChange={(e) => setProductForm({ ...productForm, makingPercent: parseFloat(e.target.value) || 10 })}
+                    className="admin-input-field"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-[#E7CB87] block mb-1">Badge Tag</label>
+                  <select
+                    value={productForm.badge}
+                    onChange={(e) => setProductForm({ ...productForm, badge: e.target.value })}
+                    className="admin-input-field"
+                  >
+                    <option value="Showroom Original">Showroom Original</option>
+                    <option value="Masterpiece">Masterpiece</option>
+                    <option value="Trending">Trending</option>
+                    <option value="Best Seller">Best Seller</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-3 pt-3 border-t border-[#55372E]">
+                <button
+                  type="button"
+                  className="admin-btn-secondary text-xs"
+                  onClick={() => setIsAddProductModalOpen(false)}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="admin-btn-primary text-xs">
+                  Save Product to Catalog
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* 4. QUICK ADD REVIEW MODAL */}
+      {isAddReviewModalOpen && (
+        <div className="fixed inset-0 z-[110000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#260F18] border border-[#C6A15B] rounded-xl max-w-lg w-full p-6 space-y-4 shadow-2xl animate-fadeIn">
+            <div className="flex items-center justify-between pb-3 border-b border-[#55372E]">
+              <div className="flex items-center gap-2">
+                <Star size={18} className="text-[#C6A15B]" />
+                <h3 className="font-serif text-lg font-bold text-[#F8F2E9]">Add Verified Customer Review</h3>
+              </div>
+              <button
+                type="button"
+                className="text-[#BAAEA3] hover:text-[#F8F2E9] p-1"
+                onClick={() => setIsAddReviewModalOpen(false)}
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveReview} className="space-y-3">
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-xs font-semibold text-[#E7CB87] block mb-1">Customer Name</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Ramesh Chandra Verma"
+                    value={reviewForm.author}
+                    onChange={(e) => setReviewForm({ ...reviewForm, author: e.target.value })}
+                    className="admin-input-field"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold text-[#E7CB87] block mb-1">Rating</label>
+                  <select
+                    value={reviewForm.rating}
+                    onChange={(e) => setReviewForm({ ...reviewForm, rating: parseInt(e.target.value) || 5 })}
+                    className="admin-input-field"
+                  >
+                    <option value="5">★★★★★ (5 Stars)</option>
+                    <option value="4">★★★★☆ (4 Stars)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="text-xs font-semibold text-[#E7CB87] block mb-1">Review Text</label>
+                <textarea
+                  rows={3}
+                  placeholder="Customer feedback quote..."
+                  value={reviewForm.comment}
+                  onChange={(e) => setReviewForm({ ...reviewForm, comment: e.target.value })}
+                  className="admin-input-field"
+                  required
+                />
+              </div>
+
+              <div className="flex justify-end gap-3 pt-3 border-t border-[#55372E]">
+                <button
+                  type="button"
+                  className="admin-btn-secondary text-xs"
+                  onClick={() => setIsAddReviewModalOpen(false)}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="admin-btn-primary text-xs">
+                  Publish Review
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
