@@ -15217,4 +15217,261 @@ select.admin-input-field:focus {
   }
 }
 
-/* Rajesh Jewellers Mirzapur — Stylesheet Verified */
+/* ==========================================================================
+   GLOBAL NORMAL ANIMATIONS & REFINED INTERACTION ENHANCEMENTS
+   Smooth, subtle, luxury transitions for cards, headers, buttons & images
+   ========================================================================== */
+
+/* 1. Global Keyframe Animations */
+@keyframes fadeInUpNormal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDownNormal {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeftNormal {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRightNormal {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes zoomInNormal {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes pulseAmbientGlow {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(229, 195, 120, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(229, 195, 120, 0.55);
+  }
+}
+
+/* 2. Utility Animation Classes */
+.animate-fade-in-up {
+  animation: fadeInUpNormal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDownNormal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeftNormal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRightNormal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-zoom-in {
+  animation: zoomInNormal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-float {
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseAmbientGlow 3s ease-in-out infinite;
+}
+
+/* Stagger Delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* 3. Smooth Component Hover Micro-Animations */
+
+/* Product Cards & Gallery Cards Hover Elevation */
+.ecom-card,
+.testimonial-card,
+.gallery-card,
+.feature-pillar-card,
+.scheme-benefit-card,
+.about-milestone-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease !important;
+  will-change: transform, box-shadow;
+}
+
+.ecom-card:hover,
+.testimonial-card:hover,
+.gallery-card:hover,
+.feature-pillar-card:hover,
+.scheme-benefit-card:hover,
+.about-milestone-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 18px rgba(229, 195, 120, 0.25) !important;
+  border-color: #E5C378 !important;
+}
+
+/* Product Card & Gallery Image Zoom on Hover */
+.card-img-holder img,
+.gallery-img-wrapper img,
+.hero-image-wrap img,
+.about-story-img img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease !important;
+  will-change: transform;
+}
+
+.card-img-holder:hover img,
+.gallery-card:hover .gallery-img-wrapper img,
+.about-story-img:hover img {
+  transform: scale(1.06) !important;
+  filter: brightness(1.05) !important;
+}
+
+/* Interactive Buttons & Badges Micro-Transitions */
+.btn-primary,
+.btn-secondary,
+.filter-chip,
+.filter-pill,
+.shape-card,
+.card-quickview-btn,
+.admin-header-btn-secondary,
+.pincode-submit-btn,
+.calc-quick-chip-btn {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 8px 22px rgba(229, 195, 120, 0.45) !important;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px) !important;
+  border-color: #E5C378 !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Subtle Link & Navigation Hover Transitions */
+.nav-link,
+.footer-link-item,
+.admin-nav-item {
+  transition: color 0.2s ease, transform 0.2s ease, background-color 0.2s ease !important;
+}
+
+.footer-link-item:hover {
+  transform: translateX(4px) !important;
+  color: #E5C378 !important;
+}
+
+/* Smooth Scroll-Triggered Reveal Animations for Section Containers */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Editorial Staggered Sequence Animations for Hero Section Elements */
+.hero-banner-section .hero-top-meta-row,
+.hero-banner-section .hero-heading,
+.hero-banner-section .hero-hindi-moniker,
+.hero-banner-section .hero-desc,
+.hero-banner-section .hero-cta-group,
+.hero-banner-section .hero-trust-badges {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: opacity, transform;
+}
+
+.hero-banner-section.is-visible .hero-top-meta-row {
+  transition-delay: 0.08s !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.hero-banner-section.is-visible .hero-heading {
+  transition-delay: 0.20s !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.hero-banner-section.is-visible .hero-hindi-moniker {
+  transition-delay: 0.32s !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.hero-banner-section.is-visible .hero-desc {
+  transition-delay: 0.42s !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.hero-banner-section.is-visible .hero-cta-group {
+  transition-delay: 0.52s !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.hero-banner-section.is-visible .hero-trust-badges {
+  transition-delay: 0.62s !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Rajesh Jewellers Mirzapur — Stylesheet Verified with Hero Staggered Sequence */

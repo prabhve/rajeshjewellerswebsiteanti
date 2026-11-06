@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { JewelleryProvider } from './context/JewelleryContext';
+import { useScrollReveal } from './hooks/useScrollReveal';
 import CategorySEO from './components/CategorySEO';
 import TopBullionBar from './components/TopBullionBar';
 import Header from './components/Header';
@@ -27,10 +28,14 @@ const GiftFinderModal = lazy(() => import('./components/GiftFinderModal'));
 const DealerPortalModal = lazy(() => import('./components/DealerPortalModal'));
 
 function App() {
+  // Use custom useScrollReveal hook to attach viewport intersection observers across all main sections
+  useScrollReveal('main > section, main > div, footer, .calc-step-unit, .testimonials-section, .swarna-nidhi-section');
   return (
     <JewelleryProvider>
       <CategorySEO />
       <div className="rajesh-app-wrapper">
+        {/* Top Bullion Bar with Live MCX Ticker */}
+
         {/* Top Bullion Bar with Live MCX Ticker */}
         <TopBullionBar />
 

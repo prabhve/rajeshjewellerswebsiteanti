@@ -78,7 +78,7 @@ const HeroSection = () => {
   const slide = HERO_SLIDES[activeSlide];
 
   return (
-    <section className="hero-banner-section" id="hero">
+    <section className="hero-banner-section scroll-reveal is-visible" id="hero">
       <div className="container">
         <div className="hero-banner-grid">
           {/* Left Column: Brand Copy & Actions */}
