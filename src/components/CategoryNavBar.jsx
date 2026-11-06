@@ -56,4 +56,4 @@ const CategoryNavBar = () => {
   );
 };
 
-export default CategoryNavBar;
+export default React.memo(CategoryNavBar);

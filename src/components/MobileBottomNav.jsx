@@ -61,4 +61,4 @@ const MobileBottomNav = () => {
   );
 };
 
-export default MobileBottomNav;
+export default React.memo(MobileBottomNav);

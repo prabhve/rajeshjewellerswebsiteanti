@@ -36,4 +36,4 @@ const FloatingWhatsApp = () => {
   );
 };
 
-export default FloatingWhatsApp;
+export default React.memo(FloatingWhatsApp);

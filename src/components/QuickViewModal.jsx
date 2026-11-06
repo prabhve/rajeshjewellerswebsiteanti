@@ -336,4 +336,4 @@ const QuickViewModal = () => {
   );
 };
 
-export default QuickViewModal;
+export default React.memo(QuickViewModal);

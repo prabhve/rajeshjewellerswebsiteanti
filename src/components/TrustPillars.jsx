@@ -66,4 +66,4 @@ const TrustPillars = () => {
   );
 };
 
-export default TrustPillars;
+export default React.memo(TrustPillars);

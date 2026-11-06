@@ -1,0 +1,1430 @@
+# RAJESH JEWELLERS — COMPLETE ADMIN CMS TRANSFORMATION
+## From Basic Showroom CMS to a Professional Jewellery Store Management Platform
+
+### ROLE
+
+Act as a world-class Product Architect, Senior UI/UX Designer, Enterprise CMS Developer, Database Architect, Security Engineer, and Full-Stack Developer.
+
+You are working on an EXISTING Rajesh Jewellers website and its existing Showroom Master Admin CMS.
+
+The brand:
+
+RAJESH JEWELLERS  
+Sangmohal Flagship Showroom  
+Mirzapur, Uttar Pradesh, India.
+
+I have provided multiple screenshots of the current admin panel covering authentication, Gold Rates, Products, Gallery, Videos, Testimonials, Schemes, Showroom Profile, and Contacts.
+
+Study every screenshot carefully.
+
+Your objective is to transform the current admin panel into a complete, professional, easy-to-use, premium Jewellery Store Management System.
+
+This is not a UI-only redesign.
+
+It must be a fully functional CMS through which an authorised administrator can manage nearly all customer-facing website content, business information, products, media and configurable business features without editing source code.
+
+---
+
+# 1. MOST IMPORTANT REQUIREMENT: COMPLETE WEBSITE CONTROL
+
+I want the administrator to control the complete customer-facing website from one place.
+
+Everything that is reasonable to manage as business content or configuration must be editable, modifiable, uploadable, removable, reorderable and publishable.
+
+Examples:
+
+- Change headings and descriptions.
+- Change Hindi and English content.
+- Replace logos.
+- Upload and remove photographs.
+- Upload and manage videos.
+- Add new jewellery products.
+- Update product prices and weights.
+- Change gold and silver rates.
+- Edit category names.
+- Change category images.
+- Reorder navigation menus.
+- Modify homepage banners.
+- Enable or disable website sections.
+- Edit promotional offers.
+- Update scheme parameters.
+- Change contact numbers.
+- Change showroom timings.
+- Edit address and landmark.
+- Update map location.
+- Edit SEO metadata.
+- Modify footer information.
+- Create and manage website content pages.
+- Preview changes before publication.
+- Restore earlier versions.
+
+Do not hardcode customer-facing content unnecessarily.
+
+Use a centralised content configuration and persistent storage architecture.
+
+Important distinction: editable business settings must not permit arbitrary modification of security-critical code, credentials, calculation algorithms or access-control rules. Expose safe configuration controls instead.
+
+# 2. COMPLETE CMS ARCHITECTURE
+
+Expand the existing eight modules into the following organised modules.
+
+### MAIN NAVIGATION
+
+1. Dashboard
+2. Homepage Builder
+3. Header & Navigation
+4. Gold Rates & Pricing
+5. Products & Inventory
+6. Categories & Collections
+7. Media Library
+8. Showroom Gallery
+9. Videos & Reels
+10. Customer Reviews
+11. Offers & Promotions
+12. Swarna Nidhi Scheme
+13. Gold Price Calculator
+14. Showroom Profile
+15. Contacts & Business Hours
+16. Bookings & Customer Inquiries
+17. SEO & Website Content
+18. Policies & Legal Pages
+19. Design & Appearance
+20. Admin Users & Permissions
+21. Backup & Restore
+22. Activity Logs
+23. General Settings
+
+Organise related modules into logical navigation groups.
+
+Provide a searchable sidebar so the administrator can find modules easily.
+
+The interface must remain clean even with 20+ modules.
+
+# 3. ADMIN PANEL — COMPLETE UI/UX REDESIGN
+
+The existing panel has several visible layout problems:
+
+- The fixed header overlaps page content.
+- Sidebar and main content scroll independently without proper visual separation.
+- Horizontal scrollbars appear unnecessarily.
+- Product images overflow their containers.
+- Image previews appear at enormous sizes.
+- Product information becomes concatenated and difficult to read.
+- Gallery editor images overlap.
+- Testimonial records are displayed as unformatted text.
+- Scheme preview controls are visually unfinished.
+- Gold rate values and price breakdowns are incorrectly aligned.
+- Some browser-default input and action buttons appear inside the interface.
+- Preview panels have inconsistent dimensions.
+- The entire CMS feels like a collection of forms rather than one coherent application.
+
+Fix the underlying component and layout issues.
+
+## Visual direction
+
+Use Rajesh Jewellers' brand identity:
+
+- Deep Burgundy: #280D16
+- Dark Wine: #350F1B
+- Champagne Gold: #C6A15B
+- Soft Gold: #E4C77D
+- Warm Ivory: #F7F0E5
+- Primary Text: #F5EFE7
+- Secondary Text: #B8A99D
+- Success: #168653
+- Danger: #B94747
+
+The admin system should look like a premium professional business application.
+
+Not like a public-facing jewellery website.
+
+Use:
+- Clean data tables.
+- Consistent form fields.
+- Elegant sidebar.
+- Refined section headings.
+- Compact status badges.
+- Clear button hierarchy.
+- Proper card spacing.
+- Accessible inputs.
+- Subtle borders and shadows.
+
+Avoid excessive glowing effects and decorative borders.
+
+## Application shell
+
+Create a consistent shell with:
+
+TOP HEADER:
+- Rajesh Jewellers logo.
+- Showroom identification.
+- Live gold/silver rate summary with actual data status.
+- Active administrator information.
+- View Live Website.
+- Save indicator.
+- Notifications.
+- Backup/Export.
+- Lock & Exit.
+
+LEFT SIDEBAR:
+- Search modules.
+- Grouped navigation.
+- Active module indicator.
+- Expand/collapse controls.
+- Section counters where useful.
+
+MAIN WORKSPACE:
+- Breadcrumb.
+- Page heading.
+- Short module description.
+- Primary action.
+- Content area.
+- Save/publish controls.
+
+Use a proper CSS Grid/Flexbox layout.
+
+The top header must not cover workspace content.
+
+The sidebar must have its own controlled scrolling.
+
+The main workspace should have natural vertical scrolling.
+
+No unnecessary horizontal scrolling.
+
+No component should exceed its allocated width.
+
+Apply min-width: 0 to flexible layout children where required.
+
+Use a responsive navigation drawer on smaller screens.
+
+# 4. DASHBOARD — NEW MODULE
+
+Create a useful administrative dashboard.
+
+Do not make it merely decorative.
+
+Include the following cards:
+
+BUSINESS OVERVIEW:
+- Total active products.
+- Product categories.
+- Gallery images.
+- Published videos.
+- Published testimonials.
+- Pending changes.
+- Scheduled or pending bookings.
+- New customer inquiries.
+
+RATE OVERVIEW:
+- 24K gold rate.
+- 22K gold rate.
+- 18K gold rate.
+- Silver rate.
+- Last successful update.
+- Data source and status.
+
+WEBSITE STATUS:
+- Published configuration.
+- Draft changes.
+- Last publication.
+- Latest backup.
+- Integration warnings.
+
+RECENT ACTIVITY:
+- Recent product modifications.
+- Rate updates.
+- Gallery uploads.
+- Content publications.
+- Booking updates.
+
+QUICK ACTIONS:
+- Add Product.
+- Update Gold Rates.
+- Upload Gallery Image.
+- Edit Homepage.
+- Add Promotional Banner.
+- View Website.
+
+Use data from the actual application.
+
+Do not create fake business metrics or pretend that unconnected external systems are integrated.
+
+# 5. HOMEPAGE BUILDER — CRITICAL NEW MODULE
+
+This should be one of the most powerful parts of the CMS.
+
+I want complete control over the homepage.
+
+Create a visual section-based homepage builder.
+
+## Editable homepage sections
+
+1. Announcement Bar.
+2. Live Gold Ticker.
+3. Main Navigation.
+4. Hero Section.
+5. Trust Indicator Strip.
+6. Shop by Category.
+7. Featured Collections.
+8. Product Discovery Section.
+9. Showroom Delivery and Trial.
+10. Video Shopping Banner.
+11. Featured Products.
+12. Swarna Nidhi Promotion.
+13. Gold Price Calculator.
+14. Showroom Gallery.
+15. Customer Reviews.
+16. Five Pillars of Trust.
+17. Showroom Information.
+18. Map Section.
+19. Footer.
+
+## Every section must support
+
+- Edit content.
+- Edit English text.
+- Edit Hindi text.
+- Replace images.
+- Upload new images.
+- Change CTA text.
+- Change CTA destination.
+- Enable/disable section.
+- Reorder sections.
+- Duplicate section where appropriate.
+- Preview.
+- Save Draft.
+- Publish.
+
+Provide drag-and-drop section ordering.
+
+Allow authorised administrators to add new reusable sections using predefined layouts.
+
+Suggested reusable blocks:
+
+- Hero Banner.
+- Image and Text.
+- Product Collection.
+- Product Carousel.
+- Category Grid.
+- Promotional Banner.
+- Trust Features.
+- Video Banner.
+- Customer Testimonials.
+- Contact CTA.
+- Statistics/Information Strip.
+
+Do not create an unrestricted HTML or JavaScript editor.
+
+Use safe, reusable content blocks.
+
+## Visual preview
+
+The administrator must see the changes in a preview resembling the actual customer-facing website.
+
+Provide Desktop, Tablet and Mobile preview modes.
+
+The preview must use the same components and design system as the live website.
+
+# 6. HEADER & NAVIGATION MANAGER
+
+Make every header element editable.
+
+Manage:
+
+- Brand logo.
+- Alternative mobile logo.
+- Brand title.
+- Brand subtitle.
+- Top announcement text.
+- Gold ticker visibility.
+- Search placeholder.
+- Wishlist visibility.
+- Shopping bag visibility.
+- VIP booking button.
+- Navigation labels.
+- Hindi navigation labels.
+- Menu links.
+- Navigation order.
+- Active/inactive menu items.
+- Gift Finder link.
+- Calculator link.
+- Scheme link.
+
+Allow menu items to be reordered.
+
+Allow an administrator to add new menu items with a configured destination.
+
+Support mobile and desktop navigation separately where necessary.
+
+# 7. GOLD RATES & PRICING MANAGEMENT
+
+This section must be accurate and easy to use.
+
+## Editable rates
+
+24K Gold 999  
+22K Gold BIS 916  
+18K Gold 750  
+Silver 999
+
+For each rate, include:
+
+- Rate value.
+- Rate unit.
+- Currency.
+- Data source.
+- Last updated time.
+- Update type.
+- Active/inactive status.
+- Optional rate notes.
+
+## Rate sources
+
+Support clearly separated modes:
+
+1. Actual external market API.
+2. Authorised manual administrator entry.
+3. Development-only simulated data.
+
+Never label simulated prices as live MCX prices.
+
+When using an API:
+- Show API connection status.
+- Show last successful fetch.
+- Show stale-data warnings.
+- Preserve a safe previous-rate fallback.
+- Record failures.
+
+When using manual rates:
+- Show Manual Rate status.
+- Record administrator and update time.
+
+## Unit management
+
+Handle units explicitly.
+
+Examples:
+- Per gram.
+- Per 10 grams.
+- Per kilogram.
+
+Do not accidentally display a kilogram rate as a per-gram rate.
+
+Use validation and consistent unit conversion.
+
+## Price configuration
+
+Allow authorised configuration of:
+- Making charge presets.
+- Minimum and maximum making charges.
+- Category-specific making charges.
+- GST configuration.
+- Supported purity grades.
+- Price display rules.
+- Rounding settings, subject to existing business rules.
+
+Preserve existing verified price calculations.
+
+## Rate preview
+
+Create a structured rate board preview.
+
+Each value should be displayed in a separate element.
+
+Never concatenate two numerical values or their units.
+
+Include an explicit preview of how the updated rates appear on:
+- Homepage ticker.
+- Navigation.
+- Product prices.
+- Calculator.
+- Product detail popup.
+
+## Rate history
+
+Maintain:
+- Old rate.
+- New rate.
+- Source.
+- Update timestamp.
+- Administrator.
+- Change type.
+
+Provide a history table and filters.
+
+Do not allow a demo simulator to affect published production prices unless explicitly configured through a safe development mechanism.
+
+# 8. PRODUCTS & JEWELLERY CATALOGUE
+
+This is a critical module.
+
+Create a complete product management interface.
+
+## Product operations
+
+- Add Product.
+- Edit Product.
+- Delete Product with confirmation.
+- Duplicate Product.
+- Archive Product.
+- Restore Product.
+- Publish Product.
+- Unpublish Product.
+- Feature Product.
+- Bulk Select.
+- Bulk Update.
+- Bulk Import.
+- Bulk Export.
+
+## Product information fields
+
+IDENTITY:
+- Product ID.
+- SKU.
+- English Title.
+- Hindi Title.
+- Short Description.
+- Full Description.
+
+CLASSIFICATION:
+- Category.
+- Subcategory.
+- Collection.
+- Occasion.
+- Tags.
+- Featured Status.
+
+MATERIAL AND PURITY:
+- Gold / Silver / Diamond / Other.
+- Karat or purity.
+- BIS hallmark information.
+- HUID, where verified.
+- Certification details.
+- Gemstone details.
+- Cut type.
+
+WEIGHT:
+- Net Gold Weight.
+- Gross Weight.
+- Stone Weight.
+- Other Material Weight.
+- Weight Unit.
+
+PRICING:
+- Pricing Method.
+- Fixed Price or Dynamic Price.
+- Reference Gold Rate.
+- Making Charges.
+- Stone Value where applicable.
+- Applicable Tax.
+- Display Price.
+- Price Visibility.
+- WhatsApp Quote Option.
+
+INVENTORY:
+- Available.
+- Made to Order.
+- Out of Stock.
+- Hidden.
+- Archived.
+
+MEDIA:
+- Main Product Photograph.
+- Additional Photographs.
+- Optional Video.
+- Image Captions.
+- Image Alt Text.
+- Display Order.
+
+## Product images
+
+The current CMS has major product image overflow issues.
+
+Fix them completely.
+
+Requirements:
+- Fixed preview container dimensions.
+- Responsive image sizing.
+- Object-fit: contain or cover depending on the image context.
+- Crop and reposition controls.
+- Image replacement.
+- Delete image.
+- Reorder images.
+- Upload multiple photographs.
+- Image size validation.
+- File-type validation.
+- Loading state.
+- Upload error state.
+
+Never display raw uploaded images at their unrestricted natural dimensions inside the CMS.
+
+Product previews must have a defined maximum size.
+
+## Product list
+
+Create a professional searchable product table or grid.
+
+Columns:
+- Thumbnail.
+- Product Title.
+- SKU.
+- Category.
+- Net Weight.
+- Purity.
+- Price.
+- Inventory Status.
+- Publication Status.
+- Actions.
+
+Include category filter, search, sorting and pagination.
+
+## Bulk import
+
+Allow CSV product import with:
+- Downloadable CSV template.
+- Column mapping.
+- Validation.
+- Duplicate SKU detection.
+- Preview before importing.
+- Error report.
+- Import summary.
+
+Image files should be uploaded through the media manager or supported bulk-media workflow.
+
+Never overwrite existing products without confirmation.
+
+# 9. CATEGORY & COLLECTION MANAGER
+
+Allow creating, editing, deleting, hiding and reordering categories.
+
+Manage the existing collections:
+
+- Royal Bridal.
+- Gold Necklaces.
+- Temple Kadas.
+- Solitaires.
+- Jhumkas & Daily.
+- Men's Jewels.
+- 24K Coins.
+- 925 Silver.
+
+Each category should support:
+- English name.
+- Hindi name.
+- Description.
+- Category image.
+- Featured image.
+- Slug.
+- Sorting priority.
+- Product assignment.
+- Visibility.
+- SEO information.
+
+Allow creating unlimited additional categories.
+
+Do not delete a category if published products are still assigned without displaying a reassignment or archive warning.
+
+# 10. CENTRAL MEDIA LIBRARY
+
+Create a dedicated media management system.
+
+Support:
+- Image uploads.
+- Video uploads where storage permits.
+- External video URLs.
+- Image replacement.
+- Image deletion.
+- Folder organisation.
+- Search by filename.
+- Media filters.
+- File details.
+- Dimensions.
+- File size.
+- Upload date.
+- Alt text.
+- Captions.
+- Reuse existing media.
+
+Suggested folders:
+
+- Brand Assets.
+- Logo.
+- Homepage Banners.
+- Product Images.
+- Royal Bridal.
+- Necklaces.
+- Temple Jewellery.
+- Earrings.
+- Men's Jewellery.
+- Silver.
+- Coins.
+- Showroom Photos.
+- Showroom Videos.
+- Promotional Campaigns.
+
+Use secure upload validation.
+
+Restrict supported file types and size.
+
+Use actual persistent media storage.
+
+Do not rely on temporary browser object URLs as permanent saved image locations.
+
+When an asset is replaced, identify where it is used before deleting the original.
+
+# 11. SHOWROOM GALLERY MANAGER
+
+Preserve the existing gallery views.
+
+Allow:
+
+- Add new gallery image.
+- Upload replacement photo.
+- Delete image.
+- Edit title.
+- Edit subtitle.
+- Edit description.
+- Change location labels.
+- Change image order.
+- Set featured gallery image.
+- Publish/unpublish a gallery image.
+
+Each record should be presented as a separate manageable card.
+
+The current gallery layout creates oversized overlapping previews.
+
+Replace it with a balanced editor:
+
+LEFT:
+Gallery item details and image upload.
+
+RIGHT:
+Constrained preview and gallery ordering.
+
+Use consistent aspect ratios.
+
+Do not duplicate raw image previews across the entire page.
+
+The editor must be comfortable for non-technical staff.
+
+# 12. VIDEOS & SHOWROOM REELS
+
+Allow complete video configuration.
+
+Fields:
+- Video Title.
+- Hindi Title.
+- Description.
+- Video Source.
+- YouTube URL.
+- Vimeo URL where supported.
+- Direct MP4 URL or upload.
+- Thumbnail.
+- Quality Label.
+- Duration if available.
+- Display Position.
+- Visibility.
+
+Validate video URLs.
+
+Show a real preview only when a valid source is configured.
+
+Remove unrelated demo videos and placeholder content.
+
+Never substitute a random video.
+
+Allow the administrator to replace the video without changing source code.
+
+# 13. TESTIMONIALS & REVIEWS
+
+Create a structured review manager.
+
+Operations:
+- Add Review.
+- Edit Review.
+- Publish.
+- Unpublish.
+- Archive.
+- Delete.
+- Reorder.
+
+Fields:
+- Customer Name.
+- Location.
+- Review Text.
+- Original Language.
+- Rating.
+- Review Date.
+- Related Jewellery Category.
+- Customer Photo, if authorised.
+- Original Review Source.
+- Google Review Link.
+- Verification Status.
+
+Display all records as individual cards or table rows.
+
+Do not allow unverified customer feedback to automatically receive a Google Verified badge.
+
+Keep genuine Google reviews distinguishable from manually submitted testimonials.
+
+# 14. SWARNA NIDHI SCHEME BUILDER
+
+Build a proper visual scheme configuration module.
+
+Editable settings:
+
+- Scheme Name.
+- Hindi Name.
+- Scheme Description.
+- Number of Installments.
+- Bonus Month.
+- Bonus Percentage or Amount.
+- Minimum Monthly Payment.
+- Maximum Monthly Payment.
+- Payment Frequency.
+- Accepted Payment Methods.
+- Eligible Jewellery Categories.
+- Redemption Rules.
+- Making Charge Benefits.
+- Scheme Start/End Date.
+- Scheme Visibility.
+- WhatsApp Enquiry Message.
+- Complete Terms and Conditions.
+
+## Live simulator
+
+Create a well-designed interactive simulator.
+
+The administrator should be able to select sample monthly contributions.
+
+Display:
+- Monthly payment.
+- Number of instalments.
+- Total customer deposit.
+- Bonus amount.
+- Final eligible redemption value.
+
+Update the preview immediately as configuration changes.
+
+Use validated calculations based on actual scheme rules.
+
+Never make false financial guarantees.
+
+# 15. GOLD PRICE CALCULATOR CONFIGURATION
+
+Allow safe configuration of the existing frontend calculator.
+
+Manage:
+- Available purities.
+- Display labels.
+- Purity percentages.
+- Rate source mapping.
+- Default weight.
+- Minimum weight.
+- Maximum weight.
+- Supported weight shortcuts.
+- Making charge range.
+- Making charge presets.
+- Default selected preset.
+- Tola conversion labels.
+- Tax configuration.
+- Price-disclaimer text.
+- WhatsApp quotation message template.
+- Calculator visibility.
+
+Preserve and validate all underlying formulas.
+
+Do not allow accidental changes to alter financial calculations silently.
+
+Show a calculation test preview before publishing configuration changes.
+
+# 16. SHOWROOM PROFILE & BRAND IDENTITY
+
+Create a complete brand profile editor.
+
+Manage:
+
+- Brand Name English.
+- Brand Name Hindi.
+- Brand Logo.
+- Alternative Logo.
+- Brand Tagline.
+- Hindi Tagline.
+- Brand Description.
+- Proprietor Display Name.
+- Brand Story.
+- Showroom Heritage Information.
+- Official GSTIN.
+- Verified Business Credentials.
+- Social Media Links.
+- Google Business Profile Link.
+- Brand Contact Information.
+
+Provide a proper formatted live preview.
+
+The current profile preview renders text in an unstructured manner.
+
+Correct the layout using meaningful headings, metadata rows and proper text hierarchy.
+
+Never allow an unverified rating or legal identifier to appear as verified.
+
+# 17. CONTACT & SHOWROOM MANAGEMENT
+
+Create structured contact settings.
+
+Allow:
+- Full Address.
+- Landmark.
+- PIN Code.
+- Latitude and Longitude.
+- Google Maps URL.
+- Main Counter Number.
+- Store Manager Number.
+- Inquiries Desk Number.
+- WhatsApp Number.
+- WhatsApp Message Templates.
+- Booking Contact.
+- Video Shopping Contact.
+- Email Address.
+- Business Hours.
+
+Support configurable business hours for each day.
+
+Include:
+- Open/Closed status preview.
+- Special holiday hours.
+- Temporary closure setting.
+- Copy Address Preview.
+- Phone Link Preview.
+- WhatsApp Link Preview.
+- Navigation Link Preview.
+
+Use valid phone number formats.
+
+Do not merge different contact numbers into one field.
+
+All numbers must map correctly to their intended action.
+
+# 18. BOOKINGS & CUSTOMER LEADS — NEW MODULE
+
+Create a central lead and enquiry manager.
+
+Manage:
+- VIP Visit Requests.
+- Showroom Trial Requests.
+- Video Shopping Requests.
+- WhatsApp Enquiries.
+- Product Inquiries.
+- General Contact Form Submissions.
+
+When actual lead integrations exist, connect this module to them.
+
+Each lead record should support:
+- Customer Name.
+- Contact Number.
+- Email, if supplied.
+- Inquiry Type.
+- Product Reference.
+- Preferred Date.
+- Preferred Time.
+- Message.
+- Source.
+- Creation Time.
+- Status.
+- Assigned Administrator.
+- Internal Notes.
+
+Lead statuses:
+- New.
+- Contacted.
+- Follow-up.
+- Confirmed.
+- Completed.
+- Cancelled.
+
+Include:
+- Search.
+- Filters.
+- Date Range.
+- Status Updates.
+- Lead Detail View.
+- Export.
+
+Do not create fake leads.
+
+Do not claim that WhatsApp conversations have been imported unless a genuine supported integration exists.
+
+# 19. HOMEPAGE OFFERS & PROMOTION MANAGER
+
+Add a separate promotion manager.
+
+Support:
+- Promotional Banner.
+- Festival Campaign.
+- Wedding Season Offer.
+- Jewellery Launch.
+- Gift Campaign.
+- Featured Collection Campaign.
+- CTA.
+- Validity Date.
+- Start/End Time.
+- Target Section.
+- Visibility.
+
+Allow:
+- Schedule.
+- Publish.
+- Unpublish.
+- Preview.
+- Expire.
+
+Do not automatically advertise discounts or offers without explicit administrator approval.
+
+# 20. SEO & CONTENT MANAGER
+
+Provide structured SEO settings.
+
+For every important page manage:
+
+- SEO Title.
+- Meta Description.
+- URL Slug.
+- Open Graph Title.
+- Open Graph Description.
+- Social Share Image.
+- Canonical URL.
+- Index/Noindex Setting.
+- Alt Text for Important Images.
+
+Create content management for editable pages:
+
+- About Us.
+- Contact Us.
+- Privacy Policy.
+- Terms & Conditions.
+- Shipping Policy.
+- Return & Exchange.
+- Cancellation.
+- Jewellery Pricing Disclaimer.
+- Scheme Terms.
+- FAQ.
+
+Provide a proper text editor with safe formatting controls.
+
+Do not allow administrators to inject arbitrary scripts.
+
+# 21. DESIGN & APPEARANCE SETTINGS
+
+Create a safe design configuration area.
+
+Allow controlled changes to:
+- Primary brand colour.
+- Secondary brand colour.
+- Accent colour.
+- Heading font selection.
+- Body font selection.
+- Button style presets.
+- Border radius presets.
+- Header layout preset.
+- Footer layout preset.
+- Product card layout preset.
+
+Provide:
+- Theme Preview.
+- Desktop Preview.
+- Tablet Preview.
+- Mobile Preview.
+- Reset to Brand Default.
+
+Use preapproved visual presets.
+
+Do not permit colour changes that make text inaccessible or unreadable.
+
+# 22. ADMIN USERS & SECURITY
+
+This is sensitive business functionality.
+
+Improve the current admin authentication.
+
+The old visible "Show Default Passcode" functionality must not expose default or production credentials.
+
+Provide:
+
+- Secure administrator login.
+- Password/PIN change.
+- Session management.
+- Logout.
+- Idle session timeout.
+- Failed login protection.
+- Account lockout or progressive rate limiting.
+- Secure password storage.
+- Server-side authentication.
+- Administrator access logs.
+
+Support roles such as:
+
+OWNER:
+Full authorised control.
+
+MANAGER:
+Products, pricing, orders/inquiries, bookings and operational content.
+
+CONTENT EDITOR:
+Homepage, media, categories and content.
+
+VIEWER:
+Read-only dashboard and permitted reporting.
+
+Apply role-based permissions on the server, not just by hiding buttons in the interface.
+
+Provide a permission matrix.
+
+Only the authorised owner should be able to modify critical security and access settings.
+
+Do not expose API secrets, database passwords or authentication tokens in frontend code.
+
+# 23. SAVE, DRAFT, PUBLISH & VERSION HISTORY
+
+This is mandatory throughout the CMS.
+
+Do not create a system where clicking Save only changes the current browser UI.
+
+Provide proper persistence and publishing workflows.
+
+Every major CMS editor must support:
+
+- Save Draft.
+- Publish Changes.
+- Discard Changes.
+- Preview.
+- Autosave where appropriate.
+- Unsaved Change Indicator.
+- Validation.
+- Success Confirmation.
+- Error Feedback.
+
+## Publishing workflow
+
+Draft changes must not automatically replace the live website.
+
+The administrator should be able to:
+
+1. Make changes.
+2. Save as Draft.
+3. Preview.
+4. Publish when ready.
+
+Provide a publication confirmation for important changes.
+
+## Version history
+
+Store:
+- Previous content.
+- Modified content.
+- Administrator.
+- Timestamp.
+- Publication status.
+
+Allow authorised users to inspect and restore previous content versions.
+
+Do not allow an accidental restore to overwrite current changes without confirmation.
+
+# 24. BACKUP, IMPORT & RESTORE
+
+Upgrade the current Export Backup and Import functionality.
+
+Support:
+
+- Full CMS data export.
+- Product data export.
+- Category data export.
+- Configuration backup.
+- Media manifest export.
+- CSV product export.
+- JSON data export where suitable.
+
+For restoration:
+- Validate file format.
+- Verify schema version.
+- Show import preview.
+- Detect duplicates.
+- Report conflicts.
+- Confirm restoration.
+- Provide rollback strategy.
+
+Do not silently overwrite existing data.
+
+A data backup should not falsely claim to contain image files unless the media assets are actually included or separately backed up.
+
+Store backup history securely where supported.
+
+# 25. ACTIVITY LOGS
+
+Create an audit trail for important administrative changes.
+
+Examples:
+
+- Product Created.
+- Product Updated.
+- Product Deleted.
+- Gold Rate Changed.
+- Gallery Photo Uploaded.
+- Video Updated.
+- Scheme Configuration Changed.
+- Contact Number Changed.
+- Website Published.
+- Backup Created.
+- Backup Restored.
+- Admin Permissions Changed.
+
+Record:
+- Event.
+- User.
+- Time.
+- Affected Record.
+- Relevant Change Summary.
+
+Provide filters and search.
+
+Audit records should not be casually editable by content editors.
+
+# 26. TECHNICAL ARCHITECTURE — EXTREMELY IMPORTANT
+
+Before implementation, inspect the existing application carefully.
+
+Identify:
+- Existing frontend framework.
+- Existing backend.
+- Existing database.
+- Existing file storage.
+- Existing APIs.
+- Existing CMS state.
+- Existing admin routes.
+- Existing authentication.
+- Existing local configuration storage.
+- Existing product and rate schemas.
+
+Do not replace a working architecture without a clear reason.
+
+## Centralised data architecture
+
+Create a clean relationship between:
+
+ADMIN PANEL
+↓
+AUTHENTICATED CMS API
+↓
+PERSISTENT DATA STORAGE
+↓
+PUBLISHED WEBSITE CONFIGURATION
+↓
+CUSTOMER-FACING WEBSITE
+
+The admin panel and public website must use the same source of truth.
+
+Changes should appear on the live website after successful publication.
+
+## Persistence
+
+Use the project's existing database and storage infrastructure if it is suitable.
+
+If the current implementation is frontend-only:
+
+- Identify this limitation.
+- Implement an appropriate persistent backend using the existing deployment environment where supported.
+- Define data models and API contracts.
+- Integrate genuine image/file storage.
+- Keep secrets server-side.
+- Document any configuration or credentials that require owner setup.
+
+localStorage may be used for non-sensitive temporary UI preferences or prototypes, but it must not be presented as secure, production-grade shared CMS storage.
+
+Do not pretend that a database or storage integration exists if it has not been configured.
+
+## Data integrity
+
+Preserve existing products, rates, contacts, gallery, schemes and reviews.
+
+Use migrations and safe defaults.
+
+Do not truncate tables or overwrite existing configuration.
+
+Validate incoming data.
+
+Use safe delete/archive operations where possible.
+
+# 27. RESPONSIVE ADMIN EXPERIENCE
+
+Test the complete CMS across desktop, laptop, tablet and mobile.
+
+Required testing sizes:
+
+1920 × 1080
+1440 × 900
+1366 × 768
+1280 × 720
+1024 × 768
+768 × 1024
+430 × 932
+390 × 844
+360 × 740
+
+Desktop:
+- Fixed top header.
+- Collapsible sidebar.
+- Spacious main workspace.
+- Balanced two-column forms and previews.
+
+Laptop:
+- Prevent header overlap.
+- Compact controls when needed.
+- Main content should remain usable without horizontal scrolling.
+
+Tablet:
+- Responsive sidebar drawer.
+- Adaptive form layouts.
+- Proper preview placement.
+
+Mobile:
+- Drawer-based navigation.
+- Single-column forms.
+- Full-width primary actions.
+- Touch-friendly controls.
+- Compact data cards.
+- Image upload support.
+- No clipped buttons or fields.
+
+Do not force desktop dashboard dimensions onto mobile.
+
+# 28. DESIGN OF CMS FOR NON-TECHNICAL STAFF
+
+The owner should not need programming knowledge.
+
+Every module should have:
+- Clear section heading.
+- Short instructions.
+- Descriptive field labels.
+- Helpful examples.
+- Validation messages.
+- Easy media selection.
+- Live preview.
+- Save and publish buttons.
+- Success and failure feedback.
+
+Use:
+- Tooltips for complex settings.
+- Confirmation dialogs before destructive operations.
+- Search and filtering for large datasets.
+- Pagination for long lists.
+- Empty states with helpful actions.
+- Loading states.
+- Error recovery.
+
+Do not overwhelm users with every advanced field at once.
+
+Group advanced settings into expandable sections.
+
+# 29. TESTING & COMPLETION REQUIREMENTS
+
+Do not stop after generating the admin panel UI.
+
+Implement the real operations and test them.
+
+Mandatory test cases:
+
+1. Update a homepage heading from admin.
+2. Publish it and verify it on the live homepage.
+3. Upload a new hero image and replace the existing one.
+4. Add a new category.
+5. Add a new jewellery product.
+6. Edit its product price and weight.
+7. Verify the product appears on the public website.
+8. Change a product image and inspect its display.
+9. Update gold rates and verify all connected displays.
+10. Change the gallery sequence.
+11. Replace the showroom video.
+12. Publish and unpublish a testimonial.
+13. Modify scheme parameters and test the simulator.
+14. Update showroom contact information.
+15. Update business hours and preview Open/Closed status.
+16. Save a draft and ensure the public website remains unchanged.
+17. Publish the draft and verify the public website updates.
+18. Create a backup and verify its contents.
+19. Test import validation.
+20. Test admin permissions.
+
+Also verify that:
+- Data persists after page refresh.
+- Data is available after a new authorised admin session.
+- Image uploads do not break existing images.
+- No module modifies unrelated settings.
+- Failed saves show useful error messages.
+- Unsaved modifications are not silently lost.
+
+# 30. EXECUTION STRATEGY
+
+Do not attempt a risky all-at-once rewrite.
+
+First inspect and document the existing implementation.
+
+Then execute in stages:
+
+STAGE 1:
+Redesign the CMS application shell, authentication, navigation and dashboard.
+
+STAGE 2:
+Build the shared data, save, draft, publish, permissions and media architecture.
+
+STAGE 3:
+Implement Products, Categories, Gallery and Videos.
+
+STAGE 4:
+Implement Gold Rates, Pricing and Calculator Configuration.
+
+STAGE 5:
+Implement Homepage Builder, Header Manager and global Content Manager.
+
+STAGE 6:
+Implement Reviews, Schemes, Showroom and Contact Management.
+
+STAGE 7:
+Implement Bookings, Leads, SEO, Policies, Theme Settings and System Settings.
+
+STAGE 8:
+Implement version history, backups, audit logs and production QA.
+
+Keep the existing working functionality available throughout development.
+
+Do not remove existing modules while replacing them.
+
+# FINAL EXPECTATION
+
+The completed system must function as a central operating platform for Rajesh Jewellers.
+
+The owner must be able to manage the public website, product catalogue, jewellery photographs, videos, pricing, schemes, content, contact details and other business configurations from one clean, elegant, professional admin interface.
+
+The system must be:
+- Fully functional.
+- Secure.
+- Persistent.
+- Easy to learn.
+- Responsive.
+- Maintainable.
+- Visually consistent.
+- Suitable for everyday showroom operations.
+
+Most importantly:
+
+I should not need a developer for routine website content updates.
+
+If I need to change an image, I should be able to upload it.
+
+If I need to modify a product, I should be able to edit it.
+
+If I need to update a price, I should be able to change it through the authorised rate manager.
+
+If I need to change the homepage, I should be able to manage its sections.
+
+If I need to publish something, I should be able to preview and publish it.
+
+Deliver a working CMS, not just a beautiful dashboard mockup.

@@ -2,6 +2,7 @@ import React, { useState, useId, useMemo } from 'react';
 import { useJewellery } from '../context/JewelleryContext';
 import { CATEGORY_CHIPS, SHAPE_FILTERS, OCCASION_FILTERS } from '../data/initialData';
 import { STORE_INFO } from '../data/storeInfo';
+import { CATEGORY_SEO_DATA } from './CategorySEO';
 import ProductCard from './ProductCard';
 import {
   Video,
@@ -239,6 +240,8 @@ const ProductsCatalog = () => {
     return filtered.map((item) => item.product);
   }, [products, activeCategory, activeShape, activeOccasion, priceRange, sortBy, calculatePrice]);
 
+  const currentSeo = CATEGORY_SEO_DATA[activeCategory] || CATEGORY_SEO_DATA.all;
+
   return (
     <section className="catalog-section" id="catalog-section">
       <div className="container">
@@ -255,10 +258,13 @@ const ProductsCatalog = () => {
                 Sangmohal Showroom Real-Time Inventory
               </span>
             </div>
-            <h2 className="catalog-main-title">
-              राजेश ज्वेलर्स ऑनलाइन आभूषण संग्रह
-            </h2>
-            <p className="catalog-subtitle">
+            <h1 className="catalog-main-title" style={{ fontSize: '1.85rem', marginBottom: '0.35rem' }}>
+              {currentSeo.heading}
+            </h1>
+            <p className="catalog-subtitle" style={{ fontSize: '0.92rem', color: '#D4C5B3', marginBottom: '0.45rem' }}>
+              {currentSeo.subheading}
+            </p>
+            <p className="catalog-subtitle" style={{ fontSize: '0.82rem', opacity: 0.85 }}>
               Showing <strong style={{ color: '#FFF6D6' }}>{displayed.length} of {products.length} Masterpiece Designs</strong> in Sangmohal, Mirzapur Showroom
             </p>
           </div>
@@ -993,4 +999,4 @@ const ProductsCatalog = () => {
   );
 };
 
-export default ProductsCatalog;
+export default React.memo(ProductsCatalog);

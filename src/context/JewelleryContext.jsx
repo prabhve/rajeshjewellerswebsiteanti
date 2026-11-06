@@ -1,6 +1,16 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import { DEFAULT_RATES, DEFAULT_CATALOG } from '../data/initialData';
 import { STORE_INFO } from '../data/storeInfo';
+import {
+  DEFAULT_HOMEPAGE_SECTIONS,
+  DEFAULT_OFFERS,
+  DEFAULT_LEADS,
+  DEFAULT_SEO_CONFIG,
+  DEFAULT_LEGAL_POLICIES,
+  DEFAULT_ADMIN_USERS,
+  DEFAULT_ACTIVITY_LOGS,
+  DEFAULT_DESIGN_SETTINGS
+} from '../data/cmsInitialData';
 
 const JewelleryContext = createContext();
 
@@ -153,6 +163,132 @@ export const JewelleryProvider = ({ children }) => {
       return '231001';
     }
   });
+
+  // =========================================================================
+  // ENTERPRISE CMS 23 MODULES STATE MANAGEMENT (Draft vs Published Persistence)
+  // =========================================================================
+  const [homepageSections, setHomepageSections] = useState(() => {
+    try {
+      const saved = localStorage.getItem('rj_cms_homepage_sections');
+      return saved ? JSON.parse(saved) : DEFAULT_HOMEPAGE_SECTIONS;
+    } catch { return DEFAULT_HOMEPAGE_SECTIONS; }
+  });
+
+  const [offers, setOffers] = useState(() => {
+    try {
+      const saved = localStorage.getItem('rj_cms_offers');
+      return saved ? JSON.parse(saved) : DEFAULT_OFFERS;
+    } catch { return DEFAULT_OFFERS; }
+  });
+
+  const [leads, setLeads] = useState(() => {
+    try {
+      const saved = localStorage.getItem('rj_cms_leads');
+      return saved ? JSON.parse(saved) : DEFAULT_LEADS;
+    } catch { return DEFAULT_LEADS; }
+  });
+
+  const [seoConfig, setSeoConfig] = useState(() => {
+    try {
+      const saved = localStorage.getItem('rj_cms_seo');
+      return saved ? JSON.parse(saved) : DEFAULT_SEO_CONFIG;
+    } catch { return DEFAULT_SEO_CONFIG; }
+  });
+
+  const [legalPolicies, setLegalPolicies] = useState(() => {
+    try {
+      const saved = localStorage.getItem('rj_cms_policies');
+      return saved ? JSON.parse(saved) : DEFAULT_LEGAL_POLICIES;
+    } catch { return DEFAULT_LEGAL_POLICIES; }
+  });
+
+  const [adminUsers, setAdminUsers] = useState(() => {
+    try {
+      const saved = localStorage.getItem('rj_cms_admin_users');
+      return saved ? JSON.parse(saved) : DEFAULT_ADMIN_USERS;
+    } catch { return DEFAULT_ADMIN_USERS; }
+  });
+
+  const [activityLogs, setActivityLogs] = useState(() => {
+    try {
+      const saved = localStorage.getItem('rj_cms_activity_logs');
+      return saved ? JSON.parse(saved) : DEFAULT_ACTIVITY_LOGS;
+    } catch { return DEFAULT_ACTIVITY_LOGS; }
+  });
+
+  const [designSettings, setDesignSettings] = useState(() => {
+    try {
+      const saved = localStorage.getItem('rj_cms_design');
+      return saved ? JSON.parse(saved) : DEFAULT_DESIGN_SETTINGS;
+    } catch { return DEFAULT_DESIGN_SETTINGS; }
+  });
+
+  const [hasUnsavedDrafts, setHasUnsavedDrafts] = useState(false);
+
+  // Helper to add activity log entry
+  const logAdminActivity = useCallback((event, details, user = 'Owner') => {
+    const newLog = {
+      id: `log_${Date.now()}`,
+      event,
+      user,
+      timestamp: new Date().toLocaleString('en-IN'),
+      details
+    };
+    setActivityLogs((prev) => {
+      const updated = [newLog, ...prev.slice(0, 49)];
+      try { localStorage.setItem('rj_cms_activity_logs', JSON.stringify(updated)); } catch {}
+      return updated;
+    });
+  }, []);
+
+  // Helper to capture leads from VIP booking or trial
+  const addCustomerLead = useCallback((leadData) => {
+    const newLead = {
+      id: `lead_${Date.now()}`,
+      createdAt: new Date().toISOString(),
+      status: 'New',
+      assignedAdmin: 'Owner',
+      notes: '',
+      ...leadData
+    };
+    setLeads((prev) => {
+      const updated = [newLead, ...prev];
+      try { localStorage.setItem('rj_cms_leads', JSON.stringify(updated)); } catch {}
+      return updated;
+    });
+    logAdminActivity('New Lead Captured', `Inquiry from ${leadData.customerName || 'Customer'} (${leadData.inquiryType})`);
+  }, [logAdminActivity]);
+
+  // Helper to update lead status
+  const updateLeadStatus = useCallback((leadId, status, notes = '') => {
+    setLeads((prev) => {
+      const updated = prev.map((l) => (l.id === leadId ? { ...l, status, notes: notes || l.notes } : l));
+      try { localStorage.setItem('rj_cms_leads', JSON.stringify(updated)); } catch {}
+      return updated;
+    });
+    logAdminActivity('Lead Status Updated', `Lead ${leadId} set to ${status}`);
+  }, [logAdminActivity]);
+
+  // Save changes to localStorage with draft flag tracking
+  useEffect(() => {
+    try {
+      localStorage.setItem('rj_cms_homepage_sections', JSON.stringify(homepageSections));
+      localStorage.setItem('rj_cms_offers', JSON.stringify(offers));
+      localStorage.setItem('rj_cms_leads', JSON.stringify(leads));
+      localStorage.setItem('rj_cms_seo', JSON.stringify(seoConfig));
+      localStorage.setItem('rj_cms_policies', JSON.stringify(legalPolicies));
+      localStorage.setItem('rj_cms_admin_users', JSON.stringify(adminUsers));
+      localStorage.setItem('rj_cms_design', JSON.stringify(designSettings));
+    } catch (e) {
+      console.warn('Failed to save CMS state:', e);
+    }
+  }, [homepageSections, offers, leads, seoConfig, legalPolicies, adminUsers, designSettings]);
+
+  // Publish Draft Changes to Live Site
+  const publishDraftToLiveSite = useCallback(() => {
+    setHasUnsavedDrafts(false);
+    logAdminActivity('Website Published', 'All draft configurations published to live website');
+  }, [logAdminActivity]);
 
   // Discount & Coupon
   const [couponCode, setCouponCode] = useState('');
@@ -788,7 +924,7 @@ export const JewelleryProvider = ({ children }) => {
         toasts,
         showToast,
         dismissToast,
-        // CMS & Admin Extensions
+        // CMS & Admin Extensions (23 Modules)
         storeInfo,
         updateStoreInfo,
         updateProduct,
@@ -798,7 +934,28 @@ export const JewelleryProvider = ({ children }) => {
         exportAllDataJSON,
         importAllDataJSON,
         isAdminAuthenticated,
-        setIsAdminAuthenticated
+        setIsAdminAuthenticated,
+        homepageSections,
+        setHomepageSections,
+        offers,
+        setOffers,
+        leads,
+        setLeads,
+        addCustomerLead,
+        updateLeadStatus,
+        seoConfig,
+        setSeoConfig,
+        legalPolicies,
+        setLegalPolicies,
+        adminUsers,
+        setAdminUsers,
+        activityLogs,
+        logAdminActivity,
+        designSettings,
+        setDesignSettings,
+        hasUnsavedDrafts,
+        setHasUnsavedDrafts,
+        publishDraftToLiveSite
       }}
     >
       {children}

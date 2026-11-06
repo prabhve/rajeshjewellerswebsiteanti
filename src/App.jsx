@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { JewelleryProvider } from './context/JewelleryContext';
+import CategorySEO from './components/CategorySEO';
 import TopBullionBar from './components/TopBullionBar';
 import Header from './components/Header';
 import CategoryNavBar from './components/CategoryNavBar';
@@ -28,6 +29,7 @@ const DealerPortalModal = lazy(() => import('./components/DealerPortalModal'));
 function App() {
   return (
     <JewelleryProvider>
+      <CategorySEO />
       <div className="rajesh-app-wrapper">
         {/* Top Bullion Bar with Live MCX Ticker */}
         <TopBullionBar />

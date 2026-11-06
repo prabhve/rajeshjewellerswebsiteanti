@@ -2,6 +2,21 @@ import React, { useState, useRef, useCallback } from 'react';
 import { useJewellery } from '../context/JewelleryContext';
 import { STORE_INFO } from '../data/storeInfo';
 import AdminSidebarNav from './AdminSidebarNav';
+import DashboardModule from './admin/DashboardModule';
+import HomepageBuilderModule from './admin/HomepageBuilderModule';
+import HeaderNavModule from './admin/HeaderNavModule';
+import CategoriesModule from './admin/CategoriesModule';
+import MediaLibraryModule from './admin/MediaLibraryModule';
+import PromotionsModule from './admin/PromotionsModule';
+import BookingsLeadsModule from './admin/BookingsLeadsModule';
+import SeoContentModule from './admin/SeoContentModule';
+import PoliciesLegalModule from './admin/PoliciesLegalModule';
+import DesignAppearanceModule from './admin/DesignAppearanceModule';
+import AdminUsersSecurityModule from './admin/AdminUsersSecurityModule';
+import BackupRestoreModule from './admin/BackupRestoreModule';
+import ActivityLogsModule from './admin/ActivityLogsModule';
+import GeneralSettingsModule from './admin/GeneralSettingsModule';
+import CalculatorConfigModule from './admin/CalculatorConfigModule';
 import {
   X,
   Lock,
@@ -29,6 +44,16 @@ import {
 // Secure hardcoded showroom master passcode
 const SECURE_MASTER_PASSCODE = '1994';
 
+// Memoized Main Content Workspace Pane Container for 8 CMS Sections
+const AdminContentPane = React.memo(({ activeTab, children }) => {
+  return (
+    <main className="admin-portal-content" aria-live="polite">
+      {children}
+    </main>
+  );
+});
+AdminContentPane.displayName = 'AdminContentPane';
+
 const DealerPortalModal = () => {
   const {
     isDealerModalOpen,
@@ -52,12 +77,28 @@ const DealerPortalModal = () => {
     importAllDataJSON,
     isAdminAuthenticated,
     setIsAdminAuthenticated,
-    showToast
+    showToast,
+    homepageSections,
+    setHomepageSections,
+    offers,
+    setOffers,
+    leads,
+    updateLeadStatus,
+    seoConfig,
+    setSeoConfig,
+    legalPolicies,
+    setLegalPolicies,
+    adminUsers,
+    setAdminUsers,
+    activityLogs,
+    designSettings,
+    setDesignSettings,
+    hasUnsavedDrafts,
+    publishDraftToLiveSite
   } = useJewellery();
 
-  // Active section inside the full-screen portal (8 distinct CMS sections)
-  // 'rates' | 'products' | 'gallery' | 'videos' | 'testimonials' | 'schemes' | 'showroom_info' | 'contacts'
-  const [activeTab, setActiveTab] = useState('rates');
+  // Active section inside full-screen CMS portal (23 Organized Modules)
+  const [activeTab, setActiveTab] = useState('dashboard');
   const handleSelectTab = useCallback((tabId) => {
     setActiveTab(tabId);
   }, []);
@@ -489,7 +530,7 @@ const DealerPortalModal = () => {
           </span>
 
           <p className="admin-gate-desc">
-            Enter 4-digit Master Passcode to access full-screen website content management, live bullion rates &amp; showroom inventory.
+            Secure access to website content management, live bullion rates and showroom inventory.
           </p>
 
           <form
@@ -709,19 +750,145 @@ const DealerPortalModal = () => {
 
       {/* 2. MAIN WORKSPACE WITH SIDEBAR & SIDE-BY-SIDE PANES */}
       <div className="admin-portal-body">
-        {/* LEFT FEATURE NAVIGATION SIDEBAR (8 DISTINCT CMS SECTIONS - MEMOIZED) */}
+        {/* LEFT FEATURE NAVIGATION SIDEBAR (23 ORGANIZED CMS MODULES) */}
         <AdminSidebarNav
           activeTab={activeTab}
           onSelectTab={handleSelectTab}
           productCount={products.length}
           reviewCount={reviewsList.length}
+          leadCount={leads.length}
+          offerCount={offers.length}
         />
 
-        {/* RIGHT MAIN CONTENT WORKSPACE (RESPONSIVE SIDE-BY-SIDE PANES) */}
-        <main className="admin-portal-content" aria-live="polite">
-          {/* ============================================================= */}
-          {/* 1. GOLD RATES — SIDE-BY-SIDE PANES                            */}
-          {/* ============================================================= */}
+        {/* RIGHT MAIN CONTENT WORKSPACE (RESPONSIVE SIDE-BY-SIDE PANES - MEMOIZED WRAPPER) */}
+        <AdminContentPane activeTab={activeTab}>
+          {/* Module 1: Dashboard */}
+          {activeTab === 'dashboard' && (
+            <DashboardModule
+              products={products}
+              liveRates={liveRates}
+              storeInfo={storeInfo}
+              leads={leads}
+              reviews={reviewsList}
+              hasUnsavedDrafts={hasUnsavedDrafts}
+              onNavigate={handleSelectTab}
+              publishDraftToLiveSite={publishDraftToLiveSite}
+            />
+          )}
+
+          {/* Module 2: Homepage Builder */}
+          {activeTab === 'homepage_builder' && (
+            <HomepageBuilderModule
+              homepageSections={homepageSections}
+              setHomepageSections={setHomepageSections}
+              publishDraftToLiveSite={publishDraftToLiveSite}
+              showToast={showToast}
+            />
+          )}
+
+          {/* Module 3: Header & Navigation */}
+          {activeTab === 'header_nav' && (
+            <HeaderNavModule
+              storeInfo={storeInfo}
+              updateStoreInfo={updateStoreInfo}
+              showToast={showToast}
+            />
+          )}
+
+          {/* Module 6: Categories & Collections */}
+          {activeTab === 'categories' && (
+            <CategoriesModule
+              products={products}
+              showToast={showToast}
+            />
+          )}
+
+          {/* Module 7: Media Library */}
+          {activeTab === 'media_library' && (
+            <MediaLibraryModule showToast={showToast} />
+          )}
+
+          {/* Module 11: Offers & Promotions */}
+          {activeTab === 'offers' && (
+            <PromotionsModule
+              offers={offers}
+              setOffers={setOffers}
+              showToast={showToast}
+            />
+          )}
+
+          {/* Module 13: Gold Price Calculator Config */}
+          {activeTab === 'calculator_config' && (
+            <CalculatorConfigModule showToast={showToast} />
+          )}
+
+          {/* Module 16: Bookings & Customer Inquiries */}
+          {activeTab === 'bookings' && (
+            <BookingsLeadsModule
+              leads={leads}
+              updateLeadStatus={updateLeadStatus}
+              showToast={showToast}
+            />
+          )}
+
+          {/* Module 17: SEO & Website Content */}
+          {activeTab === 'seo' && (
+            <SeoContentModule
+              seoConfig={seoConfig}
+              setSeoConfig={setSeoConfig}
+              showToast={showToast}
+            />
+          )}
+
+          {/* Module 18: Policies & Legal Pages */}
+          {activeTab === 'policies' && (
+            <PoliciesLegalModule
+              legalPolicies={legalPolicies}
+              setLegalPolicies={setLegalPolicies}
+              showToast={showToast}
+            />
+          )}
+
+          {/* Module 19: Design & Appearance */}
+          {activeTab === 'design' && (
+            <DesignAppearanceModule
+              designSettings={designSettings}
+              setDesignSettings={setDesignSettings}
+              showToast={showToast}
+            />
+          )}
+
+          {/* Module 20: Admin Users & Security */}
+          {activeTab === 'users_permissions' && (
+            <AdminUsersSecurityModule
+              adminUsers={adminUsers}
+              setAdminUsers={setAdminUsers}
+              changeAdminPasscode={changeAdminPasscode}
+              showToast={showToast}
+            />
+          )}
+
+          {/* Module 21: Backup & Restore */}
+          {activeTab === 'backup_restore' && (
+            <BackupRestoreModule
+              exportAllDataJSON={exportAllDataJSON}
+              importAllDataJSON={importAllDataJSON}
+              resetAllDataToDefaults={resetAllDataToDefaults}
+              showToast={showToast}
+            />
+          )}
+
+          {/* Module 22: Activity Logs */}
+          {activeTab === 'activity_logs' && (
+            <ActivityLogsModule activityLogs={activityLogs} />
+          )}
+
+          {/* Module 23: General Settings */}
+          {activeTab === 'general_settings' && (
+            <GeneralSettingsModule showToast={showToast} />
+          )}
+
+          {/* Module 4: Gold Rates & Pricing */}
           {activeTab === 'rates' && (
             <div className="admin-tab-pane">
               <div className="admin-pane-header">
@@ -2180,7 +2347,7 @@ const DealerPortalModal = () => {
               </div>
             </div>
           )}
-        </main>
+        </AdminContentPane>
       </div>
     </div>
   );

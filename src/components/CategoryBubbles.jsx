@@ -5,6 +5,7 @@ import { STORE_INFO } from '../data/storeInfo';
 import {
   Sparkles,
   Eye,
+  Heart,
   ShoppingBag,
   MessageCircle,
   X,
@@ -21,6 +22,8 @@ const CategoryBubbles = () => {
     setActiveCategory,
     calculatePrice,
     addToCart,
+    toggleWishlist,
+    isInWishlist,
     setQuickViewProduct
   } = useJewellery();
 
@@ -185,6 +188,25 @@ const CategoryBubbles = () => {
                           </span>
                         )}
 
+                        {/* Wishlist Button */}
+                        <button
+                          type="button"
+                          className={`card-wishlist-btn ${isInWishlist(product.id) ? 'active' : ''}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleWishlist(product);
+                          }}
+                          title={isInWishlist(product.id) ? 'Remove from Wishlist' : 'Save to Wishlist'}
+                          aria-label="Wishlist"
+                          style={{ top: '10px', right: '10px' }}
+                        >
+                          <Heart
+                            size={16}
+                            fill={isInWishlist(product.id) ? '#E5C378' : 'none'}
+                            color={isInWishlist(product.id) ? '#E5C378' : '#FFFDF9'}
+                          />
+                        </button>
+
                         {/* Quick View Button */}
                         <button
                           type="button"
@@ -303,4 +325,4 @@ const CategoryBubbles = () => {
   );
 };
 
-export default CategoryBubbles;
+export default React.memo(CategoryBubbles);

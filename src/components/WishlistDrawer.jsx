@@ -192,6 +192,8 @@ const WishlistDrawer = () => {
                     <img
                       src={item.image}
                       alt={item.name}
+                      loading="lazy"
+                      decoding="async"
                       onClick={() => handleOpenProduct(item)}
                       style={{ cursor: 'pointer' }}
                       title="Click to view details & certificate"
@@ -335,4 +337,4 @@ const WishlistDrawer = () => {
   );
 };
 
-export default WishlistDrawer;
+export default React.memo(WishlistDrawer);

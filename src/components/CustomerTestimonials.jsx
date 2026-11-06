@@ -71,6 +71,8 @@ const CustomerTestimonials = () => {
                     src={review.avatar}
                     alt={review.author}
                     className="author-avatar-monogram"
+                    loading="lazy"
+                    decoding="async"
                     style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }}
                   />
                 ) : (
@@ -111,4 +113,4 @@ const CustomerTestimonials = () => {
   );
 };
 
-export default CustomerTestimonials;
+export default React.memo(CustomerTestimonials);

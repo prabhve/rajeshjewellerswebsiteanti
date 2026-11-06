@@ -125,4 +125,4 @@ const TopBullionBar = () => {
   );
 };
 
-export default TopBullionBar;
+export default React.memo(TopBullionBar);

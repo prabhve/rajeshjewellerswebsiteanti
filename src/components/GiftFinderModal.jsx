@@ -644,4 +644,4 @@ const GiftFinderModal = () => {
   );
 };
 
-export default GiftFinderModal;
+export default React.memo(GiftFinderModal);

@@ -267,4 +267,4 @@ const VipBookingModal = () => {
   );
 };
 
-export default VipBookingModal;
+export default React.memo(VipBookingModal);

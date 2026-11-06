@@ -540,4 +540,4 @@ const PriceEstimator = () => {
   );
 };
 
-export default PriceEstimator;
+export default React.memo(PriceEstimator);

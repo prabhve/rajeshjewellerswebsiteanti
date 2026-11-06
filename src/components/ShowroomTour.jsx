@@ -236,6 +236,8 @@ const ShowroomTour = () => {
                     src="/assets/images/store/store_showcase_video_thumb.jpg"
                     alt="Showroom Video Reel"
                     className="video-stage-bg"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="video-stage-overlay">
                     {!isVideoPlaying ? (
@@ -342,10 +344,23 @@ const ShowroomTour = () => {
                 </div>
               </div>
 
-              <div className="wing-status-indicator">
-                <span className="pulse-emerald-dot" />
-                <span>Open Today</span>
-              </div>
+              {(() => {
+                const now = new Date();
+                const day = now.getDay();
+                const hours = now.getHours();
+                const minutes = now.getMinutes();
+                const timeVal = hours + minutes / 60;
+                const openTime = day === 0 ? 11.0 : 10.5;
+                const closeTime = day === 0 ? 20.0 : 20.5;
+                const isOpen = timeVal >= openTime && timeVal <= closeTime;
+
+                return (
+                  <div className={`wing-status-indicator ${isOpen ? 'is-open' : 'is-closed'}`}>
+                    <span className={isOpen ? 'pulse-emerald-dot' : 'pulse-red-dot'} />
+                    <span>{isOpen ? 'Open Now (10:30 AM - 8:30 PM)' : 'Closed Now (Opens 10:30 AM)'}</span>
+                  </div>
+                );
+              })()}
             </div>
 
             {/* Main Concierge Body */}
@@ -576,4 +591,4 @@ const ShowroomTour = () => {
   );
 };
 
-export default ShowroomTour;
+export default React.memo(ShowroomTour);

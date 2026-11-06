@@ -109,6 +109,23 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Legal & Policy Navigation Row */}
+        <div style={{ borderTop: '1px solid rgba(198, 161, 91, 0.18)', borderBottom: '1px solid rgba(198, 161, 91, 0.18)', padding: '0.85rem 0', margin: '2rem 0 1.25rem', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '1rem 1.5rem', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+          <a href="#trust" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-amber-400">Privacy Policy</a>
+          <span style={{ opacity: 0.3 }}>•</span>
+          <a href="#scheme" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-amber-400">Terms &amp; Conditions</a>
+          <span style={{ opacity: 0.3 }}>•</span>
+          <a href="#catalog-section" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-amber-400">Shipping Policy</a>
+          <span style={{ opacity: 0.3 }}>•</span>
+          <a href="#trust" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-amber-400">Returns &amp; Exchange</a>
+          <span style={{ opacity: 0.3 }}>•</span>
+          <a href="#trust" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-amber-400">Cancellation Policy</a>
+          <span style={{ opacity: 0.3 }}>•</span>
+          <a href="#calculator" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-amber-400">Jewellery Pricing Disclaimer</a>
+          <span style={{ opacity: 0.3 }}>•</span>
+          <a href="#showroom" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-amber-400">Contact Us</a>
+        </div>
+
         {/* Bottom Bar with Discreet Admin Passcode Access */}
         <div className="footer-bottom">
           <div>
@@ -131,4 +148,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default React.memo(Footer);
