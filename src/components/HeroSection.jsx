@@ -16,40 +16,48 @@ import {
 
 const HERO_SLIDES = [
   {
-    id: 'rani-haar',
-    title: '22K Handcrafted Bridal Rani Haar',
+    id: 'slide-masterpiece',
+    title: 'Handcrafted 22K Royal Bridal Rani Haar & Jhumka Set',
     subtitle: 'हस्तनिर्मित 22K ब्राइडल रानी हार एवं झुमका सेट',
-    tag: 'Showroom Original',
+    tag: 'Sangmohal Original',
     image: '/assets/images/store/store_display_jewellery.jpg',
-    purity: '22K BIS 916 Hallmark',
-    badge: 'Pure Gold Masterpiece'
+    purity: '22K BIS 916 Hallmark (HUID)',
+    badge: 'Royal Jewellery Masterpiece',
+    pillTag: 'Pure BIS 916',
+    isJewellery: true
   },
   {
-    id: 'bridal-polki',
-    title: 'Shahi Rajwada Polki & Kundan Set',
-    subtitle: 'शाही राजवाड़ा ब्राइडल कुंदन एवं पोलकी चोकर',
-    tag: 'Royal Bridal 2026',
-    image: '/assets/images/hero_bridal.jpg',
-    purity: 'Uncut Syndicate Polki',
-    badge: 'Heirloom Edition'
-  },
-  {
-    id: 'storefront',
+    id: 'slide-showroom',
     title: 'Rajesh Jewellers Flagship Showroom',
     subtitle: 'राजेश ज्वेलर्स — संगमोहाल, स्टेशन रोड, मिर्ज़ापुर',
-    tag: 'Verified Showroom',
+    tag: 'Established Heritage',
     image: '/assets/images/store/storefront_facade.jpg',
-    purity: 'GST: 09ADMPS4528E1Z8',
-    badge: 'Sangmohal Landmark'
+    purity: 'Station Road Landmark • GST: 09ADMPS4528E1Z8',
+    badge: 'Sangmohal Showroom Experience',
+    pillTag: 'Flagship Showroom',
+    isJewellery: false
   },
   {
-    id: 'interior',
+    id: 'slide-gaddi',
     title: 'Traditional Royal Seated Gaddi Lounge',
-    subtitle: 'पारंपरिक गद्दी एवं पारिवारिक ज्वैलरी परामर्श',
-    tag: 'Luxury Hospitality',
+    subtitle: 'पारंपरिक गद्दी बैठक एवं पारिवारिक आभूषण परामर्श',
+    tag: 'VIP Hospitality Salon',
     image: '/assets/images/store/store_interior_counter.jpg',
-    purity: 'In-Store Karatmeter Test',
-    badge: 'Air-Conditioned'
+    purity: 'Air-Conditioned Lounge • In-Store Karatmeter',
+    badge: 'Royal Gaddi Lounge',
+    pillTag: 'Showroom Hospitality',
+    isJewellery: false
+  },
+  {
+    id: 'slide-polki',
+    title: 'Shahi Rajwada Polki & Kundan Bridal Set',
+    subtitle: 'शाही राजवाड़ा ब्राइडल कुंदन एवं पोलकी चोकर',
+    tag: 'Royal Bridal Edition',
+    image: '/assets/images/hero_bridal.jpg',
+    purity: 'Uncut Syndicate Polki in 22K Gold',
+    badge: 'Heirloom Edition',
+    pillTag: 'Syndicate Polki',
+    isJewellery: true
   }
 ];
 
@@ -215,9 +223,9 @@ const HeroSection = () => {
                   </div>
                 </div>
 
-                {/* Fixed High-Contrast Pure Hallmark Tag */}
-                <div className="hero-hallmark-badge">
-                  Pure Hallmark
+                {/* Contextually Appropriate Slide Tag (Never Pure Hallmark on Showroom Interior!) */}
+                <div className={`hero-hallmark-badge ${slide.isJewellery ? 'hero-hallmark-gold' : 'hero-hallmark-showroom'}`}>
+                  {slide.pillTag || 'Showroom Original'}
                 </div>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useJewellery } from '../context/JewelleryContext';
 import { Search, Heart, ShoppingBag, Calendar, X } from 'lucide-react';
+import BrandWordmark from './BrandWordmark';
 
 const Header = () => {
   const {
@@ -56,19 +57,9 @@ const Header = () => {
     <header className="site-header" id="navbar">
       <div className="container">
         <div className="header-main-row">
-          {/* Brand Logo */}
+          {/* Brand Logo & Wordmark */}
           <a href="#" className="brand-wrap" title="Rajesh Jewellers - Sangmohal, Mirzapur">
-            <div className="brand-emblem">
-              <img
-                src="/assets/images/store/rajesh_jewellers_emblem_gold_circle.png"
-                alt="Rajesh Jewellers Official Logo - 3D Diamond RJ Emblem & BIS Hallmark"
-                className="brand-logo-img"
-              />
-            </div>
-            <div className="brand-title-box">
-              <span className="brand-name">Rajesh Jewellers</span>
-              <span className="brand-sub">SANGMOHAL • MIRZAPUR</span>
-            </div>
+            <BrandWordmark variant="header" />
           </a>
 
           {/* Live Search Bar */}

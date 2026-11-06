@@ -33,12 +33,17 @@ const TrustPillars = () => {
   return (
     <section className="trust-bright-section" id="trust">
       <div className="container">
-        <div style={{ textAlign: 'center', maxWidth: '650px', margin: '0 auto 3rem' }}>
-          <span className="kicker-tag">The Rajesh Jewellers Promise</span>
-          <h2 style={{ fontSize: '2.2rem', marginBottom: '0.5rem', color: 'var(--brand-plum)' }}>
-            हमारी 5 स्वर्ण प्रतिज्ञाएं (5 Pillars of Trust)
+        <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 3rem' }}>
+          <span className="kicker-tag" style={{ letterSpacing: '0.12em', fontSize: '0.72rem', textTransform: 'uppercase' }}>
+            THE RAJESH JEWELLERS PROMISE
+          </span>
+          <h2 style={{ fontSize: '2.3rem', fontFamily: 'var(--font-hindi-heading)', margin: '0.4rem 0 0.2rem', color: '#FFFDF9', fontWeight: 700 }}>
+            हमारी पाँच स्वर्ण प्रतिज्ञाएँ
           </h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
+          <span style={{ display: 'block', fontSize: '1.05rem', fontFamily: 'var(--font-serif-headline)', color: '#E5C378', fontStyle: 'italic', marginBottom: '0.75rem', letterSpacing: '0.04em' }}>
+            Five Pillars of Trust
+          </span>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', lineHeight: 1.6 }}>
             Why thousands of families across Mirzapur trust Rajesh Jewellers for their most sacred celebrations.
           </p>
         </div>

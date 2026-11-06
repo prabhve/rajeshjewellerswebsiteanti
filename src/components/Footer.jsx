@@ -2,6 +2,7 @@ import React from 'react';
 import { useJewellery } from '../context/JewelleryContext';
 import { STORE_INFO } from '../data/storeInfo';
 import { ShieldCheck, Phone, MapPin, Lock } from 'lucide-react';
+import BrandWordmark from './BrandWordmark';
 
 const Footer = () => {
   const { setIsDealerModalOpen, setActiveCategory, storeInfo } = useJewellery();
@@ -13,18 +14,8 @@ const Footer = () => {
         <div className="footer-grid">
           {/* Brand Info */}
           <div className="footer-col">
-            <div className="brand-wrap" style={{ marginBottom: '1.25rem' }}>
-              <div className="brand-emblem">
-                <img
-                  src="/assets/images/store/rajesh_jewellers_emblem_gold_circle.png"
-                  alt="Rajesh Jewellers Official Logo - 3D Diamond RJ Emblem & BIS Hallmark"
-                  className="brand-logo-img"
-                />
-              </div>
-              <div className="brand-title-box">
-                <span className="brand-name">{info.name}</span>
-                <span className="brand-sub">SANGMOHAL • STATION RD • MIRZAPUR</span>
-              </div>
+            <div style={{ marginBottom: '1.25rem' }}>
+              <BrandWordmark variant="footer" showHindi={true} />
             </div>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.65', marginBottom: '1.25rem' }}>
               {info.officialMerchantBio}

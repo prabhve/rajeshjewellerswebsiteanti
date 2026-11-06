@@ -34,9 +34,9 @@ const PriceEstimator = () => {
   const gst = Math.round(subtotal * 0.03);
   const grandTotal = subtotal + gst;
 
-  // Traditional Tola calculations
-  const tolaMetric = (validWeight / 10).toFixed(2);
-  const tolaTraditional = (validWeight / 8).toFixed(2);
+  // Accurate Standard Tola (11.6638g) and Pavan / Sovereign (8g) calculations
+  const standardTola = (validWeight / 11.6638).toFixed(2);
+  const pavanSovereign = (validWeight / 8).toFixed(2);
 
   const purityOptions = [
     {
@@ -69,13 +69,14 @@ const PriceEstimator = () => {
   ];
 
   const quickWeights = [
-    { label: '5g', val: 5 },
-    { label: '8g', val: 8, hint: '1 Traditional Tola' },
-    { label: '10g', val: 10, hint: '1 Metric Tola' },
-    { label: '16g', val: 16, hint: '2 Traditional Tola' },
-    { label: '24g', val: 24, hint: '3 Tola' },
-    { label: '40g', val: 40, hint: '5 Tola Bridal' },
-    { label: '80g', val: 80, hint: '10 Tola Sets' }
+    { label: '5g', val: 5, hint: '5 grams' },
+    { label: '8g', val: 8, hint: '1 Pavan / Sovereign = 8g' },
+    { label: '10g', val: 10, hint: '10 grams commercial unit' },
+    { label: '11.66g', val: 11.66, hint: '1 Standard Tola ≈ 11.6638g' },
+    { label: '16g', val: 16, hint: '2 Pavan = 16g' },
+    { label: '23.33g', val: 23.33, hint: '2 Standard Tola ≈ 23.33g' },
+    { label: '40g', val: 40, hint: '5 Pavan Bridal = 40g' },
+    { label: '80g', val: 80, hint: '10 Pavan Heavy Set = 80g' }
   ];
 
   const makingCategories = [
@@ -138,7 +139,7 @@ const PriceEstimator = () => {
       `*🏛️ Live Gold Price & Making Estimate Slip*\n` +
       `───────────────────────\n` +
       `• *Purity:* ${activePurityObj.label} (${activePurityObj.fineness})\n` +
-      `• *Weight:* ${validWeight}g (≈ ${tolaMetric} Tola / ${tolaTraditional} Vedic Tola)\n` +
+      `• *Weight:* ${validWeight}g (≈ ${standardTola} Standard Tola / ${pavanSovereign} Pavan)\n` +
       `• *Gold Benchmark Rate:* ₹${currentRate.toLocaleString('en-IN')}/g\n` +
       `───────────────────────\n` +
       `• *Pure Gold Metal Value:* ₹${metalValue.toLocaleString('en-IN')}\n` +
@@ -278,7 +279,7 @@ const PriceEstimator = () => {
                   </h3>
                 </div>
                 <span className="calc-tola-conversion">
-                  ≈ {tolaMetric} Metric Tola (10g) · {tolaTraditional} Vedic Tola (8g)
+                  ≈ {standardTola} Standard Tola (11.6638g) · {pavanSovereign} Pavan (8g)
                 </span>
               </div>
 
@@ -424,7 +425,7 @@ const PriceEstimator = () => {
               <span className="summary-sep">·</span>
               <span className="summary-item">{validWeight}g</span>
               <span className="summary-sep">·</span>
-              <span className="summary-item">≈ {tolaMetric} Tola</span>
+              <span className="summary-item">≈ {standardTola} Tola</span>
               <span className="summary-sep">·</span>
               <span className="summary-item">₹{currentRate.toLocaleString('en-IN')}/g</span>
               <span className="summary-sep">·</span>

@@ -8,7 +8,7 @@ export const STORE_INFO = {
   tagline: "फैंसी आभूषणों के विक्रेता व निर्माता",
   englishTagline: "Manufacturers & Retailers of Fancy Gold & Silver Jewellery",
   officialMerchantBio:
-    "Introducing our exquisite collection of pure and elegant gold and silver jewelry, designed to captivate hearts and elevate your style ✨️ 100% BIS, HALLMARK Gold items. We make all types of gold jewelry designs. हमारे यहां शुद्धता की गारंटी के साथ जेवर बनाए और बेचे जाते हैं।",
+    "Introducing our exquisite collection of pure and elegant gold and silver jewellery, designed to captivate hearts and elevate your style ✨️ 100% BIS, HALLMARK Gold items. We make all types of gold jewellery designs. हमारे यहां शुद्धता की गारंटी के साथ जेवर बनाए और बेचे जाते हैं।",
 
   // Legal & Certifications
   gstin: "09ADMPS4528E1Z8",
